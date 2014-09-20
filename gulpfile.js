@@ -7,18 +7,18 @@
 	-------------------------------------------------------- */
 
 var gulp 			= require('gulp'),//
-	autoprefixer 	= require('gulp-autoprefixer'),
-	changed 		= require('gulp-changed'),
+	angularFilesort = require('gulp-angular-filesort'),
+	autoprefixer 	= require('gulp-autoprefixer'),//
 	concat 			= require('gulp-concat'),//
 	connect 		= require('gulp-connect'),//
-	imageMin 		= require('gulp-imagemin'),
-	inject 			= require('gulp-inject'),
+	imagemin 		= require('gulp-imagemin'),//
+	inject 			= require('gulp-inject'),//
 	jshint 			= require('gulp-jshint'),//
 	rename 			= require('gulp-rename'),
 	replace 		= require('gulp-replace'),
 	rimraf 			= require('gulp-rimraf'),
 	rubySass 		= require('gulp-ruby-sass'),//
-	size 			= require('gulp-size'),
+	size 			= require('gulp-size'),//
 	sourcemaps 		= require('gulp-sourcemaps'),//
 	stripDebug 		= require('gulp-strip-debug'),//
 	uglify 			= require('gulp-uglify'),//
@@ -42,8 +42,13 @@ gulp.task('build:css', function() {
 			style: 'compressed', // nested, compact, compressed, expanded
 			lineNumbers: false // Emit comments in the generated CSS indicating the corresponding source line.
 		}))
-		.on('error', function (err) { console.log(err.message); })
-		.pipe(gulp.dest('dist/css'));
+		.pipe(autoprefixer({
+			browsers: ['last 2 versions', 'ie >= 9'],
+			cascade: false
+		}))
+		.on('error', function(err) { console.log(err.message); })
+		.pipe(size({ title: 'CSS' }))
+		.pipe(gulp.dest('app/css'));
 });
 
 gulp.task('build:js', function() {
@@ -57,6 +62,7 @@ gulp.task('build:js', function() {
 			preserveComments: false // 'all'
 		}))
 		.pipe(sourcemaps.write('maps'))
+		.pipe(size({ title: 'JavaScript' }))
 		.pipe(gulp.dest('dist/js'));
 });
 
@@ -75,6 +81,16 @@ gulp.task('imagemin', function() {
 			svgoPlugins: [{ removeViewBox: false }] // (svg)
 		}))
 		.pipe(gulp.dest('dist/images'));
+});
+
+// TODO: Perform different actions for angularjs projects...
+gulp.task('index', function() {
+	var target = gulp.src('app/index.html');
+	// It's not necessary to read the files (will speed up things), we're only after their paths:
+	var sources = gulp.src(['app/css/**/*.css', 'app/js/**/*.js'], { read: false });
+
+	return target.pipe(inject(sources))
+	.pipe(gulp.dest('app'));
 });
 
 gulp.task('default', ['build:css', 'build:js', 'connect']);
