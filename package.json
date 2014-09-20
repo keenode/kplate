@@ -1,0 +1,27 @@
+{
+  "name": "kplate",
+  "version": "0.0.1",
+  "description": "Front-End boilerplate with GulpJS build system.",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keezoid/kplate.git"
+  },
+  "keywords": [
+    "boilerplate",
+    "gulp"
+  ],
+  "author": {
+    "name": "Keenan Staffieri",
+    "email" : "kstaffieri@gmail.com",
+    "url" : "http://keenanstaffieri.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/keezoid/kplate/issues"
+  },
+  "homepage": "https://github.com/keezoid/kplate"
+}
