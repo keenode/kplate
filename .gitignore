@@ -1,6 +1,24 @@
+# Mac OSX Files
 .DS_Store
-/node_modules/
-/bower_components/
+.Trashes
+.Spotlight-V100
+.AppleDouble
+.LSOverride
+
+# Bower & Node Modules
+node_modules
+app/bower_components
 npm-debug.log
-*.scssc
-/src/scss/.sass-cache/
+
+# General Files
+.sass-cache
+.hg
+.idea
+.svn
+.cache
+.project
+.tmp
+.scssc
+
+# Build folder
+dist
