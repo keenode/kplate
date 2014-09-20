@@ -13,7 +13,7 @@ var gulp 			= require('gulp'),//
 	connect 		= require('gulp-connect'),//
 	imageMin 		= require('gulp-imagemin'),
 	inject 			= require('gulp-inject'),
-	jshint 			= require('gulp-jshint'),
+	jshint 			= require('gulp-jshint'),//
 	rename 			= require('gulp-rename'),
 	replace 		= require('gulp-replace'),
 	rimraf 			= require('gulp-rimraf'),
@@ -58,6 +58,23 @@ gulp.task('build:js', function() {
 		}))
 		.pipe(sourcemaps.write('maps'))
 		.pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('jshint', function() {
+	return gulp.src('app/js/**/*.js')
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish'));
+});
+
+gulp.task('imagemin', function() {
+	return gulp.src('app/images/**/*.{png,jpg,jpeg,gif,svg}')
+		.pipe(imagemin({
+			progressive: false, // (jpg)
+			optimizationLevel: 3, // (png) (0-7 low-high)
+			interlaced: false, // (gif)
+			svgoPlugins: [{ removeViewBox: false }] // (svg)
+		}))
+		.pipe(gulp.dest('dist/images'));
 });
 
 gulp.task('default', ['build:css', 'build:js', 'connect']);
