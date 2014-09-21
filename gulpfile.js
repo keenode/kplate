@@ -22,25 +22,25 @@ var gulp 			= require('gulp'),//
 	sourcemaps 		= require('gulp-sourcemaps'),//
 	stripDebug 		= require('gulp-strip-debug'),//
 	uglify 			= require('gulp-uglify'),//
-	util 			= require('gulp-util'),
-	watch 			= require('gulp-watch');
+	util 			= require('gulp-util');
 
 /*
 	Use '.pipe(connect.reload());' to reload the website
 */
 gulp.task('connect', function() {
 	return connect.server({
-		root: 'app',
+		root: 'prod',
 		livereload: true,
 		port: 8000
 	});
 });
 
 gulp.task('build:css', function() {
-	return gulp.src('app/scss/**/*.{scss,sass}')
+	return gulp.src('src/scss/**/*.{scss,sass}')
 		.pipe(rubySass({
 			style: 'compressed', // nested, compact, compressed, expanded
-			lineNumbers: false // Emit comments in the generated CSS indicating the corresponding source line.
+			lineNumbers: false, // Emit comments in the generated CSS indicating the corresponding source line.
+			cacheLocation: 'src/scss/.sass-cache'
 		}))
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions', 'ie >= 9'],
@@ -48,11 +48,12 @@ gulp.task('build:css', function() {
 		}))
 		.on('error', function(err) { console.log(err.message); })
 		.pipe(size({ title: 'CSS' }))
-		.pipe(gulp.dest('app/css'));
+		.pipe(gulp.dest('prod/css'))
+		.pipe(connect.reload());
 });
 
 gulp.task('build:js', function() {
-	return gulp.src('app/js/**/*.js')
+	return gulp.src('src/scripts/**/*.js')
 		.pipe(sourcemaps.init())
 		.pipe(concat('main.min.js'))
 		.pipe(stripDebug())
@@ -63,34 +64,45 @@ gulp.task('build:js', function() {
 		}))
 		.pipe(sourcemaps.write('maps'))
 		.pipe(size({ title: 'JavaScript' }))
-		.pipe(gulp.dest('dist/js'));
+		.pipe(gulp.dest('prod/js'))
+		.pipe(connect.reload());
 });
 
 gulp.task('jshint', function() {
-	return gulp.src('app/js/**/*.js')
+	return gulp.src('src/scripts/**/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('imagemin', function() {
-	return gulp.src('app/images/**/*.{png,jpg,jpeg,gif,svg}')
+	return gulp.src('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}')
 		.pipe(imagemin({
 			progressive: false, // (jpg)
 			optimizationLevel: 3, // (png) (0-7 low-high)
 			interlaced: false, // (gif)
 			svgoPlugins: [{ removeViewBox: false }] // (svg)
 		}))
-		.pipe(gulp.dest('dist/images'));
+		.pipe(gulp.dest('prod/images'))
+		.pipe(connect.reload());
 });
 
 // TODO: Perform different actions for angularjs projects...
-gulp.task('index', function() {
-	var target = gulp.src('app/index.html');
+gulp.task('inject', function() {
+	var target = gulp.src('src/templates/index.html');
 	// It's not necessary to read the files (will speed up things), we're only after their paths:
-	var sources = gulp.src(['app/css/**/*.css', 'app/js/**/*.js'], { read: false });
+	var sources = gulp.src(['css/**/*.css', 'js/**/*.js'], { read: false, cwd: 'src' });
 
 	return target.pipe(inject(sources))
-	.pipe(gulp.dest('app'));
+		.pipe(gulp.dest('prod'));
 });
 
-gulp.task('default', ['build:css', 'build:js', 'connect']);
+gulp.task('default',
+	['build:css', 'jshint', 'build:js', 'inject', 'imagemin', 'connect'],
+	function() {
+		gulp.watch('src/scss/**/*.{scss,sass}', ['build:css']);
+		gulp.watch('src/scripts/**/*.js', ['build:js']);
+		gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['imagemin']);
+		gulp.watch('src/templates/**/*.html', []);
+});
+
+gulp.task('build', ['build:css', 'build:js', 'inject', 'imagemin']);
