@@ -3,7 +3,7 @@
 	--------------------------------------------------------
 	@author Keenan Staffieri
 	@version 0.0.1
-	GulpJS Build tasks.
+	GulpJS Build tasks for kplate.
 	-------------------------------------------------------- */
 
 /**
@@ -37,30 +37,35 @@ var buildConfig = {
 	dev: {
 		rootFolder: './dev',
 		paths: {
-			css: './dev/css',
-			js: './dev/js',
+			css: 	'./dev/css',
+			js: 	'./dev/js',
 			images: './dev/images',
-			svgs: './dev/svgs'
+			svgs: 	'./dev/svgs',
+			videos: './dev/videos',
+			fonts: 	'./dev/fonts'
 		},
 		connectServer: {
 			livereload: true,
-			port: 8000
+			port: 	8000
 		}
 	},
 	prod: {
 		rootFolder: './prod',
 		paths: {
-			css: './prod/css',
-			js: './prod/js',
+			css: 	'./prod/css',
+			js: 	'./prod/js',
 			images: './prod/images',
-			svgs: './prod/svgs'
+			svgs: 	'./prod/svgs',
+			videos: './prod/videos',
+			fonts: 	'./prod/fonts'
 		},
 		connectServer: {
 			livereload: true,
 			port: 8000
 		},
 		jsMangle: true,
-		jsComments: false // false or 'all'
+		jsComments: false, // false or 'all'
+		mainJsFileName: 'main'
 	},
 	logSepDecor: ' *** ' // Logger decor separator for RUN TASK
 };
@@ -169,7 +174,7 @@ gulp.task('dev:js', function() {
 
 	logTaskStartup('RUN TASK: JavaScript (development)...');
 
-	return gulp.src('./src/scripts/**/*.js')
+	return gulp.src(['./src/scripts/**/*.js', '!./src/scripts/' + buildConfig.prod.mainJsFileName + '.min.js'])
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sourcemaps.write('maps'))
@@ -189,7 +194,7 @@ gulp.task('prod:js', function() {
 	return gulp.src('./src/scripts/**/*.js')
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
-		.pipe(concat('main.min.js'))
+		.pipe(concat(buildConfig.prod.mainJsFileName + '.min.js'))
 		.pipe(stripDebug())
 		.pipe(uglify({
 			mangle: buildConfig.prod.jsMangle,
@@ -278,7 +283,7 @@ gulp.task('dev:inject', function() {
 
 	logTaskStartup('RUN TASK: inject (development)...');
 
-	var target = gulp.src('./src/templates/index.html');
+	var target = gulp.src('./src/templates/**/*.html');
 
 	// get css and js folder names
 	var cssPath = buildConfig.dev.paths.css,
@@ -291,7 +296,7 @@ gulp.task('dev:inject', function() {
 		[
 			cssFolderName + '/**/*.css',
 			jsFolderName + '/**/*.js',
-			'!' + jsFolderName + '/main.min.js'
+			'!' + jsFolderName + '/' + buildConfig.prod.mainJsFileName + '.min.js'
 		],
 		{
 			read: false,
@@ -312,7 +317,7 @@ gulp.task('prod:inject', function() {
 
 	logTaskStartup('RUN TASK: inject (production)...');
 
-	var target = gulp.src('./src/templates/index.html');
+	var target = gulp.src('./src/templates/**/*.html');
 
 	// get css and js folder names
 	var cssPath = buildConfig.prod.paths.css,
@@ -362,6 +367,102 @@ gulp.task('prod:clear', function(cb) {
 });
 
 /**
+	TASK: dev:videos
+	Copy videos to development folder.
+*/
+gulp.task('dev:videos', function() {
+
+	logTaskStartup('RUN TASK: copy videos (development)...');
+
+	return gulp.src('./src/assets/videos/**/*.{mp4,ogv}')
+		.pipe(gulp.dest(buildConfig.dev.paths.videos));
+});
+
+/**
+	TASK: prod:videos
+	Copy videos to production folder.
+*/
+gulp.task('prod:videos', function() {
+
+	logTaskStartup('RUN TASK: copy videos (production)...');
+
+	return gulp.src('./src/assets/videos/**/*.{mp4,ogv}')
+		.pipe(gulp.dest(buildConfig.prod.paths.videos));
+});
+
+/**
+	TASK: dev:fonts
+	Copy fonts to development folder.
+*/
+gulp.task('dev:fonts', function() {
+
+	logTaskStartup('RUN TASK: copy fonts (development)...');
+
+	return gulp.src('./src/assets/fonts/**/*.{eot,svg,ttf,woff}')
+		.pipe(gulp.dest(buildConfig.dev.paths.fonts));
+});
+
+/**
+	TASK: prod:fonts
+	Copy fonts to production folder.
+*/
+gulp.task('prod:fonts', function() {
+
+	logTaskStartup('RUN TASK: copy fonts (production)...');
+
+	return gulp.src('./src/assets/fonts/**/*.{eot,svg,ttf,woff}')
+		.pipe(gulp.dest(buildConfig.prod.paths.fonts));
+});
+
+/**
+	TASK: dev:favicons
+	Copy favicons to development folder.
+*/
+gulp.task('dev:favicons', function() {
+
+	logTaskStartup('RUN TASK: copy favicons (development)...');
+
+	return gulp.src('./src/favicons/**/*.{ico,png}')
+		.pipe(gulp.dest(buildConfig.dev.rootFolder));
+});
+
+/**
+	TASK: prod:favicons
+	Copy favicons to production folder.
+*/
+gulp.task('prod:favicons', function() {
+
+	logTaskStartup('RUN TASK: copy favicons (production)...');
+
+	return gulp.src('./src/favicons/**/*.{ico,png}')
+		.pipe(gulp.dest(buildConfig.prod.rootFolder));
+});
+
+/**
+	TASK: dev:rootfiles
+	Copy rootfiles to development folder.
+*/
+gulp.task('dev:rootfiles', function() {
+
+	logTaskStartup('RUN TASK: copy rootfiles (development)...');
+
+	return gulp.src('./src/rootfiles/**/*')
+		.pipe(gulp.dest(buildConfig.dev.rootFolder));
+});
+
+/**
+	TASK: prod:rootfiles
+	Copy rootfiles to production folder.
+*/
+gulp.task('prod:rootfiles', function() {
+
+	logTaskStartup('RUN TASK: copy rootfiles (production)...');
+
+	return gulp.src('./src/rootfiles/**/*')
+		.pipe(gulp.dest(buildConfig.prod.rootFolder));
+});
+
+/**
 	TASK: dev:watch
 	Watch files in development mode and run only the necessary tasks when certain file types change.
 */
@@ -369,10 +470,14 @@ gulp.task('dev:watch', function(cb) {
 
 	gutil.log(gutil.colors.bgMagenta.white.bold('Watching files...'));
 
-	gulp.watch('src/scss/**/*.{scss,sass}', ['dev:css']);
-	gulp.watch('src/scripts/**/*.js', ['jshint', 'dev:js']);
-	gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['dev:imagemin']);
-	gulp.watch('src/templates/**/*.html', ['dev:inject']);
+	gulp.watch('src/scss/**/*.{scss,sass}', 					['dev:css']);
+	gulp.watch('src/scripts/**/*.js', 							['jshint', 'dev:js']);
+	gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif}', 	['dev:imagemin']);
+	gulp.watch('src/assets/svgs/**/*.svg',					 	['dev:imagemin']);
+	gulp.watch('src/assets/videos/**/*.{mp4,ogv}', 				['dev:videos']);
+	gulp.watch('src/favicons/**/*.{ico,png}', 					['dev:favicons']);
+	gulp.watch('src/rootfiles/**/*', 							['dev:rootfiles']);
+	gulp.watch('src/templates/**/*.html', 						['dev:inject']);
 });
 
 /**
@@ -383,18 +488,18 @@ gulp.task('prod:watch', function(cb) {
 
 	gutil.log(gutil.colors.bgMagenta.white.bold('Watching files...'));
 
-	gulp.watch('src/scss/**/*.{scss,sass}', ['prod:css']);
-	gulp.watch('src/scripts/**/*.js', ['prod:js']);
-	gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['prod:imagemin']);
-	gulp.watch('src/templates/**/*.html', ['prod:inject']);
+	gulp.watch('src/scss/**/*.{scss,sass}', 					['prod:css']);
+	gulp.watch('src/scripts/**/*.js', 							['prod:js']);
+	gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif}', 	['prod:imagemin']);
+	gulp.watch('src/assets/svgs/**/*.svg',					 	['prod:imagemin']);
+	gulp.watch('src/assets/videos/**/*.{mp4,ogv}', 				['prod:videos']);
+	gulp.watch('src/favicons/**/*.{ico,png}', 					['prod:favicons']);
+	gulp.watch('src/rootfiles/**/*', 							['prod:rootfiles']);
+	gulp.watch('src/templates/**/*.html', 						['prod:inject']);
 });
 
 ////////
-/////////////// ADD COPY VIDEOS
-//// ADD COPY FONTS
-/// ADD COPY FAVICONS
-// ADD COPY ROOT FILES
-// ADD COPY OTHER HTML TEMPLATES
+// ADD COPY OTHER HTML TEMPLATES (modify inject)
 /////
 
 /**
@@ -411,7 +516,7 @@ gulp.task('default',
 
 		runSequence(
 			'dev:clear',
-			['dev:css', 'jshint', 'dev:js', 'dev:imagemin'],
+			['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles'],
 			'dev:inject',
 			'dev:connect',
 			'dev:watch',
@@ -425,7 +530,7 @@ gulp.task('prod',
 
 		runSequence(
 			'prod:clear',
-			['prod:css', 'prod:js', 'prod:imagemin'],
+			['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles'],
 			'prod:inject',
 			'prod:connect',
 			'prod:watch',
@@ -439,7 +544,7 @@ gulp.task('build:dev',
 
 		runSequence(
 			'dev:clear',
-			['dev:css', 'jshint', 'dev:js', 'dev:imagemin'],
+			['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles'],
 			'dev:inject',
 		cb);
 });
@@ -451,7 +556,7 @@ gulp.task('build:prod',
 
 		runSequence(
 			'prod:clear',
-			['prod:css', 'prod:js', 'prod:imagemin'],
+			['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles'],
 			'prod:inject',
 		cb);
 });
