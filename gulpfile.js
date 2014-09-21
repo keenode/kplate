@@ -3,7 +3,7 @@
 	--------------------------------------------------------
 	@author Keenan Staffieri
 	@version 0.0.1
-	GulpJS Build tasks for kplate.
+	GulpJS build tasks for kplate.
 	-------------------------------------------------------- */
 
 /**
@@ -69,6 +69,11 @@ var buildConfig = {
 	},
 	logSepDecor: ' *** ' // Logger decor separator for RUN TASK
 };
+
+var bowerComponentsPath = './src/bower_components',
+	bowerComponents = [
+		bowerComponentsPath + '/jquery/dist/jquery.js'
+	];
 
 gutil.log(
 	gutil.colors.bgCyan('----------------- kplate STARTED -----------------')
@@ -174,7 +179,13 @@ gulp.task('dev:js', function() {
 
 	logTaskStartup('RUN TASK: JavaScript (development)...');
 
-	return gulp.src(['./src/scripts/**/*.js', '!./src/scripts/' + buildConfig.prod.mainJsFileName + '.min.js'])
+	var jsCompileArr = bowerComponents.concat(
+		[
+			'./src/scripts/**/*.js',
+			'!./src/scripts/' + buildConfig.prod.mainJsFileName + '.min.js'
+		]);
+
+	return gulp.src(jsCompileArr)
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sourcemaps.write('maps'))
@@ -191,7 +202,12 @@ gulp.task('prod:js', function() {
 
 	logTaskStartup('RUN TASK: JavaScript (production)...');
 
-	return gulp.src('./src/scripts/**/*.js')
+	var jsCompileArr = bowerComponents.concat(
+		[
+			'./src/scripts/**/*.js'
+		]);
+
+	return gulp.src(jsCompileArr)
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(concat(buildConfig.prod.mainJsFileName + '.min.js'))
@@ -497,10 +513,6 @@ gulp.task('prod:watch', function(cb) {
 	gulp.watch('src/rootfiles/**/*', 							['prod:rootfiles']);
 	gulp.watch('src/templates/**/*.html', 						['prod:inject']);
 });
-
-////////
-// ADD COPY OTHER HTML TEMPLATES (modify inject)
-/////
 
 /**
 	Gulp Tasks - run these commands in the terminal:

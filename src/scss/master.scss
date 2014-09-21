@@ -1,5 +1,12 @@
+/** Bourbon Mixins **/
+@import "../bower_components/bourbon/dist/bourbon";
+
+/** Bourbon Neat Grid **/
+@import "../bower_components/neat/app/assets/stylesheets/neat";
+
 body {
 	background: black;
+	font-family: 'Open Sans', sans-serif;
 	transition: all 300ms ease-out;
 }
 
