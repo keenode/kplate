@@ -35,10 +35,12 @@ var gulp 			= require('gulp'),
 */
 var buildConfig = {
 	dev: {
-		rootFolder: 'dev',
+		rootFolder: './dev',
 		paths: {
 			css: './dev/css',
-			js: './dev/js'
+			js: './dev/js',
+			images: './dev/images',
+			svgs: './dev/svgs'
 		},
 		connectServer: {
 			livereload: true,
@@ -46,15 +48,19 @@ var buildConfig = {
 		}
 	},
 	prod: {
-		rootFolder: 'prod',
+		rootFolder: './prod',
 		paths: {
 			css: './prod/css',
-			js: './prod/js'
+			js: './prod/js',
+			images: './prod/images',
+			svgs: './prod/svgs'
 		},
 		connectServer: {
 			livereload: true,
 			port: 8000
-		}
+		},
+		jsMangle: true,
+		jsComments: false // false or 'all'
 	},
 	logSepDecor: ' *** ' // Logger decor separator for RUN TASK
 };
@@ -186,9 +192,9 @@ gulp.task('prod:js', function() {
 		.pipe(concat('main.min.js'))
 		.pipe(stripDebug())
 		.pipe(uglify({
-			mangle: true,
+			mangle: buildConfig.prod.jsMangle,
 			compress: true,
-			preserveComments: false // 'all'
+			preserveComments: buildConfig.prod.jsComments
 		}))
 		.pipe(sourcemaps.write('maps'))
 		.pipe(size({ title: 'JavaScript (compressed)' }))
@@ -196,6 +202,10 @@ gulp.task('prod:js', function() {
 		.pipe(connect.reload());
 });
 
+/**
+	TASK: jshint
+	jshint JavaScript files.
+*/
 gulp.task('jshint', function() {
 
 	logTaskStartup('RUN TASK: jshint...');
@@ -205,6 +215,11 @@ gulp.task('jshint', function() {
 		.pipe(jshint.reporter('jshint-stylish'));
 });
 
+
+/**
+	TASK: dev:imagemin
+	Apply image and SVG minification on development settings.
+*/
 gulp.task('dev:imagemin', function() {
 
 	logTaskStartup('RUN TASK: imagemin (development)...');
@@ -221,13 +236,17 @@ gulp.task('dev:imagemin', function() {
 			svgoPlugins: [{ removeViewBox: false }] // (svg)
 		}))
 		.pipe(imgFilter)
-		.pipe(gulp.dest('./dev/images'))
+		.pipe(gulp.dest(buildConfig.dev.paths.images))
 		.pipe(imgFilter.restore())
 		.pipe(svgFilter)
-		.pipe(gulp.dest('./dev/svg'))
+		.pipe(gulp.dest(buildConfig.dev.paths.svgs))
 		.pipe(connect.reload());
 });
 
+/**
+	TASK: dev:imagemin
+	Apply image and SVG minification on production settings.
+*/
 gulp.task('prod:imagemin', function() {
 
 	logTaskStartup('RUN TASK: imagemin (production)...');
@@ -244,65 +263,122 @@ gulp.task('prod:imagemin', function() {
 			svgoPlugins: [{ removeViewBox: false }] // (svg)
 		}))
 		.pipe(imgFilter)
-		.pipe(gulp.dest('./prod/images'))
+		.pipe(gulp.dest(buildConfig.prod.paths.images))
 		.pipe(imgFilter.restore())
 		.pipe(svgFilter)
-		.pipe(gulp.dest('./prod/svg'))
+		.pipe(gulp.dest(buildConfig.prod.paths.svgs))
 		.pipe(connect.reload());
 });
 
+/**
+	TASK: dev:inject
+	Inject all CSS and JavaScript into index.html document.
+*/
 gulp.task('dev:inject', function() {
 
 	logTaskStartup('RUN TASK: inject (development)...');
 
 	var target = gulp.src('./src/templates/index.html');
+
+	// get css and js folder names
+	var cssPath = buildConfig.dev.paths.css,
+		jsPath = buildConfig.dev.paths.js,
+		cssFolderName = cssPath.split('/').pop(),
+		jsFolderName = jsPath.split('/').pop();
+
 	// It's not necessary to read the files (will speed up things), we're only after their paths:
-	var sources = gulp.src(['css/**/*.css', 'js/**/*.js', '!js/main.min.js'], { read: false, cwd: 'dev' });
+	var sources = gulp.src(
+		[
+			cssFolderName + '/**/*.css',
+			jsFolderName + '/**/*.js',
+			'!' + jsFolderName + '/main.min.js'
+		],
+		{
+			read: false,
+		  	cwd: buildConfig.dev.rootFolder
+	 	});
 
 	return target.pipe(inject(sources))
 		.pipe(plumber())
-		.pipe(gulp.dest('./dev'));
+		.pipe(gulp.dest(buildConfig.dev.rootFolder))
+		.pipe(connect.reload());
 });
 
+/**
+	TASK: prod:inject
+	Inject minified CSS and JavaScript into index.html document.
+*/
 gulp.task('prod:inject', function() {
 
 	logTaskStartup('RUN TASK: inject (production)...');
 
 	var target = gulp.src('./src/templates/index.html');
+
+	// get css and js folder names
+	var cssPath = buildConfig.prod.paths.css,
+		jsPath = buildConfig.prod.paths.js,
+		cssFolderName = cssPath.split('/').pop(),
+		jsFolderName = jsPath.split('/').pop();
+
 	// It's not necessary to read the files (will speed up things), we're only after their paths:
-	var sources = gulp.src(['css/**/*.css', 'js/**/*.js'], { read: false, cwd: 'prod' });
+	var sources = gulp.src(
+		[
+			cssFolderName + '/**/*.css',
+			jsFolderName + '/**/*.js'
+		],
+		{
+			read: false,
+			cwd: buildConfig.prod.rootFolder
+		});
 
 	return target.pipe(inject(sources))
 		.pipe(plumber())
-		.pipe(gulp.dest('./prod'));
+		.pipe(gulp.dest(buildConfig.prod.rootFolder))
+		.pipe(connect.reload());
 });
 
+/**
+	TASK: dev:clear
+	Delete the development folder.
+*/
 gulp.task('dev:clear', function(cb) {
 
 	logTaskStartup('RUN TASK: clear files (development)...');
 
-	return gulp.src('./dev', { read: false })
+	return gulp.src(buildConfig.dev.rootFolder, { read: false })
 		.pipe(rimraf());
 });
 
+/**
+	TASK: prod:clear
+	Delete the production folder.
+*/
 gulp.task('prod:clear', function(cb) {
 
 	logTaskStartup('RUN TASK: clear files (production)...');
 
-	return gulp.src('./prod', { read: false })
+	return gulp.src(buildConfig.prod.rootFolder, { read: false })
 		.pipe(rimraf());
 });
 
+/**
+	TASK: dev:watch
+	Watch files in development mode and run only the necessary tasks when certain file types change.
+*/
 gulp.task('dev:watch', function(cb) {
 
 	gutil.log(gutil.colors.bgMagenta.white.bold('Watching files...'));
 
 	gulp.watch('src/scss/**/*.{scss,sass}', ['dev:css']);
-	gulp.watch('src/scripts/**/*.js', ['dev:js']);
+	gulp.watch('src/scripts/**/*.js', ['jshint', 'dev:js']);
 	gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['dev:imagemin']);
-	gulp.watch('src/templates/**/*.html', []);
+	gulp.watch('src/templates/**/*.html', ['dev:inject']);
 });
 
+/**
+	TASK: prod:watch
+	Watch files in production mode and run only the necessary tasks when certain file types change.
+*/
 gulp.task('prod:watch', function(cb) {
 
 	gutil.log(gutil.colors.bgMagenta.white.bold('Watching files...'));
@@ -310,9 +386,20 @@ gulp.task('prod:watch', function(cb) {
 	gulp.watch('src/scss/**/*.{scss,sass}', ['prod:css']);
 	gulp.watch('src/scripts/**/*.js', ['prod:js']);
 	gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['prod:imagemin']);
-	gulp.watch('src/templates/**/*.html', []);
+	gulp.watch('src/templates/**/*.html', ['prod:inject']);
 });
 
+////////
+/////////////// ADD COPY VIDEOS
+/////
+
+/**
+	Gulp Tasks - run these commands in the terminal:
+	'gulp'				: Run 'development' mode tasks with WATCH.
+	'gulp prod'			: Run 'production' mode tasks with WATCH.
+	'gulp build:dev'	: Build 'development' folder.
+	'gulp build:prod'	: Build 'production' folder.
+*/
 gulp.task('default',
 	function(cb) {
 
