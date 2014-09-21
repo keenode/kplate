@@ -25,7 +25,8 @@ var gulp 			= require('gulp'),//
 	sourcemaps 		= require('gulp-sourcemaps'),//
 	stripDebug 		= require('gulp-strip-debug'),//
 	uglify 			= require('gulp-uglify'),//
-	util 			= require('gulp-util');
+	util 			= require('gulp-util'),
+	runSequence 	= require('run-sequence');
 
 
 gulp.task('connect', function() {
@@ -146,12 +147,24 @@ gulp.task('prod:clear', function(cb) {
 });
 
 gulp.task('default',
-	['dev:clear', 'dev:css', 'jshint', 'dev:js', 'inject', 'dev:imagemin', 'connect'],
-	function() {
+	function(cb) {
+
+		runSequence(
+			'dev:clear',
+			['dev:css', 'jshint', 'dev:js', 'inject', 'dev:imagemin', 'connect'],
+		cb);
+
 		gulp.watch('src/scss/**/*.{scss,sass}', ['prod:css']);
 		gulp.watch('src/scripts/**/*.js', ['prod:js']);
 		gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['dev:imagemin']);
 		gulp.watch('src/templates/**/*.html', []);
 });
 
-gulp.task('prod', ['prod:clear', 'prod:css', 'prod:js', 'inject', 'prod:imagemin']);
+gulp.task('prod',
+	function(cb) {
+
+		runSequence(
+			'dev:clear',
+			['prod:css', 'prod:js', 'inject', 'prod:imagemin'],
+		cb);
+});
