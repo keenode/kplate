@@ -11,8 +11,8 @@ var gulp 			= require('gulp'),
 	rubySass 		= require('gulp-ruby-sass'),
 	size 			= require('gulp-size'),
 	sourcemaps 		= require('gulp-sourcemaps'),
-	buildConfig 	= require('./buildconfig'),
-	bowerComponents = require('./bowercomponents');
+	buildConfig 	= require('../config/buildconfig'),
+	bowerComponents = require('../config/bowercomponents');
 
 /**
 	TASK: dev:connect

@@ -13,8 +13,8 @@ var gulp 			= require('gulp'),
 	sourcemaps 		= require('gulp-sourcemaps'),
 	stripDebug 		= require('gulp-strip-debug'),
 	uglify 			= require('gulp-uglify'),
-	buildConfig 	= require('./buildconfig'),
-	bowerComponents = require('./bowercomponents');
+	buildConfig 	= require('../config/buildconfig'),
+	bowerComponents = require('../config/bowercomponents');
 
 /**
 	TASK: prod:connect
