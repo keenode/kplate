@@ -20,5 +20,6 @@ npm-debug.log
 .tmp
 .scssc
 
-# Build folder
-dist
+# Build folders
+dev
+prod

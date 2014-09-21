@@ -6,6 +6,9 @@
 	GulpJS Build tasks.
 	-------------------------------------------------------- */
 
+/**
+	Gulp Modules
+*/
 var gulp 			= require('gulp'),//
 	angularFilesort = require('gulp-angular-filesort'),
 	autoprefixer 	= require('gulp-autoprefixer'),//
@@ -24,9 +27,7 @@ var gulp 			= require('gulp'),//
 	uglify 			= require('gulp-uglify'),//
 	util 			= require('gulp-util');
 
-/*
-	Use '.pipe(connect.reload());' to reload the website
-*/
+
 gulp.task('connect', function() {
 	return connect.server({
 		root: 'prod',
@@ -35,25 +36,51 @@ gulp.task('connect', function() {
 	});
 });
 
-gulp.task('build:css', function() {
-	return gulp.src('src/scss/**/*.{scss,sass}')
+gulp.task('dev:css', function() {
+	return gulp.src('./src/scss/**/*.{scss,sass}')
 		.pipe(rubySass({
-			style: 'compressed', // nested, compact, compressed, expanded
-			lineNumbers: false, // Emit comments in the generated CSS indicating the corresponding source line.
-			cacheLocation: 'src/scss/.sass-cache'
+			style: 'expanded', // nested, compact, compressed, expanded
+			lineNumbers: true, // Emit comments in the generated CSS indicating the corresponding source line.
+			cacheLocation: './src/scss/.sass-cache'
 		}))
 		.pipe(autoprefixer({
 			browsers: ['last 2 versions', 'ie >= 9'],
 			cascade: false
 		}))
 		.on('error', function(err) { console.log(err.message); })
-		.pipe(size({ title: 'CSS' }))
-		.pipe(gulp.dest('prod/css'))
+		.pipe(size({ title: 'CSS (uncompressed)' }))
+		.pipe(gulp.dest('./dev/css'))
 		.pipe(connect.reload());
 });
 
-gulp.task('build:js', function() {
-	return gulp.src('src/scripts/**/*.js')
+gulp.task('prod:css', function() {
+	return gulp.src('./src/scss/**/*.{scss,sass}')
+		.pipe(rubySass({
+			style: 'compressed', // nested, compact, compressed, expanded
+			lineNumbers: false, // Emit comments in the generated CSS indicating the corresponding source line.
+			cacheLocation: './src/scss/.sass-cache'
+		}))
+		.pipe(autoprefixer({
+			browsers: ['last 2 versions', 'ie >= 9'],
+			cascade: false
+		}))
+		.on('error', function(err) { console.log(err.message); })
+		.pipe(size({ title: 'CSS (compressed)' }))
+		.pipe(gulp.dest('./prod/css'))
+		.pipe(connect.reload());
+});
+
+gulp.task('dev:js', function() {
+	return gulp.src('./src/scripts/**/*.js')
+		.pipe(sourcemaps.init())
+		.pipe(sourcemaps.write('maps'))
+		.pipe(size({ title: 'JavaScript (uncompressed)' }))
+		.pipe(gulp.dest('./dev/js'))
+		.pipe(connect.reload());
+});
+
+gulp.task('prod:js', function() {
+	return gulp.src('./src/scripts/**/*.js')
 		.pipe(sourcemaps.init())
 		.pipe(concat('main.min.js'))
 		.pipe(stripDebug())
@@ -63,46 +90,68 @@ gulp.task('build:js', function() {
 			preserveComments: false // 'all'
 		}))
 		.pipe(sourcemaps.write('maps'))
-		.pipe(size({ title: 'JavaScript' }))
-		.pipe(gulp.dest('prod/js'))
+		.pipe(size({ title: 'JavaScript (compressed)' }))
+		.pipe(gulp.dest('./prod/js'))
 		.pipe(connect.reload());
 });
 
 gulp.task('jshint', function() {
-	return gulp.src('src/scripts/**/*.js')
+	return gulp.src('./src/scripts/**/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('imagemin', function() {
-	return gulp.src('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}')
+gulp.task('dev:imagemin', function() {
+	return gulp.src('./src/assets/images/**/*.{png,jpg,jpeg,gif,svg}')
 		.pipe(imagemin({
 			progressive: false, // (jpg)
 			optimizationLevel: 3, // (png) (0-7 low-high)
 			interlaced: false, // (gif)
 			svgoPlugins: [{ removeViewBox: false }] // (svg)
 		}))
-		.pipe(gulp.dest('prod/images'))
+		.pipe(gulp.dest('./dev/images'))
+		.pipe(connect.reload());
+});
+
+gulp.task('prod:imagemin', function() {
+	return gulp.src('./src/assets/images/**/*.{png,jpg,jpeg,gif,svg}')
+		.pipe(imagemin({
+			progressive: false, // (jpg)
+			optimizationLevel: 7, // (png) (0-7 low-high)
+			interlaced: false, // (gif)
+			svgoPlugins: [{ removeViewBox: false }] // (svg)
+		}))
+		.pipe(gulp.dest('./prod/images'))
 		.pipe(connect.reload());
 });
 
 // TODO: Perform different actions for angularjs projects...
 gulp.task('inject', function() {
-	var target = gulp.src('src/templates/index.html');
+	var target = gulp.src('./src/templates/index.html');
 	// It's not necessary to read the files (will speed up things), we're only after their paths:
 	var sources = gulp.src(['css/**/*.css', 'js/**/*.js'], { read: false, cwd: 'src' });
 
 	return target.pipe(inject(sources))
-		.pipe(gulp.dest('prod'));
+		.pipe(gulp.dest('./prod'));
+});
+
+gulp.task('dev:clear', function(cb) {
+	return gulp.src('./dev', { read: false })
+		.pipe(rimraf());
+});
+
+gulp.task('prod:clear', function(cb) {
+	return gulp.src('./prod', { read: false })
+		.pipe(rimraf());
 });
 
 gulp.task('default',
-	['build:css', 'jshint', 'build:js', 'inject', 'imagemin', 'connect'],
+	['dev:clear', 'dev:css', 'jshint', 'dev:js', 'inject', 'dev:imagemin', 'connect'],
 	function() {
-		gulp.watch('src/scss/**/*.{scss,sass}', ['build:css']);
-		gulp.watch('src/scripts/**/*.js', ['build:js']);
-		gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['imagemin']);
+		gulp.watch('src/scss/**/*.{scss,sass}', ['prod:css']);
+		gulp.watch('src/scripts/**/*.js', ['prod:js']);
+		gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['dev:imagemin']);
 		gulp.watch('src/templates/**/*.html', []);
 });
 
-gulp.task('build', ['build:css', 'build:js', 'inject', 'imagemin']);
+gulp.task('prod', ['prod:clear', 'prod:css', 'prod:js', 'inject', 'prod:imagemin']);
