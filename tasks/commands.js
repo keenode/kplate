@@ -1,9 +1,19 @@
+/** --------------------------------------------------------
+	tasks/commands.js
+	--------------------------------------------------------
+	@author Keenan Staffieri
+	GulpJS commands to perform certain sets of tasks.
+	-------------------------------------------------------- */
+
+/**
+	Required Modules
+*/
 var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	runSequence = require('run-sequence');
 
 /**
-	Gulp Tasks - run these commands in the terminal:
+	Gulp Tasks - You may run these commands in the terminal:
 	'gulp'				: Run 'development' mode tasks with WATCH.
 	'gulp prod'			: Run 'production' mode tasks with WATCH.
 	'gulp build:dev'	: Build 'development' folder.

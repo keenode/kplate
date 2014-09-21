@@ -1,3 +1,6 @@
+/**
+	Required Modules
+*/
 var gulp 			= require('gulp'),
 	autoprefixer 	= require('gulp-autoprefixer'),
 	connect 		= require('gulp-connect'),
@@ -23,7 +26,7 @@ gulp.task('dev:connect', function() {
 	logTaskStartup('Startup connect server (development)...');
 
 	return connect.server({
-		root: 		buildConfig.dev.rootFolder,
+		root: 		buildConfig.dev.rootDir,
 		livereload: buildConfig.dev.connectServer.livereload,
 		port: 		buildConfig.dev.connectServer.port
 	});
@@ -142,12 +145,12 @@ gulp.task('dev:inject', function() {
 		],
 		{
 			read: false,
-		  	cwd: buildConfig.dev.rootFolder
+		  	cwd: buildConfig.dev.rootDir
 	 	});
 
 	return target.pipe(inject(sources))
 		.pipe(plumber())
-		.pipe(gulp.dest(buildConfig.dev.rootFolder))
+		.pipe(gulp.dest(buildConfig.dev.rootDir))
 		.pipe(connect.reload());
 });
 
@@ -159,7 +162,7 @@ gulp.task('dev:clear', function(cb) {
 
 	logTaskStartup('RUN TASK: clear files (development)...');
 
-	return gulp.src(buildConfig.dev.rootFolder, { read: false })
+	return gulp.src(buildConfig.dev.rootDir, { read: false })
 		.pipe(rimraf());
 });
 
@@ -196,7 +199,7 @@ gulp.task('dev:favicons', function() {
 	logTaskStartup('RUN TASK: copy favicons (development)...');
 
 	return gulp.src('./src/favicons/**/*.{ico,png}')
-		.pipe(gulp.dest(buildConfig.dev.rootFolder));
+		.pipe(gulp.dest(buildConfig.dev.rootDir));
 });
 
 /**
@@ -208,7 +211,7 @@ gulp.task('dev:rootfiles', function() {
 	logTaskStartup('RUN TASK: copy rootfiles (development)...');
 
 	return gulp.src('./src/rootfiles/**/*')
-		.pipe(gulp.dest(buildConfig.dev.rootFolder));
+		.pipe(gulp.dest(buildConfig.dev.rootDir));
 });
 
 /**

@@ -7,7 +7,7 @@
 	-------------------------------------------------------- */
 
 /**
-	Gulp Modules
+	Required Modules
 */
 var gutil 		= require('gulp-util'),
 	requireDir 	= require('require-dir');
