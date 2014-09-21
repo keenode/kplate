@@ -7,7 +7,7 @@
 
 # Bower & Node Modules
 node_modules
-app/bower_components
+bower_components
 npm-debug.log
 
 # General Files
