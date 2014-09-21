@@ -16,4 +16,7 @@ gutil.log(
 	gutil.colors.bgCyan('----------------- kplate STARTED -----------------')
 );
 
+/**
+	Include gulp tasks
+*/
 var dir = requireDir('./tasks');

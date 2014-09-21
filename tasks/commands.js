@@ -19,6 +19,10 @@ var gulp = require('gulp'),
 	'gulp build:dev'	: Build 'development' folder.
 	'gulp build:prod'	: Build 'production' folder.
 */
+
+/**
+	COMMAND: default (gulp)
+*/
 gulp.task('default',
 	function(cb) {
 
@@ -33,6 +37,9 @@ gulp.task('default',
 		cb);
 });
 
+/**
+	COMMAND: prod (gulp prod)
+*/
 gulp.task('prod',
 	function(cb) {
 
@@ -47,6 +54,9 @@ gulp.task('prod',
 		cb);
 });
 
+/**
+	COMMAND: build:dev (gulp build:dev)
+*/
 gulp.task('build:dev',
 	function(cb) {
 
@@ -59,6 +69,9 @@ gulp.task('build:dev',
 		cb);
 });
 
+/**
+	COMMAND: build:prod (gulp build:prod)
+*/
 gulp.task('build:prod',
 	function(cb) {
 
