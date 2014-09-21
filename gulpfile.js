@@ -391,6 +391,10 @@ gulp.task('prod:watch', function(cb) {
 
 ////////
 /////////////// ADD COPY VIDEOS
+//// ADD COPY FONTS
+/// ADD COPY FAVICONS
+// ADD COPY ROOT FILES
+// ADD COPY OTHER HTML TEMPLATES
 /////
 
 /**
