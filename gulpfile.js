@@ -14,9 +14,11 @@ var gulp 			= require('gulp'),
 	autoprefixer 	= require('gulp-autoprefixer'),
 	concat 			= require('gulp-concat'),
 	connect 		= require('gulp-connect'),
+	filter 			= require('gulp-filter'),
 	imagemin 		= require('gulp-imagemin'),
 	inject 			= require('gulp-inject'),
 	jshint 			= require('gulp-jshint'),
+	plumber 		= require('gulp-plumber'),
 	replace 		= require('gulp-replace'), // needs to be used
 	rimraf 			= require('gulp-rimraf'),
 	rubySass 		= require('gulp-ruby-sass'),
@@ -51,6 +53,7 @@ gulp.task('dev:css', function() {
 	logTaskStartup('RUN TASK: CSS (development)...');
 
 	return gulp.src('./src/scss/**/*.{scss,sass}')
+		.pipe(plumber())
 		.pipe(rubySass({
 			style: 'expanded', // nested, compact, compressed, expanded
 			lineNumbers: true, // Emit comments in the generated CSS indicating the corresponding source line.
@@ -71,6 +74,7 @@ gulp.task('prod:css', function() {
 	logTaskStartup('RUN TASK: CSS (production)...');
 
 	return gulp.src('./src/scss/**/*.{scss,sass}')
+		.pipe(plumber())
 		.pipe(rubySass({
 			style: 'compressed', // nested, compact, compressed, expanded
 			lineNumbers: false, // Emit comments in the generated CSS indicating the corresponding source line.
@@ -91,6 +95,7 @@ gulp.task('dev:js', function() {
 	logTaskStartup('RUN TASK: JavaScript (development)...');
 
 	return gulp.src('./src/scripts/**/*.js')
+		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(sourcemaps.write('maps'))
 		.pipe(size({ title: 'JavaScript (uncompressed)' }))
@@ -103,6 +108,7 @@ gulp.task('prod:js', function() {
 	logTaskStartup('RUN TASK: JavaScript (production)...');
 
 	return gulp.src('./src/scripts/**/*.js')
+		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(concat('main.min.js'))
 		.pipe(stripDebug())
@@ -130,14 +136,22 @@ gulp.task('dev:imagemin', function() {
 
 	logTaskStartup('RUN TASK: imagemin (development)...');
 
-	return gulp.src('./src/assets/images/**/*.{png,jpg,jpeg,gif,svg}')
+	var imgFilter = filter('**/*.{png,jpg,jpeg,gif}'),
+		svgFilter = filter('**/*.svg');
+
+	return gulp.src(['./src/assets/images/**/*.{png,jpg,jpeg,gif}', './src/assets/svgs/**/*.svg'])
+		.pipe(plumber())
 		.pipe(imagemin({
 			progressive: false, // (jpg)
 			optimizationLevel: 3, // (png) (0-7 low-high)
 			interlaced: false, // (gif)
 			svgoPlugins: [{ removeViewBox: false }] // (svg)
 		}))
+		.pipe(imgFilter)
 		.pipe(gulp.dest('./dev/images'))
+		.pipe(imgFilter.restore())
+		.pipe(svgFilter)
+		.pipe(gulp.dest('./dev/svg'))
 		.pipe(connect.reload());
 });
 
@@ -145,27 +159,48 @@ gulp.task('prod:imagemin', function() {
 
 	logTaskStartup('RUN TASK: imagemin (production)...');
 
-	return gulp.src('./src/assets/images/**/*.{png,jpg,jpeg,gif,svg}')
+	var imgFilter = filter('**/*.{png,jpg,jpeg,gif}'),
+		svgFilter = filter('**/*.svg');
+
+	return gulp.src(['./src/assets/images/**/*.{png,jpg,jpeg,gif}', './src/assets/svgs/**/*.svg'])
+		.pipe(plumber())
 		.pipe(imagemin({
 			progressive: false, // (jpg)
 			optimizationLevel: 7, // (png) (0-7 low-high)
 			interlaced: false, // (gif)
 			svgoPlugins: [{ removeViewBox: false }] // (svg)
 		}))
+		.pipe(imgFilter)
 		.pipe(gulp.dest('./prod/images'))
+		.pipe(imgFilter.restore())
+		.pipe(svgFilter)
+		.pipe(gulp.dest('./prod/svg'))
 		.pipe(connect.reload());
 });
 
-// TODO: Perform different actions for angularjs projects...
-gulp.task('inject', function() {
+gulp.task('dev:inject', function() {
 
-	logTaskStartup('RUN TASK: inject...');
+	logTaskStartup('RUN TASK: inject (development)...');
 
 	var target = gulp.src('./src/templates/index.html');
 	// It's not necessary to read the files (will speed up things), we're only after their paths:
-	var sources = gulp.src(['css/**/*.css', 'js/**/*.js'], { read: false, cwd: 'src' });
+	var sources = gulp.src(['css/**/*.css', 'js/**/*.js', '!js/main.min.js'], { read: false, cwd: 'dev' });
 
 	return target.pipe(inject(sources))
+		.pipe(plumber())
+		.pipe(gulp.dest('./dev'));
+});
+
+gulp.task('prod:inject', function() {
+
+	logTaskStartup('RUN TASK: inject (production)...');
+
+	var target = gulp.src('./src/templates/index.html');
+	// It's not necessary to read the files (will speed up things), we're only after their paths:
+	var sources = gulp.src(['css/**/*.css', 'js/**/*.js'], { read: false, cwd: 'prod' });
+
+	return target.pipe(inject(sources))
+		.pipe(plumber())
 		.pipe(gulp.dest('./prod'));
 });
 
@@ -189,8 +224,8 @@ gulp.task('watch-files', function(cb) {
 
 	gutil.log(gutil.colors.bgMagenta.white.bold('Watching files...'));
 
-	gulp.watch('src/scss/**/*.{scss,sass}', ['prod:css']);
-	gulp.watch('src/scripts/**/*.js', ['prod:js']);
+	gulp.watch('src/scss/**/*.{scss,sass}', ['dev:css']);
+	gulp.watch('src/scripts/**/*.js', ['dev:js']);
 	gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif,svg}', ['dev:imagemin']);
 	gulp.watch('src/templates/**/*.html', []);
 });
@@ -200,7 +235,9 @@ gulp.task('default',
 
 		runSequence(
 			'dev:clear',
-			['dev:css', 'jshint', 'dev:js', 'inject', 'dev:imagemin', 'connect'],
+			['dev:css', 'jshint', 'dev:js', 'dev:imagemin'],
+			'dev:inject',
+			'connect',
 			'watch-files',
 		cb);
 });
@@ -209,7 +246,8 @@ gulp.task('prod',
 	function(cb) {
 
 		runSequence(
-			'dev:clear',
-			['prod:css', 'prod:js', 'inject', 'prod:imagemin'],
+			'prod:clear',
+			['prod:css', 'prod:js', 'prod:imagemin'],
+			'prod:inject',
 		cb);
 });
