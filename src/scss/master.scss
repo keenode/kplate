@@ -1,19 +1,30 @@
+/** --------------------------------------------------------
+	master.scss
+	--------------------------------------------------------
+	@author Keenan Staffieri
+	Master file for all SCSS.
+	-------------------------------------------------------- */
+
 /** Bourbon Mixins **/
 @import "../bower_components/bourbon/dist/bourbon";
 
 /** Bourbon Neat Grid **/
 @import "../bower_components/neat/app/assets/stylesheets/neat";
 
-body {
-	background: black;
-	font-family: 'Open Sans', sans-serif;
-	transition: all 300ms ease-out;
-}
+/** Import custom mixins **/
+@import "mixins/base";
 
-h1 {
-	color: white;
-}
+/** Grid settings **/
+@import "grid/base";
 
-p {
-	color: white;
-}
+/** Custom webfonts **/
+@import "fonts";
+
+/** Normalize CSS **/
+@import "normalize";
+
+/** Import theme styles **/
+@import "styles/base";
+
+/** Import component styles **/
+@import "components/base";

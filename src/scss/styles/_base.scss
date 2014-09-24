@@ -1,0 +1,14 @@
+/** --------------------------------------------------------
+	styles/_base.scss
+	--------------------------------------------------------
+	@author Keenan Staffieri
+	Base theme styles.
+	-------------------------------------------------------- */
+
+body {
+	background: black;
+	font-family: 'Open Sans', sans-serif;
+	transition: all 300ms ease-out;
+}
+
+@import "typography";
