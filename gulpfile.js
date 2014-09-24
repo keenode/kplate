@@ -18,5 +18,9 @@ gutil.log(
 
 /**
 	Include gulp tasks
+	------------------
+	./tasks/dev.js
+	./tasks/prod.js
+	./tasks/commands.js
 */
 var dir = requireDir('./tasks');
