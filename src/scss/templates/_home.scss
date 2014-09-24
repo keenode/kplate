@@ -1,0 +1,10 @@
+/** --------------------------------------------------------
+    templates/_home.scss
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    Homepage styles.
+    -------------------------------------------------------- */
+
+section.main-content {
+	@include outer-container;
+}

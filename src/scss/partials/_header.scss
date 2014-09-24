@@ -1,0 +1,14 @@
+/** --------------------------------------------------------
+    partials/_header.scss
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    Header styles.
+    -------------------------------------------------------- */
+
+header.main {
+	background-color: $light-gray;
+
+	.inner {
+		@include outer-container;
+	}
+}

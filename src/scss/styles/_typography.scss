@@ -5,10 +5,35 @@
 	Typography styles.
 	-------------------------------------------------------- */
 
-h1 {
-	color: white;
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 0.5em 0;
+}
+
+h1, h2 {
+	font-family: $font-family-headings;
+}
+
+h3, h4 {
+	font-family: $font-family-subheadings;
+}
+
+h5, h6 {
+	font-family: $font-family-base;
 }
 
 p {
-	color: white;
+	
+}
+
+a {
+	color: blue;
+	transition: color 200ms ease-in;
+
+	&:active {
+		color: red;
+	}
+
+	&:hover {
+		color: green;
+	}
 }

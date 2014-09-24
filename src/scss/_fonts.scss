@@ -2,13 +2,14 @@
     _fonts.scss
     --------------------------------------------------------
     @author Keenan Staffieri
-    Include all custom web fonts.
+    Include all custom webfonts.
     -------------------------------------------------------- */
 
 /**
 	Include custom fonts
 */
 @include font-face('Open Sans','../fonts/opensans_regular/OpenSans-Regular-webfont');
+
 
 /**
 	font-face

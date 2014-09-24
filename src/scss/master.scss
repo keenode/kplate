@@ -2,6 +2,8 @@
 	master.scss
 	--------------------------------------------------------
 	@author Keenan Staffieri
+	@version 0.1.0
+	@framework_version 0.1.0
 	Master file for all SCSS.
 	-------------------------------------------------------- */
 
@@ -10,6 +12,9 @@
 
 /** Bourbon Neat Grid **/
 @import "../bower_components/neat/app/assets/stylesheets/neat";
+
+/** Theme settings **/
+@import "theme_settings";
 
 /** Import custom mixins **/
 @import "mixins/base";
@@ -28,3 +33,9 @@
 
 /** Import component styles **/
 @import "components/base";
+
+/** Import partial templates **/
+@import "partials/base";
+
+/** Import template styles **/
+@import "templates/base";

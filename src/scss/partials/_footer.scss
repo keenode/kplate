@@ -1,0 +1,14 @@
+/** --------------------------------------------------------
+    partials/_footer.scss
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    Footer styles.
+    -------------------------------------------------------- */
+
+footer.main {
+	background-color: $light-gray;
+
+	.inner {
+		@include outer-container;
+	}	
+}

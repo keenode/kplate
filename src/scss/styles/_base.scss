@@ -6,9 +6,9 @@
 	-------------------------------------------------------- */
 
 body {
-	background: black;
-	font-family: 'Open Sans', sans-serif;
-	transition: all 300ms ease-out;
+	color: $font-color-default;
+	background-color: white;
+	font-family: $font-family-base;
 }
 
 @import "typography";
