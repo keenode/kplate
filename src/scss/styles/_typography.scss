@@ -14,6 +14,7 @@ h1, h2 {
 }
 
 h3, h4 {
+	color: $gray;
 	font-family: $font-family-subheadings;
 }
 
@@ -21,8 +22,32 @@ h5, h6 {
 	font-family: $font-family-base;
 }
 
+h1 {
+	font-size: em(36px);
+}
+
+h2 {
+	font-size: em(32px);
+}
+
+h3 {
+	font-size: em(26px);
+}
+
+h4 {
+	font-size: em(22px);
+}
+
+h5 {
+	font-size: em(20px);
+}
+
+h6 {
+	font-size: em(16px);
+}
+
 p {
-	
+	font-size: em(16px);
 }
 
 a {

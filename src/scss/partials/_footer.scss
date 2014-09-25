@@ -6,9 +6,17 @@
     -------------------------------------------------------- */
 
 footer.main {
-	background-color: $light-gray;
+	border-top: 1px solid $light-gray;
 
 	.inner {
 		@include outer-container;
-	}	
+		@include pad(1em);
+	}
+
+	.copyright {
+		display: block;
+		color: $gray;
+		font-size: em(12px);
+		text-align: center;
+	}
 }

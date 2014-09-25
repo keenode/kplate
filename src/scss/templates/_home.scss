@@ -7,4 +7,43 @@
 
 section.main-content {
 	@include outer-container;
+	@include pad(1em);
+
+	.left {
+		@include span-columns(12);
+
+		@include media($tablet) {
+			@include span-columns(8);
+		}
+	}
+
+	.right {
+		@include span-columns(12);
+		@include omega();
+
+		@include media($tablet) {
+			@include span-columns(4);
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+}
+
+section.main-cols {
+	@include outer-container;
+	@include pad(1em);
+
+	.col {
+		@include span-columns(12);
+
+		@include media($tablet) {
+			@include span-columns(4);
+		}
+
+		p {
+			font-size: em(14px);
+		}
+	}
 }

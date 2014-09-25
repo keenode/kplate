@@ -6,9 +6,16 @@
     -------------------------------------------------------- */
 
 header.main {
-	background-color: $light-gray;
+	background-color: $dark-gray;
 
 	.inner {
 		@include outer-container;
+		@include pad(1em);
+	}
+
+	.site-title {
+		color: white;
+		margin: 0;
+		cursor: default;
 	}
 }
