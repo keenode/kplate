@@ -8,11 +8,16 @@
 /**
 	Theme Colors
 */
-$color-primary: 	blue;
-$color-secondary: 	green;
-$color-accent: 		yellow;
+$color-primary: 	#00accc;
+$color-secondary: 	#ff338c;
+$color-accent: 		#ff8219;
 
 $bg-color: #f6f6f6;
+
+$link-color: 		$color-secondary;
+$link-hover-color: 	darken($color-secondary, 20%);
+$link-active-color: $color-accent;
+
 
 /**
 	Default Colors
@@ -21,17 +26,20 @@ $light-gray: 	#ccc;
 $gray: 			#999;
 $dark-gray: 	#333;
 
+
 /**
 	FX and Action Colors
 */
 $highlight-color: yellow;
 
+
 /**
 	Font Families
 */
-$font-family-base: 'Open Sans', Helvetica, Arial, sans-serif;
-$font-family-headings: 'Open Sans', Helvetica, Arial, sans-serif;
-$font-family-subheadings: 'Open Sans', Helvetica, Arial, sans-serif;
+$font-family-base: 			'Open Sans', Helvetica, Arial, sans-serif;
+$font-family-headings: 		$font-family-base;
+$font-family-subheadings: 	$font-family-base;
+
 
 /**
 	Font Color

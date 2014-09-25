@@ -6,7 +6,8 @@
 	-------------------------------------------------------- */
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 0.5em 0;
+	margin: 0 0 0 0;
+	text-rendering: optimizeLegibility; // Fix the character spacing for headings
 }
 
 h1, h2 {
@@ -16,6 +17,10 @@ h1, h2 {
 h3, h4 {
 	color: $gray;
 	font-family: $font-family-subheadings;
+
+	&.subheading {
+		margin-bottom: 1em;
+	}
 }
 
 h5, h6 {
@@ -48,17 +53,30 @@ h6 {
 
 p {
 	font-size: em(16px);
+	margin: 0 0 1em 0;
 }
 
 a {
-	color: blue;
-	transition: color 200ms ease-in;
-
-	&:active {
-		color: red;
-	}
+	color: $link-color;
+	text-decoration: none;
+	transition: color 200ms ease-out;
 
 	&:hover {
-		color: green;
+		color: $link-hover-color;
 	}
+
+	&:active {
+		color: $link-active-color;
+	}
+}
+
+hr {
+	border: 0;
+	border-bottom: 1px solid $light-gray;
+	margin: 2em 0;
+}
+
+img, picture {
+	margin: 0;
+	max-width: 100%;
 }

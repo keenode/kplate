@@ -9,6 +9,14 @@ section.main-content {
 	@include outer-container;
 	@include pad(1em);
 
+	h1, h4 {
+		cursor: default;
+	}
+
+	img {
+		width: 100%;
+	}
+
 	.left {
 		@include span-columns(12);
 
@@ -24,10 +32,6 @@ section.main-content {
 		@include media($tablet) {
 			@include span-columns(4);
 		}
-
-		img {
-			width: 100%;
-		}
 	}
 }
 
@@ -40,6 +44,12 @@ section.main-cols {
 
 		@include media($tablet) {
 			@include span-columns(4);
+		}
+
+		h3 {
+			color: $color-accent;
+			margin-bottom: 0.25em;
+			cursor: default;
 		}
 
 		p {
