@@ -28,12 +28,6 @@ $dark-gray: 	#333;
 
 
 /**
-	FX and Action Colors
-*/
-$highlight-color: yellow;
-
-
-/**
 	Font Families
 */
 $font-family-base: 			'Open Sans', Helvetica, Arial, sans-serif;
@@ -42,6 +36,12 @@ $font-family-subheadings: 	$font-family-base;
 
 
 /**
-	Font Color
+	Font Colors
 */
-$font-color-default: #1a1a1a;
+$font-color-base: #1a1a1a;
+
+
+/**
+	FX and Action Colors
+*/
+$highlight-color: yellow;
