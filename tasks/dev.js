@@ -147,6 +147,10 @@ gulp.task('dev:inject', function() {
 	var sources = gulp.src(
 		[
 			cssFolderName + '/**/*.css',
+			jsFolderName + '/**/jquery.js',
+			jsFolderName + '/**/jquery.*.js',
+			jsFolderName + '/**/MyClass.js',
+			jsFolderName + '/**/MyChildClass.js',
 			jsFolderName + '/**/*.js',
 			'!' + jsFolderName + '/' + buildConfig.prod.mainJsFileName + '.min.js'
 		],

@@ -76,6 +76,10 @@ gulp.task('prod:js', function() {
 
 	var jsCompileArr = bowerComponents.concat(
 		[
+			'./src/scripts/**/jquery.js',
+			'./src/scripts/**/jquery.*.js',
+			'./src/scripts/**/MyClass.js',
+			'./src/scripts/**/MyChildClass.js',
 			'./src/scripts/**/*.js'
 		]);
 
