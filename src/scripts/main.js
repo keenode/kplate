@@ -13,5 +13,8 @@
 	'use strict';
 
 	console.log("From 'main.js' file.");
+
+	// Test jquery.myplugin
+	$('img').myplugin({ action: 'addBorder' });
   
 })(jQuery);
