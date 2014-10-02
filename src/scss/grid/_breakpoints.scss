@@ -1,11 +1,11 @@
 /** --------------------------------------------------------
-	grid/_breakpoints.scss
-	--------------------------------------------------------
-	@author Keenan Staffieri
-	Custom breakpoints.
-	-------------------------------------------------------- */
+    grid/_breakpoints.scss
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    Custom breakpoints.
+    -------------------------------------------------------- */
 
-$desktop-lg: 	new-breakpoint(min-width 1201px 12);
-$desktop: 		new-breakpoint(min-width 1025px 12);
-$tablet: 		new-breakpoint(min-width 769px 12);
-$mobile: 		new-breakpoint(min-width 481px 12);
+$desktop-lg:    new-breakpoint(min-width 1201px 12);
+$desktop:       new-breakpoint(min-width 1025px 12);
+$tablet:        new-breakpoint(min-width 769px 12);
+$mobile:        new-breakpoint(min-width 481px 12);

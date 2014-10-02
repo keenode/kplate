@@ -1,85 +1,85 @@
 /** --------------------------------------------------------
-	tasks/commands.js
-	--------------------------------------------------------
-	@author Keenan Staffieri
-	GulpJS commands to perform certain sets of tasks.
-	-------------------------------------------------------- */
+    tasks/commands.js
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    GulpJS commands to perform certain sets of tasks.
+    -------------------------------------------------------- */
 
 /**
-	Required Modules
+    Required Modules
 */
 var gulp = require('gulp'),
-	gutil = require('gulp-util'),
-	runSequence = require('run-sequence');
+    gutil = require('gulp-util'),
+    runSequence = require('run-sequence');
 
 /**
-	Gulp Tasks - You may run these commands in the terminal:
-	'gulp'				: Run 'development' mode tasks with WATCH.
-	'gulp prod'			: Run 'production' mode tasks with WATCH.
-	'gulp build:dev'	: Build 'development' folder.
-	'gulp build:prod'	: Build 'production' folder.
+    Gulp Tasks - You may run these commands in the terminal:
+    'gulp'              : Run 'development' mode tasks with WATCH.
+    'gulp prod'         : Run 'production' mode tasks with WATCH.
+    'gulp build:dev'    : Build 'development' folder.
+    'gulp build:prod'   : Build 'production' folder.
 */
 
 /**
-	COMMAND: default (gulp)
+    COMMAND: default (gulp)
 */
 gulp.task('default',
-	function(cb) {
+    function(cb) {
 
-		gutil.log(gutil.colors.yellow.bold('Running DEVELOPMENT tasks...'));
+        gutil.log(gutil.colors.yellow.bold('Running DEVELOPMENT tasks...'));
 
-		runSequence(
-			'dev:clear',
-			['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles'],
-			'dev:inject',
-			'dev:connect',
-			'dev:watch',
-		cb);
+        runSequence(
+            'dev:clear',
+            ['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles'],
+            'dev:inject',
+            'dev:connect',
+            'dev:watch',
+        cb);
 });
 
 /**
-	COMMAND: prod (gulp prod)
+    COMMAND: prod (gulp prod)
 */
 gulp.task('prod',
-	function(cb) {
+    function(cb) {
 
-		gutil.log(gutil.colors.yellow.bold('Running PRODUCTION tasks...'));
+        gutil.log(gutil.colors.yellow.bold('Running PRODUCTION tasks...'));
 
-		runSequence(
-			'prod:clear',
-			['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles'],
-			'prod:inject',
-			'prod:connect',
-			'prod:watch',
-		cb);
+        runSequence(
+            'prod:clear',
+            ['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles'],
+            'prod:inject',
+            'prod:connect',
+            'prod:watch',
+        cb);
 });
 
 /**
-	COMMAND: build:dev (gulp build:dev)
+    COMMAND: build:dev (gulp build:dev)
 */
 gulp.task('build:dev',
-	function(cb) {
+    function(cb) {
 
-		gutil.log(gutil.colors.blue.bold('Building DEVELOPMENT source...'));
+        gutil.log(gutil.colors.blue.bold('Building DEVELOPMENT source...'));
 
-		runSequence(
-			'dev:clear',
-			['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles'],
-			'dev:inject',
-		cb);
+        runSequence(
+            'dev:clear',
+            ['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles'],
+            'dev:inject',
+        cb);
 });
 
 /**
-	COMMAND: build:prod (gulp build:prod)
+    COMMAND: build:prod (gulp build:prod)
 */
 gulp.task('build:prod',
-	function(cb) {
+    function(cb) {
 
-		gutil.log(gutil.colors.blue.bold('Building PRODUCTION source...'));
+        gutil.log(gutil.colors.blue.bold('Building PRODUCTION source...'));
 
-		runSequence(
-			'prod:clear',
-			['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles'],
-			'prod:inject',
-		cb);
+        runSequence(
+            'prod:clear',
+            ['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles'],
+            'prod:inject',
+        cb);
 });

@@ -6,42 +6,42 @@
     -------------------------------------------------------- */
 
 /**
-	Theme Colors
+    Theme Colors
 */
-$color-primary: 	#00accc;
-$color-secondary: 	#ff338c;
-$color-accent: 		#ff8219;
+$color-primary:     #00accc;
+$color-secondary:   #ff338c;
+$color-accent:      #ff8219;
 
 $bg-color: #f6f6f6;
 
-$link-color: 		$color-secondary;
-$link-hover-color: 	darken($color-secondary, 20%);
+$link-color:        $color-secondary;
+$link-hover-color:  darken($color-secondary, 20%);
 $link-active-color: $color-accent;
 
 
 /**
-	Default Colors
+    Default Colors
 */
-$light-gray: 	#ccc;
-$gray: 			#999;
-$dark-gray: 	#333;
+$light-gray:    #ccc;
+$gray:          #999;
+$dark-gray:     #333;
 
 
 /**
-	Font Families
+    Font Families
 */
-$font-family-base: 			'Open Sans', Helvetica, Arial, sans-serif;
-$font-family-headings: 		$font-family-base;
-$font-family-subheadings: 	$font-family-base;
+$font-family-base:          'Open Sans', Helvetica, Arial, sans-serif;
+$font-family-headings:      $font-family-base;
+$font-family-subheadings:   $font-family-base;
 
 
 /**
-	Font Colors
+    Font Colors
 */
 $font-color-base: #1a1a1a;
 
 
 /**
-	FX and Action Colors
+    FX and Action Colors
 */
 $highlight-color: yellow;
