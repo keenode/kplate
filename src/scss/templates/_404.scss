@@ -5,7 +5,7 @@
     404 page styles.
     -------------------------------------------------------- */
 
-section.contain-404 {
+.contain404 {
     @include outer-container;
     @include pad(80px);
 

@@ -1,13 +1,33 @@
 /** --------------------------------------------------------
-    templates/_home.scss
+    templates/_index.scss
     --------------------------------------------------------
     @author Keenan Staffieri
-    Homepage styles.
+    Index page styles.
     -------------------------------------------------------- */
 
-section.main-content {
+/**
+    Content section of the index page.
+*/
+.mainContent {
     @include outer-container;
     @include pad(1em);
+
+    &__left {
+        @include span-columns(12);
+
+        @include media($tablet) {
+            @include span-columns(8);
+        }
+    }
+
+    &__right {
+        @include span-columns(12);
+        @include omega();
+
+        @include media($tablet) {
+            @include span-columns(4);
+        }
+    }
 
     h1, h4 {
         cursor: default;
@@ -16,44 +36,30 @@ section.main-content {
     img {
         width: 100%;
     }
-
-    .left {
-        @include span-columns(12);
-
-        @include media($tablet) {
-            @include span-columns(8);
-        }
-    }
-
-    .right {
-        @include span-columns(12);
-        @include omega();
-
-        @include media($tablet) {
-            @include span-columns(4);
-        }
-    }
 }
 
-section.main-cols {
+/**
+    Main columns of the index page.
+*/
+.mainCols {
     @include outer-container;
     @include pad(1em);
 
-    .col {
+    &__col {
         @include span-columns(12);
 
         @include media($tablet) {
             @include span-columns(4);
         }
+    }
 
-        h3 {
-            color: $color-accent;
-            margin-bottom: 0.25em;
-            cursor: default;
-        }
+    h3 {
+        color: $color-accent;
+        margin-bottom: 0.25em;
+        cursor: default;
+    }
 
-        p {
-            font-size: em(14px);
-        }
+    p {
+        font-size: em(14px);
     }
 }

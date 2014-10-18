@@ -5,15 +5,15 @@
     Footer styles.
     -------------------------------------------------------- */
 
-footer.main {
+.mainFooter {
     border-top: 1px solid $light-gray;
 
-    .inner {
+    &__inner {
         @include outer-container;
         @include pad(1em);
     }
 
-    .copyright {
+    &__copyright {
         display: block;
         color: $gray;
         font-size: em(12px);
