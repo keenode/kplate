@@ -32,6 +32,7 @@
     // Set the "constructor" property to refer to MyChildClass
     MyChildClass.prototype.constructor = MyChildClass;
 
+
     /** --------------------------------------------------------
         Methods
         -------------------------------------------------------- */
