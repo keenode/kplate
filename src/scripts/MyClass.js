@@ -20,14 +20,6 @@
         this.name = name;
 
         console.log('MyClass instantiated.');
-
-        // Private vars
-        var _myPrivateVar = 999;
-
-        // Private functions
-        function myPrivateFunction() {
-            return 'This is private!';
-        }
     };
 
     /** --------------------------------------------------------

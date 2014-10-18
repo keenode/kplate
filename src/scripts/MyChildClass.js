@@ -40,7 +40,7 @@
         sayHello
         Simply say hello!
     */
-    // Replaces the "sayHello" method
+    // Replaces the "sayHello" method from MyClass
     MyChildClass.prototype.sayHello = function() {
         console.log("Hello, I'm " + this.name + " from the child class.");
     };
