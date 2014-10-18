@@ -8,8 +8,8 @@
 /**
     Required Modules
 */
-var gulp = require('gulp'),
-    gutil = require('gulp-util'),
+var gulp        = require('gulp'),
+    gutil       = require('gulp-util'),
     runSequence = require('run-sequence');
 
 /**
