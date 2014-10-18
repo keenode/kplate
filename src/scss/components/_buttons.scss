@@ -1,0 +1,18 @@
+/** --------------------------------------------------------
+    components/_buttons.scss
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    Button styles.
+    -------------------------------------------------------- */
+
+.btn {
+    @include ks-button();
+}
+
+.btn-primary {
+    @include ks-button(primary);
+}
+
+.btn-large {
+    @include ks-button(large);
+}

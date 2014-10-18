@@ -1,0 +1,12 @@
+/** --------------------------------------------------------
+    grid/_neat-overrides.scss
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    Override default Neat settings.
+    -------------------------------------------------------- */
+
+// Neat Overrides
+// $column: 90px;
+// $gutter: 30px;
+// $grid-columns: 12;
+$max-width: em(1200); // default em(1088)

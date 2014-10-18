@@ -5,7 +5,14 @@
     Custom breakpoints.
     -------------------------------------------------------- */
 
-$desktop-lg:    new-breakpoint(min-width 1201px 12);
-$desktop:       new-breakpoint(min-width 1025px 12);
-$tablet:        new-breakpoint(min-width 769px 12);
-$mobile:        new-breakpoint(min-width 481px 12);
+// Screens
+$screen-desktop-lg: em(1201);
+$screen-desktop:    em(1025);
+$screen-tablet:     em(769);
+$screen-mobile:     em(481);
+
+// Breakpoints
+$desktop-lg:    new-breakpoint(min-width $screen-desktop-lg 12);
+$desktop:       new-breakpoint(min-width $screen-desktop    12);
+$tablet:        new-breakpoint(min-width $screen-tablet     12);
+$mobile:        new-breakpoint(min-width $screen-mobile     12);

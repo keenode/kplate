@@ -12,11 +12,13 @@ h1, h2, h3, h4, h5, h6 {
 
 h1, h2 {
     font-family: $font-family-headings;
+    font-weight: 100;
 }
 
 h3, h4 {
     color: $gray;
     font-family: $font-family-subheadings;
+    font-weight: 400;
 
     &.subheading {
         margin-bottom: 1em;
