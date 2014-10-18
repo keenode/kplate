@@ -13,9 +13,6 @@
 
     'use strict';
 
-    // Private vars for plugin
-    var _borderColor = '#556b2f';
-
     /**
         jquery.myplugin
         Simply add a border to something for demonstration
@@ -32,6 +29,9 @@
         if(settings.action === 'addBorder') {
             this.css('border', '2px solid ' + _borderColor);
         }
+
+        // Private vars for plugin
+        var _borderColor = '#556b2f';
 
         return this; // make chainable
     };
