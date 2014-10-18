@@ -83,4 +83,5 @@ To install **kplate**, simply clone this repo, update the configuration files, a
 If you have questions, comments or concerns, feel free to reach me as follows:
 
 **Website** --- [keenanstaffieri.com](http://keenanstaffieri.com)
+
 **Twitter** --- [@keenode](https://twitter.com/keenode)
