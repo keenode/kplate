@@ -1,8 +1,8 @@
 {
   "name": "kplate",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Front-End boilerplate with GulpJS build system.",
-  "main": "dist/main.js",
+  "main": "prod/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
