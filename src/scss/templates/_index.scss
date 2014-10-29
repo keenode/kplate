@@ -23,6 +23,7 @@
     &__right {
         @include span-columns(12);
         @include omega();
+        margin-top: em(20);
 
         @include media($tablet) {
             @include span-columns(4);
