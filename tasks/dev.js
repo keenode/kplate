@@ -22,7 +22,8 @@ var gulp            = require('gulp'),
     size            = require('gulp-size'),
     sourcemaps      = require('gulp-sourcemaps'),
     buildConfig     = require('../config/buildConfig'),
-    bowerComponents = require('../config/bowerComponents');
+    bowerComponents = require('../config/bowerComponents'),
+    jsCompileFiles  = require('../config/jsCompileFiles');
 
 /**
     TASK: dev:connect
@@ -72,6 +73,7 @@ gulp.task('dev:js', function() {
 
     logTaskStartup('RUN TASK: JavaScript (development)...');
 
+    /* Gather all JavaScripts and then copy to dev folder */
     var jsCompileArr = bowerComponents.concat(
         [
             './src/scripts/**/*.js',
@@ -137,23 +139,27 @@ gulp.task('dev:inject', function() {
 
     var target = gulp.src('./src/templates/**/*.html');
 
-    // get css and js folder names
+    // Get css and js folder names
     var cssPath = buildConfig.dev.paths.css,
         jsPath = buildConfig.dev.paths.js,
         cssFolderName = cssPath.split('/').pop(),
         jsFolderName = jsPath.split('/').pop();
 
+    /* Loop through JavaScript files to compile and 
+        prepend js folder path */
+    var jsCompileFilesWithPath = [];
+    for(var i = 0; i < jsCompileFiles.length; i++)
+        jsCompileFilesWithPath.push(jsFolderName + jsCompileFiles[i]);
+
+    var cssFiles      = [ cssFolderName + '/**/*.css' ],
+        excludeProdJs = [ '!' + jsFolderName + '/' + buildConfig.prod.mainJsFileName + '.min.js' ];
+
+    // Gather all CSS and JavaScript paths
+    var allFilePaths  = cssFiles.concat(jsCompileFilesWithPath).concat(excludeProdJs);
+
     // It's not necessary to read the files (will speed up things), we're only after their paths:
     var sources = gulp.src(
-        [
-            cssFolderName + '/**/*.css',
-            jsFolderName + '/**/jquery.js',
-            jsFolderName + '/**/jquery.*.js',
-            jsFolderName + '/**/MyClass.js',
-            jsFolderName + '/**/MyChildClass.js',
-            jsFolderName + '/**/*.js',
-            '!' + jsFolderName + '/' + buildConfig.prod.mainJsFileName + '.min.js'
-        ],
+        allFilePaths,
         {
             read: false,
             cwd: buildConfig.dev.rootDir

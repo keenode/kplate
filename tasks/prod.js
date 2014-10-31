@@ -24,7 +24,8 @@ var gulp            = require('gulp'),
     stripDebug      = require('gulp-strip-debug'),
     uglify          = require('gulp-uglify'),
     buildConfig     = require('../config/buildConfig'),
-    bowerComponents = require('../config/bowerComponents');
+    bowerComponents = require('../config/bowerComponents'),
+    jsCompileFiles  = require('../config/jsCompileFiles');
 
 /**
     TASK: prod:connect
@@ -74,14 +75,15 @@ gulp.task('prod:js', function() {
 
     logTaskStartup('RUN TASK: JavaScript (production)...');
 
-    var jsCompileArr = bowerComponents.concat(
-        [
-            './src/scripts/**/jquery.js',
-            './src/scripts/**/jquery.*.js',
-            './src/scripts/**/MyClass.js',
-            './src/scripts/**/MyChildClass.js',
-            './src/scripts/**/*.js'
-        ]);
+    /* Loop through JavaScript files to compile and 
+        prepend scripts folder path */
+    var jsCompileFilesWithPath = [];
+    for(var i = 0; i < jsCompileFiles.length; i++)
+        jsCompileFilesWithPath.push('./src/scripts' + jsCompileFiles[i]);
+
+    /* Gather JavaScripts in correct order and then
+        create a single minified JavaScript file. */
+    var jsCompileArr = bowerComponents.concat(jsCompileFilesWithPath).concat([ './src/scripts/**/*.js' ]);
 
     return gulp.src(jsCompileArr)
         .pipe(plumber())
