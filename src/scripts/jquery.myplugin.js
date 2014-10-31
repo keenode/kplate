@@ -25,13 +25,13 @@
             action: 'nothing'
         }, options);
 
+        // Private vars for plugin
+        var _borderColor = '#556b2f';
+
         // Perform specified action
         if(settings.action === 'addBorder') {
             this.css('border', '2px solid ' + _borderColor);
         }
-
-        // Private vars for plugin
-        var _borderColor = '#556b2f';
 
         return this; // make chainable
     };
