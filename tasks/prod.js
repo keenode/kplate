@@ -26,7 +26,8 @@ var gulp            = require('gulp'),
     uglify          = require('gulp-uglify'),
     buildConfig     = require('../config/buildConfig'),
     bowerComponents = require('../config/bowerComponents'),
-    jsCompileFiles  = require('../config/jsCompileFiles');
+    jsCompileFiles  = require('../config/jsCompileFiles'),
+    Helpers         = require('../util/helpers');
 
 /**
     TASK: prod:connect
@@ -34,7 +35,7 @@ var gulp            = require('gulp'),
 */
 gulp.task('prod:connect', function() {
 
-    logTaskStartup('Startup connect server (production)...');
+    Helpers.logTaskStartup('Startup connect server (production)...');
 
     return connect.server({
         root:       buildConfig.prod.rootDir,
@@ -49,7 +50,7 @@ gulp.task('prod:connect', function() {
 */
 gulp.task('prod:css', function() {
 
-    logTaskStartup('RUN TASK: CSS (production)...');
+    Helpers.logTaskStartup('RUN TASK: CSS (production)...');
 
     return gulp.src('./src/scss/**/*.{scss,sass}')
         .pipe(plumber())
@@ -74,7 +75,7 @@ gulp.task('prod:css', function() {
 */
 gulp.task('prod:js', function() {
 
-    logTaskStartup('RUN TASK: JavaScript (production)...');
+    Helpers.logTaskStartup('RUN TASK: JavaScript (production)...');
 
     /* Loop through JavaScript files to compile and 
         prepend scripts folder path */
@@ -108,7 +109,7 @@ gulp.task('prod:js', function() {
 */
 gulp.task('prod:imagemin', function() {
 
-    logTaskStartup('RUN TASK: imagemin (production)...');
+    Helpers.logTaskStartup('RUN TASK: imagemin (production)...');
 
     var imgFilter = filter('**/*.{png,jpg,jpeg,gif}'),
         svgFilter = filter('**/*.svg');
@@ -135,7 +136,7 @@ gulp.task('prod:imagemin', function() {
 */
 gulp.task('prod:inject', function() {
 
-    logTaskStartup('RUN TASK: inject (production)...');
+    Helpers.logTaskStartup('RUN TASK: inject (production)...');
 
     var target = gulp.src('./src/templates/**/*.html');
 
@@ -168,7 +169,7 @@ gulp.task('prod:inject', function() {
 */
 gulp.task('prod:clear', function(cb) {
 
-    logTaskStartup('RUN TASK: clear files (production)...');
+    Helpers.logTaskStartup('RUN TASK: clear files (production)...');
 
     return gulp.src(buildConfig.prod.rootDir, { read: false })
         .pipe(rimraf());
@@ -180,7 +181,7 @@ gulp.task('prod:clear', function(cb) {
 */
 gulp.task('prod:videos', function() {
 
-    logTaskStartup('RUN TASK: copy videos (production)...');
+    Helpers.logTaskStartup('RUN TASK: copy videos (production)...');
 
     return gulp.src('./src/assets/videos/**/*.{mp4,ogv}')
         .pipe(gulp.dest(buildConfig.prod.paths.videos));
@@ -192,7 +193,7 @@ gulp.task('prod:videos', function() {
 */
 gulp.task('prod:fonts', function() {
 
-    logTaskStartup('RUN TASK: copy fonts (production)...');
+    Helpers.logTaskStartup('RUN TASK: copy fonts (production)...');
 
     return gulp.src('./src/assets/fonts/**/*.{eot,svg,ttf,woff}')
         .pipe(gulp.dest(buildConfig.prod.paths.fonts));
@@ -204,7 +205,7 @@ gulp.task('prod:fonts', function() {
 */
 gulp.task('prod:favicons', function() {
 
-    logTaskStartup('RUN TASK: copy favicons (production)...');
+    Helpers.logTaskStartup('RUN TASK: copy favicons (production)...');
 
     return gulp.src('./src/favicons/**/*.{ico,png}')
         .pipe(gulp.dest(buildConfig.prod.rootDir));
@@ -216,20 +217,8 @@ gulp.task('prod:favicons', function() {
 */
 gulp.task('prod:rootfiles', function() {
 
-    logTaskStartup('RUN TASK: copy rootfiles (production)...');
+    Helpers.logTaskStartup('RUN TASK: copy rootfiles (production)...');
 
     return gulp.src('./src/rootfiles/**/*')
         .pipe(gulp.dest(buildConfig.prod.rootDir));
 });
-
-/**
-    logTaskStartup
-    Helper function that formats and logs tasks startups
-*/
-function logTaskStartup(logString) {
-    gutil.log(
-        gutil.colors.inverse(
-            buildConfig.logSepDecor + logString + buildConfig.logSepDecor
-        )
-    );
-}

@@ -23,7 +23,8 @@ var gulp            = require('gulp'),
     sourcemaps      = require('gulp-sourcemaps'),
     buildConfig     = require('../config/buildConfig'),
     bowerComponents = require('../config/bowerComponents'),
-    jsCompileFiles  = require('../config/jsCompileFiles');
+    jsCompileFiles  = require('../config/jsCompileFiles'),
+    Helpers         = require('../util/helpers');
 
 /**
     TASK: dev:connect
@@ -31,7 +32,7 @@ var gulp            = require('gulp'),
 */
 gulp.task('dev:connect', function() {
 
-    logTaskStartup('Startup connect server (development)...');
+    Helpers.logTaskStartup('Startup connect server (development)...');
 
     return connect.server({
         root:       buildConfig.dev.rootDir,
@@ -46,7 +47,7 @@ gulp.task('dev:connect', function() {
 */
 gulp.task('dev:css', function() {
 
-    logTaskStartup('RUN TASK: CSS (development)...');
+    Helpers.logTaskStartup('RUN TASK: CSS (development)...');
 
     return gulp.src('./src/scss/**/*.{scss,sass}')
         .pipe(plumber())
@@ -71,7 +72,7 @@ gulp.task('dev:css', function() {
 */
 gulp.task('dev:js', function() {
 
-    logTaskStartup('RUN TASK: JavaScript (development)...');
+    Helpers.logTaskStartup('RUN TASK: JavaScript (development)...');
 
     /* Gather all JavaScripts and then copy to dev folder */
     var jsCompileArr = bowerComponents.concat(
@@ -95,7 +96,7 @@ gulp.task('dev:js', function() {
 */
 gulp.task('jshint', function() {
 
-    logTaskStartup('RUN TASK: jshint...');
+    Helpers.logTaskStartup('RUN TASK: jshint...');
 
     return gulp.src('./src/scripts/**/*.js')
         .pipe(jshint())
@@ -108,7 +109,7 @@ gulp.task('jshint', function() {
 */
 gulp.task('dev:imagemin', function() {
 
-    logTaskStartup('RUN TASK: imagemin (development)...');
+    Helpers.logTaskStartup('RUN TASK: imagemin (development)...');
 
     var imgFilter = filter('**/*.{png,jpg,jpeg,gif}'),
         svgFilter = filter('**/*.svg');
@@ -135,7 +136,7 @@ gulp.task('dev:imagemin', function() {
 */
 gulp.task('dev:inject', function() {
 
-    logTaskStartup('RUN TASK: inject (development)...');
+    Helpers.logTaskStartup('RUN TASK: inject (development)...');
 
     var target = gulp.src('./src/templates/**/*.html');
 
@@ -177,7 +178,7 @@ gulp.task('dev:inject', function() {
 */
 gulp.task('dev:clear', function(cb) {
 
-    logTaskStartup('RUN TASK: clear files (development)...');
+    Helpers.logTaskStartup('RUN TASK: clear files (development)...');
 
     return gulp.src(buildConfig.dev.rootDir, { read: false })
         .pipe(rimraf());
@@ -189,7 +190,7 @@ gulp.task('dev:clear', function(cb) {
 */
 gulp.task('dev:videos', function() {
 
-    logTaskStartup('RUN TASK: copy videos (development)...');
+    Helpers.logTaskStartup('RUN TASK: copy videos (development)...');
 
     return gulp.src('./src/assets/videos/**/*.{mp4,ogv}')
         .pipe(gulp.dest(buildConfig.dev.paths.videos));
@@ -201,7 +202,7 @@ gulp.task('dev:videos', function() {
 */
 gulp.task('dev:fonts', function() {
 
-    logTaskStartup('RUN TASK: copy fonts (development)...');
+    Helpers.logTaskStartup('RUN TASK: copy fonts (development)...');
 
     return gulp.src('./src/assets/fonts/**/*.{eot,svg,ttf,woff}')
         .pipe(gulp.dest(buildConfig.dev.paths.fonts));
@@ -213,7 +214,7 @@ gulp.task('dev:fonts', function() {
 */
 gulp.task('dev:favicons', function() {
 
-    logTaskStartup('RUN TASK: copy favicons (development)...');
+    Helpers.logTaskStartup('RUN TASK: copy favicons (development)...');
 
     return gulp.src('./src/favicons/**/*.{ico,png}')
         .pipe(gulp.dest(buildConfig.dev.rootDir));
@@ -225,20 +226,8 @@ gulp.task('dev:favicons', function() {
 */
 gulp.task('dev:rootfiles', function() {
 
-    logTaskStartup('RUN TASK: copy rootfiles (development)...');
+    Helpers.logTaskStartup('RUN TASK: copy rootfiles (development)...');
 
     return gulp.src('./src/rootfiles/**/*')
         .pipe(gulp.dest(buildConfig.dev.rootDir));
 });
-
-/**
-    logTaskStartup
-    Helper function that formats and logs tasks startups
-*/
-function logTaskStartup(logString) {
-    gutil.log(
-        gutil.colors.inverse(
-            buildConfig.logSepDecor + logString + buildConfig.logSepDecor
-        )
-    );
-}

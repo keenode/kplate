@@ -9,20 +9,22 @@
 /**
     Required Modules
 */
-var gutil = require('gulp-util');
+var gutil       = require('gulp-util'),
+    buildConfig = require('../config/buildConfig');
 
-/**
-    TODO: Place these functions into a class for module.exports
-*/
+var Helpers = {
+    /**
+        logTaskStartup
+        - Formats and logs task startups
+    */
+    logTaskStartup: function(logString) {
+        gutil.log(
+            gutil.colors.inverse(
+                buildConfig.logSepDecor + logString + buildConfig.logSepDecor
+            )
+        );
+    }
+};
 
-/**
-    logTaskStartup
-    Helper function that formats and logs tasks startups
-*/
-// function logTaskStartup(logString) {
-//  gutil.log(
-//      gutil.colors.inverse(
-//          buildConfig.logSepDecor + logString + buildConfig.logSepDecor
-//      )
-//  );
-// }
+// Make Helpers available from require
+module.exports = Helpers;
