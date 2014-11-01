@@ -51,13 +51,13 @@ gulp.task('dev:css', function() {
     return gulp.src('./src/scss/**/*.{scss,sass}')
         .pipe(plumber())
         .pipe(rubySass({
-            style: 'expanded', // nested, compact, compressed, expanded
-            lineNumbers: true, // Emit comments in the generated CSS indicating the corresponding source line.
+            style:          'expanded', // nested, compact, compressed, expanded
+            lineNumbers:    true, // Emit comments in the generated CSS indicating the corresponding source line.
             cacheLocation: './src/scss/.sass-cache'
         }))
         .pipe(autoprefixer({
             browsers: ['last 2 versions', 'ie >= 9'],
-            cascade: false
+            cascade:  false
         }))
         .on('error', function(err) { console.log(err.message); })
         .pipe(size({ title: 'CSS (uncompressed)' }))
@@ -116,10 +116,10 @@ gulp.task('dev:imagemin', function() {
     return gulp.src(['./src/assets/images/**/*.{png,jpg,jpeg,gif}', './src/assets/svgs/**/*.svg'])
         .pipe(plumber())
         .pipe(imagemin({
-            progressive: false, // (jpg)
-            optimizationLevel: 3, // (png) (0-7 low-high)
-            interlaced: false, // (gif)
-            svgoPlugins: [{ removeViewBox: false }] // (svg)
+            progressive:       false,                     // (jpg)
+            optimizationLevel: 3,                         // (png) (0-7 low-high)
+            interlaced:        false,                     // (gif)
+            svgoPlugins:       [{ removeViewBox: false }] // (svg)
         }))
         .pipe(imgFilter)
         .pipe(gulp.dest(buildConfig.dev.paths.images))
@@ -140,10 +140,10 @@ gulp.task('dev:inject', function() {
     var target = gulp.src('./src/templates/**/*.html');
 
     // Get css and js folder names
-    var cssPath = buildConfig.dev.paths.css,
-        jsPath = buildConfig.dev.paths.js,
+    var cssPath       = buildConfig.dev.paths.css,
+        jsPath        = buildConfig.dev.paths.js,
         cssFolderName = cssPath.split('/').pop(),
-        jsFolderName = jsPath.split('/').pop();
+        jsFolderName  = jsPath.split('/').pop();
 
     /* Loop through JavaScript files to compile and 
         prepend js folder path */
@@ -155,14 +155,14 @@ gulp.task('dev:inject', function() {
         excludeProdJs = [ '!' + jsFolderName + '/' + buildConfig.prod.mainJsFileName + '.min.js' ];
 
     // Gather all CSS and JavaScript paths
-    var allFilePaths  = cssFiles.concat(jsCompileFilesWithPath).concat(excludeProdJs);
+    var allFilePaths = cssFiles.concat(jsCompileFilesWithPath).concat(excludeProdJs);
 
     // It's not necessary to read the files (will speed up things), we're only after their paths:
     var sources = gulp.src(
         allFilePaths,
         {
             read: false,
-            cwd: buildConfig.dev.rootDir
+            cwd:  buildConfig.dev.rootDir
         });
 
     return target.pipe(inject(sources))

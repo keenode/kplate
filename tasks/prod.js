@@ -53,13 +53,13 @@ gulp.task('prod:css', function() {
     return gulp.src('./src/scss/**/*.{scss,sass}')
         .pipe(plumber())
         .pipe(rubySass({
-            style: 'compressed', // nested, compact, compressed, expanded
-            lineNumbers: false, // Emit comments in the generated CSS indicating the corresponding source line.
+            style:         'compressed', // nested, compact, compressed, expanded
+            lineNumbers:   false, // Emit comments in the generated CSS indicating the corresponding source line.
             cacheLocation: './src/scss/.sass-cache'
         }))
         .pipe(autoprefixer({
             browsers: ['last 2 versions', 'ie >= 9'],
-            cascade: false
+            cascade:  false
         }))
         .on('error', function(err) { console.log(err.message); })
         .pipe(size({ title: 'CSS (compressed)' }))
@@ -91,8 +91,8 @@ gulp.task('prod:js', function() {
         .pipe(concat(buildConfig.prod.mainJsFileName + '.min.js'))
         .pipe(stripDebug())
         .pipe(uglify({
-            mangle: buildConfig.prod.jsMangle,
-            compress: true,
+            mangle:           buildConfig.prod.jsMangle,
+            compress:         true,
             preserveComments: buildConfig.prod.jsComments
         }))
         .pipe(sourcemaps.write('maps'))
@@ -115,10 +115,10 @@ gulp.task('prod:imagemin', function() {
     return gulp.src(['./src/assets/images/**/*.{png,jpg,jpeg,gif}', './src/assets/svgs/**/*.svg'])
         .pipe(plumber())
         .pipe(imagemin({
-            progressive: false, // (jpg)
-            optimizationLevel: 7, // (png) (0-7 low-high)
-            interlaced: false, // (gif)
-            svgoPlugins: [{ removeViewBox: false }] // (svg)
+            progressive:       false,                     // (jpg)
+            optimizationLevel: 7,                         // (png) (0-7 low-high)
+            interlaced:        false,                     // (gif)
+            svgoPlugins:       [{ removeViewBox: false }] // (svg)
         }))
         .pipe(imgFilter)
         .pipe(gulp.dest(buildConfig.prod.paths.images))
@@ -139,10 +139,10 @@ gulp.task('prod:inject', function() {
     var target = gulp.src('./src/templates/**/*.html');
 
     // get css and js folder names
-    var cssPath = buildConfig.prod.paths.css,
-        jsPath = buildConfig.prod.paths.js,
+    var cssPath       = buildConfig.prod.paths.css,
+        jsPath        = buildConfig.prod.paths.js,
         cssFolderName = cssPath.split('/').pop(),
-        jsFolderName = jsPath.split('/').pop();
+        jsFolderName  = jsPath.split('/').pop();
 
     // It's not necessary to read the files (will speed up things), we're only after their paths:
     var sources = gulp.src(
@@ -152,7 +152,7 @@ gulp.task('prod:inject', function() {
         ],
         {
             read: false,
-            cwd: buildConfig.prod.rootDir
+            cwd:  buildConfig.prod.rootDir
         });
 
     return target.pipe(inject(sources))
