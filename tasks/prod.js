@@ -9,6 +9,7 @@
     Required Modules
 */
 var gulp            = require('gulp'),
+    watch           = require('gulp-watch'),
     autoprefixer    = require('gulp-autoprefixer'),
     concat          = require('gulp-concat'),
     connect         = require('gulp-connect'),
@@ -37,8 +38,8 @@ gulp.task('prod:connect', function() {
 
     return connect.server({
         root:       buildConfig.prod.rootDir,
-        livereload: buildConfig.dev.connectServer.livereload,
-        port:       buildConfig.dev.connectServer.port
+        livereload: buildConfig.prod.connectServer.livereload,
+        port:       buildConfig.prod.connectServer.port
     });
 });
 
@@ -229,14 +230,50 @@ gulp.task('prod:watch', function(cb) {
 
     gutil.log(gutil.colors.bgMagenta.white.bold('Watching files...'));
 
-    gulp.watch('./src/scss/**/*.{scss,sass}',                   ['prod:css']);
-    gulp.watch('./src/scripts/**/*.js',                         ['prod:js']);
-    gulp.watch('./src/assets/images/**/*.{png,jpg,jpeg,gif}',   ['prod:imagemin']);
-    gulp.watch('./src/assets/svgs/**/*.svg',                    ['prod:imagemin']);
-    gulp.watch('./src/assets/videos/**/*.{mp4,ogv}',            ['prod:videos']);
-    gulp.watch('./src/favicons/**/*.{ico,png}',                 ['prod:favicons']);
-    gulp.watch('./src/rootfiles/**/*',                          ['prod:rootfiles']);
-    gulp.watch('./src/templates/**/*.html',                     ['prod:inject']);
+    // WATCH SCSS
+    watch('src/scss/**/*.{scss,sass}',{ name: 'WATCH SCSS', read: false }, function() {
+        gulp.start('prod:css');
+    });
+
+    // WATCH JavaScript
+    watch('src/scripts/**/*.js',{ name: 'WATCH JavaScript', read: false }, function() {
+        gulp.start('prod:js');
+    });
+
+    // WATCH Fonts
+    watch('src/assets/fonts/**/*', { name: 'WATCH Fonts', read: false }, function() {
+        gulp.start('prod:fonts');
+    });
+
+    // WATCH Images
+    watch('src/assets/images/**/*.{png,jpg,jpeg,gif}', { name: 'WATCH Images', read: false }, function() {
+        gulp.start('prod:imagemin');
+    });
+
+    // WATCH SVGs
+    watch('src/assets/svgs/**/*.svg', { name: 'WATCH SVGs', read: false }, function() {
+        gulp.start('prod:imagemin');
+    });
+
+    // WATCH Videos
+    watch('src/assets/videos/**/*.{mp4,ogv}', { name: 'WATCH Videos', read: false }, function() {
+        gulp.start('prod:videos');
+    });
+
+    // WATCH Favicons
+    watch('src/favicons/**/*.{ico,png}', { name: 'WATCH Favicons', read: false }, function() {
+        gulp.start('prod:favicons');
+    });
+
+    // WATCH Rootfiles
+    watch('src/rootfiles/**/*', { name: 'WATCH Rootfiles', read: false }, function() {
+        gulp.start('prod:rootfiles');
+    });
+
+    // WATCH Templates
+    watch('src/templates/**/*.html', { name: 'WATCH Rootfiles', read: false }, function() {
+        gulp.start('prod:inject');
+    });
 });
 
 /**
