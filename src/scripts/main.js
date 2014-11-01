@@ -34,5 +34,5 @@
 
     childClassObj.sayHello();
     childClassObj.sayAdj();
-  
+
 })(jQuery);
