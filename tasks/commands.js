@@ -83,3 +83,25 @@ gulp.task('build:prod',
             'prod:inject',
         cb);
 });
+
+/**
+    COMMAND: serve:dev (gulp serve:dev)
+*/
+gulp.task('serve:dev',
+    function(cb) {
+
+        gutil.log(gutil.colors.blue.bold('Serving development directory...'));
+
+        runSequence('dev:connect', cb);
+});
+
+/**
+    COMMAND: serve:prod (gulp serve:prod)
+*/
+gulp.task('serve:prod',
+    function(cb) {
+
+        gutil.log(gutil.colors.blue.bold('Serving production directory...'));
+
+        runSequence('prod:connect', cb);
+});
