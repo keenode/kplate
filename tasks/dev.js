@@ -251,6 +251,11 @@ gulp.task('dev:watch', function(cb) {
         gulp.start('dev:js');
     });
 
+    // WATCH Fonts
+    watch('src/assets/fonts/**/*', { name: 'WATCH Fonts', read: false }, function() {
+        gulp.start('dev:fonts');
+    });
+
     // WATCH Images
     watch('src/assets/images/**/*.{png,jpg,jpeg,gif}', { name: 'WATCH Images', read: false }, function() {
         gulp.start('dev:imagemin');
