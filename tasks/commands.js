@@ -18,6 +18,8 @@ var gulp        = require('gulp'),
     'gulp prod'         : Run 'production' mode tasks with WATCH.
     'gulp build:dev'    : Build 'development' folder.
     'gulp build:prod'   : Build 'production' folder.
+    'gulp serve:dev'    : Serve 'development' folder.
+    'gulp serve:prod'   : Serve 'production' folder.
 */
 
 /**

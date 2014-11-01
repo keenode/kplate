@@ -2,7 +2,7 @@
     gulpfile.js
     --------------------------------------------------------
     @author Keenan Staffieri
-    @version 0.1.0
+    @version 0.2.2
     GulpJS build tasks for kplate.
     -------------------------------------------------------- */
 
@@ -19,8 +19,10 @@ gutil.log(
 /**
     Include gulp tasks
     ------------------
-    ./tasks/dev.js
-    ./tasks/prod.js
     ./tasks/commands.js
+    ./tasks/dev-watch.js
+    ./tasks/dev.js
+    ./tasks/prod-watch.js
+    ./tasks/prod.js
 */
 var dir = requireDir('./tasks');
