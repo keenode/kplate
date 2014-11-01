@@ -7,8 +7,10 @@
     -------------------------------------------------------- */
 
 /**
-    JavaScript files to compile
-    Array of bower resources.
+    JavaScript files to compile.
+    - This helps you specify which scripts you want in the
+    build process and lets you put them in the correct
+    order.
 */
 var jsCompileFiles = [
     '/**/jquery.js',
