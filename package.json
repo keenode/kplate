@@ -1,6 +1,6 @@
 {
   "name": "kplate",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Front-End boilerplate with GulpJS build system.",
   "main": "prod/main.js",
   "scripts": {
