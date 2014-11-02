@@ -41,6 +41,7 @@ var buildConfig = {
         },
         jsMangle: true,         // "uglify" the JavaScript
         jsComments: false,      // false or 'all'
+        useCdn: true,
         mainJsFileName: 'main'  // JavaScript filename where all resources concat into it
     },
     logSepDecor: ' *** ' // Logger decor separator for RUN TASK

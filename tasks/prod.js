@@ -86,9 +86,11 @@ gulp.task('prod:js', function() {
 
         // Determine if there is a CDN instance of this script
         var canUse = true;
-        for(var j = 0; j < jsCDNFiles.length; j++)
-            if(jsCompileFiles[i] === jsCDNFiles[j].filePath)
-                canUse = false;
+
+        if(buildConfig.prod.useCdn)
+            for(var j = 0; j < jsCDNFiles.length; j++)
+                if(jsCompileFiles[i] === jsCDNFiles[j].filePath)
+                    canUse = false;
 
         if(canUse)
             // Include this script in the compile
@@ -101,17 +103,19 @@ gulp.task('prod:js', function() {
     /* Loop through bower components and determine if any have CDN
         references and should be excluded from the build process.
     */
-    for(var i = 0; i < bowerComponents.length; i++) {
+    if(buildConfig.prod.useCdn) {
+        for(var i = 0; i < bowerComponents.length; i++) {
 
-        // Determine if there is a CDN instance of this script
-        var canUse = true;
-        for(var j = 0; j < jsCDNFiles.length; j++)
-            if(bowerComponents[i] === jsCDNFiles[j].filePath)
-                canUse = false;
+            // Determine if there is a CDN instance of this script
+            var canUse = true;
+            for(var j = 0; j < jsCDNFiles.length; j++)
+                if(bowerComponents[i] === jsCDNFiles[j].filePath)
+                    canUse = false;
 
-        // Ignore including script for compile if CDN had been set up
-        if(!canUse)
-            jsCompileFilesWithPath.push('!' + bowerComponents[i]);
+            // Ignore including script for compile if CDN had been set up
+            if(!canUse)
+                jsCompileFilesWithPath.push('!' + bowerComponents[i]);
+        }
     }
 
     /* Gather JavaScripts in correct order and then
@@ -188,9 +192,11 @@ gulp.task('prod:inject', function() {
             cwd:  buildConfig.prod.rootDir
         });
 
+    // Generate CDN script includes
     var cdnScriptTags = '';
-    for(var i = 0; i < jsCDNFiles.length; i++)
-        cdnScriptTags += '<script src="' + jsCDNFiles[i].cdnPath + '"></script>';
+    if(buildConfig.prod.useCdn)
+        for(var i = 0; i < jsCDNFiles.length; i++)
+            cdnScriptTags += '<script src="' + jsCDNFiles[i].cdnPath + '"></script>';
 
     return target.pipe(inject(sources))
         .pipe(plumber())
