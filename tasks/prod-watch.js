@@ -8,9 +8,9 @@
 /**
     Required Modules
 */
-var gulp            = require('gulp'),
-    watch           = require('gulp-watch'),
-    gutil           = require('gulp-util');
+var gulp  = require('gulp'),
+    watch = require('gulp-watch'),
+    gutil = require('gulp-util');
 
 /**
     TASK: prod:watch

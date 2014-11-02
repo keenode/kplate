@@ -24,9 +24,11 @@ var gulp            = require('gulp'),
     sourcemaps      = require('gulp-sourcemaps'),
     stripDebug      = require('gulp-strip-debug'),
     uglify          = require('gulp-uglify'),
+    replace         = require('gulp-replace'),
     buildConfig     = require('../config/buildConfig'),
     bowerComponents = require('../config/bowerComponents'),
     jsCompileFiles  = require('../config/jsCompileFiles'),
+    jsCDNFiles      = require('../config/jsCDNFiles'),
     Helpers         = require('../util/helpers');
 
 /**
@@ -80,8 +82,37 @@ gulp.task('prod:js', function() {
     /* Loop through JavaScript files to compile and 
         prepend scripts folder path */
     var jsCompileFilesWithPath = [];
-    for(var i = 0; i < jsCompileFiles.length; i++)
-        jsCompileFilesWithPath.push('./src/scripts' + jsCompileFiles[i]);
+    for(var i = 0; i < jsCompileFiles.length; i++) {
+
+        // Determine if there is a CDN instance of this script
+        var canUse = true;
+        for(var j = 0; j < jsCDNFiles.length; j++)
+            if(jsCompileFiles[i] === jsCDNFiles[j].filePath)
+                canUse = false;
+
+        if(canUse)
+            // Include this script in the compile
+            jsCompileFilesWithPath.push('./src/scripts' + jsCompileFiles[i]);
+        else
+            // Ignore including script for compile if CDN had been set up
+            jsCompileFilesWithPath.push('!./src/scripts' + jsCompileFiles[i]);
+    }
+
+    /* Loop through bower components and determine if any have CDN
+        references and should be excluded from the build process.
+    */
+    for(var i = 0; i < bowerComponents.length; i++) {
+
+        // Determine if there is a CDN instance of this script
+        var canUse = true;
+        for(var j = 0; j < jsCDNFiles.length; j++)
+            if(bowerComponents[i] === jsCDNFiles[j].filePath)
+                canUse = false;
+
+        // Ignore including script for compile if CDN had been set up
+        if(!canUse)
+            jsCompileFilesWithPath.push('!' + bowerComponents[i]);
+    }
 
     /* Gather JavaScripts in correct order and then
         create a single minified JavaScript file. */
@@ -132,7 +163,7 @@ gulp.task('prod:imagemin', function() {
 
 /**
     TASK: prod:inject
-    Inject minified CSS and JavaScript into index.html document.
+    Inject minified CSS and JavaScript into HTML documents.
 */
 gulp.task('prod:inject', function() {
 
@@ -157,8 +188,13 @@ gulp.task('prod:inject', function() {
             cwd:  buildConfig.prod.rootDir
         });
 
+    var cdnScriptTags = '';
+    for(var i = 0; i < jsCDNFiles.length; i++)
+        cdnScriptTags += '<script src="' + jsCDNFiles[i].cdnPath + '"></script>';
+
     return target.pipe(inject(sources))
         .pipe(plumber())
+        .pipe(replace('<!-- replace:js-cdn -->', cdnScriptTags))
         .pipe(gulp.dest(buildConfig.prod.rootDir))
         .pipe(connect.reload());
 });

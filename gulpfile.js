@@ -9,8 +9,8 @@
 /**
     Required Modules
 */
-var gutil       = require('gulp-util'),
-    requireDir  = require('require-dir');
+var gutil      = require('gulp-util'),
+    requireDir = require('require-dir');
 
 gutil.log(
     gutil.colors.bgCyan('----------------- kplate STARTED -----------------')

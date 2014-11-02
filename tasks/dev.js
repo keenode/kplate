@@ -132,7 +132,7 @@ gulp.task('dev:imagemin', function() {
 
 /**
     TASK: dev:inject
-    Inject all CSS and JavaScript into index.html document.
+    Inject all CSS and JavaScript into HTML documents.
 */
 gulp.task('dev:inject', function() {
 
