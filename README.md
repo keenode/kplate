@@ -1,5 +1,7 @@
 # kplate
 
+**v0.3.0**
+
 #### Front-End boilerplate with GulpJS build system.
 
 "A place to get started."
@@ -68,6 +70,12 @@ To install **kplate**, simply clone this repo, update the configuration files, a
 * `gulp build:prod`
     Simply builds the `prod` folder and does not launch a server.
 
+* `gulp serve:dev`
+    Starts up a server that hosts the development directory on localhost:8000.
+
+* `gulp serve:prod`
+    Starts up a server that hosts the production directory on localhost:8000.
+
 ## Recommendations
 * It is recommended that you update properties on both `package.json` and `bower.json` files to reflect your current project.
 * If you are using git on your project, you can remove the hidden .git folder and run `git init` to start your own repository.
@@ -75,9 +83,7 @@ To install **kplate**, simply clone this repo, update the configuration files, a
 
 ## Warnings
 * Never, ever, add new files or make changes to anything within either of the destination folders (`dev` and `prod` by default). **These folders and removed and regenerated when kplate starts, for fresh clean builds**.
-
-## Current Issues
-* Creating new SCSS or JavaScript files will require you to manually restart kplate for those files to be watched.
+* Be sure to copy over all of the hidden files if you are moving these files to your own project. The .bowerrc file is especially essential.
 
 ## Contact Me
 If you have questions, comments or concerns, feel free to reach me as follows:
