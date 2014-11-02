@@ -5,18 +5,21 @@
     Footer styles.
     -------------------------------------------------------- */
 
+/**
+    .mainFooter
+*/
 .mainFooter {
     border-top: 1px solid $light-gray;
+}
 
-    &__inner {
-        @include outer-container;
-        @include pad(1em);
-    }
+.mainFooter__inner {
+    @include outer-container;
+    @include pad(1em);
+}
 
-    &__copyright {
-        display: block;
-        color: $gray;
-        font-size: em(12px);
-        text-align: center;
-    }
+.mainFooter__copyright {
+    display: block;
+    color: $gray;
+    font-size: em(12px);
+    text-align: center;
 }

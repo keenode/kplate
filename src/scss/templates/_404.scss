@@ -8,16 +8,16 @@
 .contain404 {
     @include outer-container;
     @include pad(80px);
+}
 
-    h1 {
-        font-size: em(80px);
-        text-align: center;
-        @include pad(20px);
-        cursor: default;
-    }
+.contain404 h1 {
+    font-size: em(80px);
+    text-align: center;
+    @include pad(20px);
+    cursor: default;
+}
 
-    p {
-        color: $dark-gray;
-        text-align: center;
-    }
+.contain404 p {
+    color: $dark-gray;
+    text-align: center;
 }

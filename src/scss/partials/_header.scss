@@ -5,19 +5,22 @@
     Header styles.
     -------------------------------------------------------- */
 
+/**
+    .mainHeader
+*/
 .mainHeader {
     background-color: $color-primary;
     border-bottom: 2px solid $color-accent;
+}
 
-    &__inner {
-        @include outer-container;
-        @include pad(1em);
-    }
+.mainHeader__inner {
+    @include outer-container;
+    @include pad(1em);
+}
 
-    &__site-title {
-        color: white;
-        margin: 0;
-        cursor: default;
-        text-shadow: 1px 2px 0 darken($color-primary, 20%);
-    }
+.mainHeader__site-title {
+    color: white;
+    margin: 0;
+    cursor: default;
+    text-shadow: 1px 2px 0 darken($color-primary, 20%);
 }

@@ -6,61 +6,63 @@
     -------------------------------------------------------- */
 
 /**
+    .mainContent
     Content section of the index page.
 */
 .mainContent {
     @include outer-container;
     @include pad(1em);
+}
 
-    &__left {
-        @include span-columns(12);
+.mainContent__left {
+    @include span-columns(12);
 
-        @include media($tablet) {
-            @include span-columns(8);
-        }
-    }
-
-    &__right {
-        @include span-columns(12);
-        @include omega();
-        margin-top: em(20);
-
-        @include media($tablet) {
-            @include span-columns(4);
-        }
-    }
-
-    h1, h4 {
-        cursor: default;
-    }
-
-    img {
-        width: 100%;
+    @include media($tablet) {
+        @include span-columns(8);
     }
 }
 
+.mainContent__right {
+    @include span-columns(12);
+    @include omega();
+    margin-top: em(20);
+
+    @include media($tablet) {
+        @include span-columns(4);
+    }
+}
+
+.mainContent h1, h4 {
+    cursor: default;
+}
+
+.mainContent img {
+    width: 100%;
+}
+
 /**
+    .mainCols
     Main columns of the index page.
 */
 .mainCols {
     @include outer-container;
     @include pad(1em);
+}
 
-    &__col {
-        @include span-columns(12);
+.mainCols__col {
+    @include span-columns(12);
 
-        @include media($tablet) {
-            @include span-columns(4);
-        }
+    @include media($tablet) {
+        @include span-columns(4);
     }
+}
 
-    h3 {
-        color: $color-accent;
-        margin-bottom: 0.25em;
-        cursor: default;
-    }
+.mainCols h3 {
+    color: $color-accent;
+    margin-bottom: 0.25em;
+    cursor: default;
+}
 
-    p {
-        font-size: em(14px);
-    }
+.mainCols p {
+    font-size: em(14px);
 }
