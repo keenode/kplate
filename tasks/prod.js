@@ -9,7 +9,6 @@
     Required Modules
 */
 var gulp            = require('gulp'),
-    watch           = require('gulp-watch'),
     autoprefixer    = require('gulp-autoprefixer'),
     concat          = require('gulp-concat'),
     connect         = require('gulp-connect'),
