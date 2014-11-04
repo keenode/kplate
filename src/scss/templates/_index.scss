@@ -6,15 +6,15 @@
     -------------------------------------------------------- */
 
 /**
-    .mainContent
+    .main-content
     Content section of the index page.
 */
-.mainContent {
+.main-content {
     @include outer-container;
     @include pad(1em);
 }
 
-.mainContent__left {
+.main-content__left {
     @include span-columns(12);
 
     @include media($tablet) {
@@ -22,7 +22,7 @@
     }
 }
 
-.mainContent__right {
+.main-content__right {
     @include span-columns(12);
     @include omega();
     margin-top: em(20);
@@ -32,24 +32,24 @@
     }
 }
 
-.mainContent h1, h4 {
+.main-content h1, h4 {
     cursor: default;
 }
 
-.mainContent img {
+.main-content img {
     width: 100%;
 }
 
 /**
-    .mainCols
+    .main-cols
     Main columns of the index page.
 */
-.mainCols {
+.main-cols {
     @include outer-container;
     @include pad(1em);
 }
 
-.mainCols__col {
+.main-cols__col {
     @include span-columns(12);
 
     @include media($tablet) {
@@ -57,12 +57,12 @@
     }
 }
 
-.mainCols h3 {
+.main-cols h3 {
     color: $color-accent;
     margin-bottom: 0.25em;
     cursor: default;
 }
 
-.mainCols p {
+.main-cols p {
     font-size: em(14px);
 }

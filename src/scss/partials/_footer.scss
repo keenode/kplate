@@ -6,18 +6,18 @@
     -------------------------------------------------------- */
 
 /**
-    .mainFooter
+    .main-footer
 */
-.mainFooter {
+.main-footer {
     border-top: 1px solid $light-gray;
 }
 
-.mainFooter__inner {
+.main-footer__inner {
     @include outer-container;
     @include pad(1em);
 }
 
-.mainFooter__copyright {
+.main-footer__copyright {
     display: block;
     color: $gray;
     font-size: em(12px);

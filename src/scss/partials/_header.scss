@@ -6,19 +6,19 @@
     -------------------------------------------------------- */
 
 /**
-    .mainHeader
+    .main-header
 */
-.mainHeader {
+.main-header {
     background-color: $color-primary;
     border-bottom: 2px solid $color-accent;
 }
 
-.mainHeader__inner {
+.main-header__inner {
     @include outer-container;
     @include pad(1em);
 }
 
-.mainHeader__site-title {
+.main-header__site-title {
     color: white;
     margin: 0;
     cursor: default;
