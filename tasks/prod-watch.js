@@ -20,74 +20,29 @@ gulp.task('prod:watch', function(cb) {
     gutil.log(gutil.colors.bgMagenta.white.bold('Watching files...'));
 
     // WATCH SCSS
-    // watch(
-    //     'src/scss/**/*.{scss,sass}',
-    //     { name: 'WATCH SCSS', read: false },
-    //     function() {
-    //         gulp.start('prod:css');
-    // });
+    gulp.watch('src/scss/**/*.{scss,sass}', ['prod:css']);
 
     // WATCH JavaScript
-    // watch(
-    //     'src/scripts/**/*.js',
-    //     { name: 'WATCH JavaScript', read: false },
-    //     function() {
-    //         gulp.start('prod:js');
-    // });
+    gulp.watch('src/scripts/**/*.js', ['prod:js']);
 
     // WATCH Fonts
-    // watch(
-    //     'src/assets/fonts/**/*',
-    //     { name: 'WATCH Fonts', read: false },
-    //     function() {
-    //         gulp.start('prod:fonts');
-    // });
+    gulp.watch('src/assets/fonts/**/*', ['prod:fonts']);
 
     // WATCH Images
-    // watch(
-    //     'src/assets/images/**/*.{png,jpg,jpeg,gif}',
-    //     { name: 'WATCH Images', read: false },
-    //     function() {
-    //         gulp.start('prod:imagemin');
-    // });
+    gulp.watch('src/assets/images/**/*.{png,jpg,jpeg,gif}', ['prod:imagemin']);
 
     // WATCH SVGs
-    // watch(
-    //     'src/assets/svgs/**/*.svg',
-    //     { name: 'WATCH SVGs', read: false },
-    //     function() {
-    //         gulp.start('prod:imagemin');
-    // });
+    gulp.watch('src/assets/svgs/**/*.svg', ['prod:imagemin']);
 
     // WATCH Videos
-    // watch(
-    //     'src/assets/videos/**/*.{mp4,ogv}',
-    //     { name: 'WATCH Videos', read: false },
-    //     function() {
-    //         gulp.start('prod:videos');
-    // });
+    gulp.watch('src/assets/videos/**/*.{mp4,ogv}', ['prod:videos']);
 
     // WATCH Favicons
-    // watch(
-    //     'src/favicons/**/*.{ico,png}',
-    //     { name: 'WATCH Favicons', read: false },
-    //     function() {
-    //         gulp.start('prod:favicons');
-    // });
+    gulp.watch('src/favicons/**/*.{ico,png}', ['prod:favicons']);
 
     // WATCH Rootfiles
-    // watch(
-    //     'src/rootfiles/**/*',
-    //     { name: 'WATCH Rootfiles', read: false },
-    //     function() {
-    //         gulp.start('prod:rootfiles');
-    // });
+    gulp.watch('src/rootfiles/**/*', ['prod:rootfiles']);
 
     // WATCH Templates
-    // watch(
-    //     'src/templates/**/*.html',
-    //     { name: 'WATCH Rootfiles', read: false },
-    //     function() {
-    //         gulp.start('prod:inject');
-    // });
+    gulp.watch('src/templates/**/*.html', ['prod:inject']);
 });
