@@ -17,7 +17,7 @@ var gulp            = require('gulp'),
     inject          = require('gulp-inject'),
     gutil           = require('gulp-util'),
     plumber         = require('gulp-plumber'),
-    rimraf          = require('gulp-rimraf'),
+    del             = require('del'),
     rubySass        = require('gulp-ruby-sass'),
     size            = require('gulp-size'),
     sourcemaps      = require('gulp-sourcemaps'),
@@ -212,8 +212,7 @@ gulp.task('prod:clear', function(cb) {
 
     Helpers.logTaskStartup('RUN TASK: clear files (production)...');
 
-    return gulp.src(buildConfig.prod.rootDir, { read: false })
-        .pipe(rimraf());
+    return del(buildConfig.prod.rootDir, cb);
 });
 
 /**
