@@ -1,14 +1,8 @@
 /** --------------------------------------------------------
-    styles/_base.scss
+    themes/_default.scss
     --------------------------------------------------------
     @author Keenan Staffieri
-    Base theme styles.
+    Default theme.
     -------------------------------------------------------- */
 
-body {
-    color: $font-color-base;
-    background-color: $bg-color;
-    font-family: $font-family-base;
-}
 
-@import "typography";

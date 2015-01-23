@@ -1,0 +1,84 @@
+/** --------------------------------------------------------
+    styles/_typography.scss
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    Typography styles.
+    -------------------------------------------------------- */
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    text-rendering: optimizeLegibility; // Fix the character spacing for headings
+}
+
+h1, h2 {
+    font-family: $font-family-headings;
+    font-weight: 100;
+}
+
+h3, h4 {
+    color: $gray;
+    font-family: $font-family-subheadings;
+    font-weight: 400;
+
+    &.subheading {
+        margin-bottom: 1em;
+    }
+}
+
+h5, h6 {
+    font-family: $font-family-base;
+}
+
+h1 {
+    font-size: em(36px);
+}
+
+h2 {
+    font-size: em(32px);
+}
+
+h3 {
+    font-size: em(26px);
+}
+
+h4 {
+    font-size: em(22px);
+}
+
+h5 {
+    font-size: em(20px);
+}
+
+h6 {
+    font-size: em(16px);
+}
+
+p {
+    font-size: em(16px);
+    margin: 0 0 1em 0;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+    transition: color 200ms ease-out;
+
+    &:hover {
+        color: $link-hover-color;
+    }
+
+    &:active {
+        color: $link-active-color;
+    }
+}
+
+hr {
+    border: 0;
+    border-bottom: 1px solid $light-gray;
+    margin: 2em 0;
+}
+
+img, picture {
+    margin: 0;
+    max-width: 100%;
+}
