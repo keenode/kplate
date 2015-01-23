@@ -1,18 +1,8 @@
 /** --------------------------------------------------------
-    components/_buttons.scss
+    components/_navs.scss
     --------------------------------------------------------
     @author Keenan Staffieri
-    Button styles.
+    Nav styles.
     -------------------------------------------------------- */
 
-.btn {
-    @include ks-button();
-}
 
-.btn-primary {
-    @include ks-button(primary);
-}
-
-.btn-large {
-    @include ks-button(large);
-}

@@ -1,12 +1,8 @@
 /** --------------------------------------------------------
-    mixins/_helpers.scss
+    utils/_functions.scss
     --------------------------------------------------------
     @author Keenan Staffieri
-    Helper mixins.
+    Utility SASS functions.
     -------------------------------------------------------- */
 
-@mixin reset-list() {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+

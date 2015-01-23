@@ -2,48 +2,85 @@
 	master.scss
 	--------------------------------------------------------
 	@author Keenan Staffieri
-	@version 0.3.0
-	@framework_version 0.3.1
+	@version 0.4.0
 	Master file for all SCSS.
 	-------------------------------------------------------- */
 
 /**
-    BEM Techniques are used
-    https://bem.info/method/
-**/
+    B O U R B O N  &  N E A T
+*/
 
 /** Bourbon Mixins **/
-@import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
+@import '../bower_components/bourbon/app/assets/stylesheets/bourbon';
 
-/** Bourbon Neat Grid **/
-@import "../bower_components/neat/app/assets/stylesheets/neat";
+/** Neat Grid **/
+@import '../bower_components/neat/app/assets/stylesheets/neat';
 
-/** Font Awesome **/
-@import "vendor/font-awesome/font-awesome";
 
-/** Theme settings **/
-@import "theme_settings";
+/**
+    V E N D O R S
+*/
+@import
+    'vendors/font-awesome/font-awesome'; // Font Awesome
 
-/** Import custom mixins **/
-@import "mixins/base";
 
-/** Grid settings **/
-@import "grid/base";
+/**
+    T H E M E  C O N F I G S
+*/
+@import
+    'theme-configs/default',
+    'theme-configs/dark';
 
-/** Custom webfonts **/
-@import "fonts";
 
-/** Normalize CSS **/
-@import "normalize";
+/**
+    U T I L S
+*/
+@import
+    'utils/functions',
+    'utils/mixins-buttons',
+    'utils/mixins-navs',
+    'utils/helpers';
 
-/** Import theme styles **/
-@import "styles/base";
 
-/** Import component styles **/
-@import "components/base";
+/**
+    G R I D
+*/
+@import
+    'grid/breakpoints',
+    'grid/neat-overrides';
 
-/** Import partial templates **/
-@import "partials/base";
 
-/** Import template styles **/
-@import "templates/base";
+/**
+    B A S E
+*/
+@import
+    'base/normalize',
+    'base/fonts',
+    'base/base',
+    'base/typography',
+    'base/forms';
+
+
+/**
+    L A Y O U T
+*/
+@import
+    'layout/header',
+    'layout/footer',
+    'layout/sidebar';
+
+
+/**
+    C O M P O N E N T S
+*/
+@import
+    'components/buttons',
+    'components/navs';
+
+
+/**
+    P A G E S
+*/
+@import
+    'pages/index',
+    'pages/404';
