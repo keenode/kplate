@@ -11,19 +11,23 @@ $theme-config: (
 
 
     'colors': (
-        'red':        #FA6ACC,
-        'green':      #F02A52,
-        'blue':       #09A6E4,
-        'light-gray': #ccc,
+        'black':      #202A25,
+        'teal':       #84DCC6,
+        'blue':       #068D9D,
+        'light-blue': #85BDBF,
+        'gray-blue':  #57737A,
         'gray':       #999,
+        'light-gray': #ccc,
         'dark-gray':  #333
     ),
 
 
+    /** Must only use colors declared above. **/
+
     'theme-colors': (
-        'primary':   red,
-        'secondary': green,
-        'accent':    blue
+        'primary':   'blue',
+        'secondary': 'teal',
+        'accent':    'light-blue'
     ),
 
 

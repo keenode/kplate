@@ -7,11 +7,38 @@
 
 @function color($key) {
 
-    @if map-has-key($colors, $key) {
-        @return map-get($colors, $key);
+    @if map-has-key($theme-config, 'colors') {
+
+        $colors: map-get($theme-config, 'colors');
+
+        @if map-get($colors, $key) {
+            @return map-get($colors, $key);
+        }
+
+        @warn "Color `#{$key}` not found in $theme-config->colors.";
+        @return null;
     }
 
-    @warn "Unknown `#{$key}` in $colors.";
+    @warn "'colors' not found in $theme-config";
+    @return null;
+}
+
+
+@function theme-color($key) {
+
+    @if map-has-key($theme-config, 'theme-colors') {
+
+        $theme-colors: map-get($theme-config, 'theme-colors');
+
+        @if map-get($theme-colors, $key) {
+            @return call('color', map-get($theme-colors, $key));
+        }
+
+        @warn "Color `#{$key}` not found in $theme-config->theme-colors.";
+        @return null;
+    }
+
+    @warn "'theme-colors' not found in $theme-config";
     @return null;
 }
 

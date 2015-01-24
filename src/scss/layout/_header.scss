@@ -12,7 +12,8 @@
 */
 .main-header {
     padding: 20px;
-    background-color: $color-primary;
+    // background-color: color('black');
+    background-color: theme-color('primary');
 
     .title {
         @include span-columns(3);
