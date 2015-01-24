@@ -22,12 +22,26 @@ $theme-config: (
     ),
 
 
-    /** Must only use colors declared above. **/
+    /**
+        Must only use colors declared from 'colors'.
+        'theme-colors' are simply aliases to 'colors'.
+    **/
 
     'theme-colors': (
         'primary':   'blue',
         'secondary': 'teal',
         'accent':    'light-blue'
+    ),
+
+
+    /** Page background, accepts only valid css color or image path. **/
+    'page-background': #f6f6f6,
+
+
+    /** Must only use colors declared from 'colors' or 'theme-colors'. **/
+
+    'header': (
+        'background-color': 'black'
     ),
 
 

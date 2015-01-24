@@ -43,6 +43,81 @@
 }
 
 
+@function page-background() {
+
+    @if map-has-key($theme-config, 'page-background') {
+        @return  map-get($theme-config, 'page-background');
+    }
+
+    @warn "'page-background' not found in $theme-config";
+    @return null;
+}
+
+
+@function get-all-colors() {
+
+    $colors: map-get($theme-config, 'colors');
+    $theme-colors: map-get($theme-config, 'theme-colors');
+    $all-colors: map-merge($colors, $theme-colors);
+
+    @return $all-colors;
+}
+
+@function get-colors() {
+
+    @if map-has-key($theme-config, 'colors') {
+        @return map-get($theme-config, 'colors');
+    }
+
+    @warn "'colors' not found in $theme-config";
+    @return null;
+}
+
+@function get-theme-colors() {
+
+    @if map-has-key($theme-config, 'theme-colors') {
+        @return map-get($theme-config, 'theme-colors');
+    }
+
+    @warn "'theme-colors' not found in $theme-config";
+    @return null;
+}
+
+
+@function get-theme-property($component, $property) {
+
+    // Special logic required for color properties
+    // Both 'colors' and 'theme-colors' need to be checked
+    @if $property == 'background-color' {
+
+        // Get theme component
+        $theme-component: map-get($theme-config, $component);
+
+        // Determine wanted color from theme component
+        $wanted-color: map-get($theme-component, $property);
+
+        // Get 'theme-colors' and 'colors'
+        $theme-colors: get-theme-colors();
+        $colors: get-colors();
+
+        // First, check if colors can be found in 'theme-colors'
+        @if map-has-key($theme-colors, $wanted-color) {
+            @return call('color', map-get($theme-colors, $wanted-color));
+        }
+        // If color not found in 'theme-colors', then check 'colors'
+        @else if map-has-key($colors, $wanted-color) {
+            @return map-get($colors, $wanted-color);
+        }
+
+        @warn "Color not found in 'theme-colors' or 'colors'";
+        @return null;
+    }
+    @else {
+
+    }
+}
+
+
 @function z($key) {
 
     @if map-has-key($z-layers, $key) {

@@ -12,8 +12,20 @@
 */
 .main-header {
     padding: 20px;
-    // background-color: color('black');
-    background-color: theme-color('primary');
+
+    // $all-colors: get-all-colors();
+    // $header-config: map-get($theme-config, 'header');
+    // $header-color: map-get($header-config, 'background-color');
+    // $bgcolor: call('color', map-get($all-colors, $header-color));
+
+    // Try to get color from 'colors' first
+    // @if get-colors() not null {
+        
+    // }
+
+    // background-color: $bgcolor;
+
+    background-color: get-theme-property('header', 'background-color');
 
     .title {
         @include span-columns(3);

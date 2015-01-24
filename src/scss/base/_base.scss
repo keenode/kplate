@@ -7,6 +7,6 @@
 
 body {
     color: $font-color-base;
-    background-color: $bg-color;
+    background: page-background();
     font-family: $font-family-base;
 }
