@@ -2,8 +2,59 @@
     theme-configs/_default.scss
     --------------------------------------------------------
     @author Keenan Staffieri
-    Default theme.
+    Default theme configuration settings.
     -------------------------------------------------------- */
+
+$theme-config: (
+
+    'name': 'Default',
+
+    'colors': (
+        'red':   #FA6ACC,
+        'green': #F02A52,
+        'blue':  #09A6E4
+    ),
+
+    'theme-colors': (
+        'primary':   color('red'),
+        'secondary': color('green'),
+        'accent':    color('blue')
+    ),
+
+    'z-layers': (
+        'default':      1,
+        'modal':        1000,
+        'force-front':  9999,
+        'force-back':   -9999
+    )
+
+);
+
+$themes: append($themes, $theme-config);
+
+
+/// Prints a map as a CSS rule
+/// @param {Map} $map
+ 
+@mixin debug-map($map) {
+    @at-root {
+        @debug-map {
+            __toString__: inspect($map);
+            __length__: length($map);
+            __depth__: depth($map);
+            __keys__: map-keys($map);
+            __properties__ {
+                @each $key, $value in $map {
+                    #{'(' + type-of($value) + ') ' + $key}: inspect($value);
+                }
+            }
+        }
+    }
+}
+
+// @include debug-map($themes);
+
+
 
 /**
     Theme Colors

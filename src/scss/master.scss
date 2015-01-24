@@ -27,6 +27,7 @@
 /**
     T H E M E  C O N F I G S
 */
+$themes: (); // Init map to hold theme configs
 @import
     'theme-configs/default',
     'theme-configs/dark';
