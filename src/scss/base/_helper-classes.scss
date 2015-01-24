@@ -1,0 +1,10 @@
+/** --------------------------------------------------------
+    base/_helper-classes.scss
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    A collection of helper classes.
+    -------------------------------------------------------- */
+
+.inner-container {
+    @include outer-container;
+}

@@ -58,6 +58,7 @@ $default-theme-name: 'Default'; // Name used for default theme
 @import
     'base/normalize',
     'base/fonts',
+    'base/helper-classes',
     'base/base',
     'base/typography',
     'base/forms';

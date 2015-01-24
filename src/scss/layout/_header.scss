@@ -6,20 +6,44 @@
     -------------------------------------------------------- */
 
 /**
+    Main Header
+    -----------------------------------
     .main-header
 */
 .main-header {
+    padding: 20px;
     background-color: $color-primary;
+
+    .title {
+        @include span-columns(3);
+        color: white;
+        margin: 0;
+        cursor: default;
+        text-shadow: 1px 2px 0 darken($color-primary, 20%);
+    }
 }
 
-.main-header__inner {
-    @include outer-container;
-    @include pad(1em);
+
+/**
+    Main Nav
+    -----------------------------------
+    .main-nav, .main-nav-list,
+    .main-nav-item
+*/
+.main-nav {
+    @include span-columns(9);
 }
 
-.main-header__site-title {
-    color: white;
-    margin: 0;
-    cursor: default;
-    text-shadow: 1px 2px 0 darken($color-primary, 20%);
+.main-nav-list {
+    @include reset-list();
+    float: right;
+}
+
+.main-nav-item {
+    float: left;
+    margin: 0 10px;
+
+    &:last-child {
+        margin-right: 0;
+    }
 }
