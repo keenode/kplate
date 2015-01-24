@@ -28,6 +28,7 @@
     T H E M E  C O N F I G S
 */
 $themes: (); // Init map to hold theme configs
+$default-theme-name: 'Default'; // Name used for default theme
 @import
     'theme-configs/default',
     'theme-configs/dark';
@@ -68,7 +69,8 @@ $themes: (); // Init map to hold theme configs
 @import
     'layout/header',
     'layout/footer',
-    'layout/sidebar';
+    'layout/sidebar',
+    'layout/hero';
 
 
 /**

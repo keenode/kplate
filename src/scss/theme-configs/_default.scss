@@ -7,19 +7,25 @@
 
 $theme-config: (
 
-    'name': 'Default',
+    'name': $default-theme-name,
+
 
     'colors': (
-        'red':   #FA6ACC,
-        'green': #F02A52,
-        'blue':  #09A6E4
+        'red':        #FA6ACC,
+        'green':      #F02A52,
+        'blue':       #09A6E4,
+        'light-gray': #ccc,
+        'gray':       #999,
+        'dark-gray':  #333
     ),
 
+
     'theme-colors': (
-        'primary':   color('red'),
-        'secondary': color('green'),
-        'accent':    color('blue')
+        'primary':   red,
+        'secondary': green,
+        'accent':    blue
     ),
+
 
     'z-layers': (
         'default':      1,
