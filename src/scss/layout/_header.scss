@@ -11,52 +11,14 @@
     .main-header
 */
 .main-header {
-    padding: 20px;
-
-    // $all-colors: get-all-colors();
-    // $header-config: map-get($theme-config, 'header');
-    // $header-color: map-get($header-config, 'background-color');
-    // $bgcolor: call('color', map-get($all-colors, $header-color));
-
-    // Try to get color from 'colors' first
-    // @if get-colors() not null {
-        
-    // }
-
-    // background-color: $bgcolor;
-
+    padding: get-theme-property('header', 'padding');
     background-color: get-theme-property('header', 'background-color');
 
     .title {
         @include span-columns(3);
-        color: white;
         margin: 0;
+        color: white;
+        font-size: em(30px);
         cursor: default;
-        text-shadow: 1px 2px 0 darken($color-primary, 20%);
-    }
-}
-
-
-/**
-    Main Nav
-    -----------------------------------
-    .main-nav, .main-nav-list,
-    .main-nav-item
-*/
-.main-nav {
-    @include span-columns(9);
-}
-
-.main-nav-list {
-    @include reset-list();
-    float: right;
-}
-
-.main-nav-item {
-    float: left;
-    margin: 0 10px;
-
-    &:last-child {
-        margin-right: 0;
     }
 }

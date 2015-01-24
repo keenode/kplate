@@ -86,12 +86,12 @@
 
 @function get-theme-property($component, $property) {
 
+    // Get theme component
+    $theme-component: map-get($theme-config, $component);
+
     // Special logic required for color properties
     // Both 'colors' and 'theme-colors' need to be checked
-    @if $property == 'background-color' {
-
-        // Get theme component
-        $theme-component: map-get($theme-config, $component);
+    @if $property == 'background-color' or $property == 'nav-item-color' or $property == 'nav-item-hover-color' {
 
         // Determine wanted color from theme component
         $wanted-color: map-get($theme-component, $property);
@@ -112,8 +112,9 @@
         @warn "Color not found in 'theme-colors' or 'colors'";
         @return null;
     }
+    // Return wanted theme property
     @else {
-
+        @return map-get($theme-component, $property);
     }
 }
 

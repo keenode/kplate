@@ -11,14 +11,16 @@ $theme-config: (
 
 
     'colors': (
-        'black':      #202A25,
-        'teal':       #84DCC6,
-        'blue':       #068D9D,
-        'light-blue': #85BDBF,
-        'gray-blue':  #57737A,
-        'gray':       #999,
-        'light-gray': #ccc,
-        'dark-gray':  #333
+        'black':       #202A25,
+        'teal':        #84DCC6,
+        'blue':        #068D9D,
+        'light-blue':  #85BDBF,
+        'gray-blue':   #57737A,
+        'gray':        #999,
+        'light-gray':  #ccc,
+        'dark-gray':   #333,
+        'white':       white,
+        'transparent': transparent
     ),
 
 
@@ -41,8 +43,29 @@ $theme-config: (
     /** Must only use colors declared from 'colors' or 'theme-colors'. **/
 
     'header': (
-        'background-color': 'black'
+        'background-color': 'black',
+        'padding': 20px
     ),
+
+
+    'nav': (
+        'padding':              10px,
+        'background-color': 'transparent',
+
+        // Nav Items
+        'nav-item-margin':      0 15px,
+        'nav-item-padding':     0,
+        'nav-item-color':       'white',
+        'nav-item-hover-color': 'light-gray',
+        'nav-item-transition':  color 300ms ease-in
+    ),
+
+
+    'hero': (
+        'background-color': 'accent',
+        'padding': 40px
+    ),
+
 
 
     'z-layers': (

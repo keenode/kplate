@@ -5,4 +5,39 @@
     Nav styles.
     -------------------------------------------------------- */
 
+/**
+    Main Nav
+    -----------------------------------
+    .main-nav, .main-nav-list,
+    .main-nav-item
+*/
+.main-nav {
+    @include span-columns(9);
+    padding: get-theme-property('nav', 'padding');
+    background-color: get-theme-property('nav', 'background-color');
+}
+
+.main-nav-list {
+    @include reset-list();
+    float: right;
+}
+
+.main-nav-item {
+    float: left;
+    margin: get-theme-property('nav', 'nav-item-margin');
+    padding: get-theme-property('nav', 'nav-item-padding');
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    a {
+        color: get-theme-property('nav', 'nav-item-color');
+        transition: get-theme-property('nav', 'nav-item-transition');
+
+        &:hover {
+            color: get-theme-property('nav', 'nav-item-hover-color');
+        }
+    }
+}
 
