@@ -10,12 +10,22 @@
     Content section of the index page.
 */
 section.index-content {
-    padding: 50px 0;
+    padding: 60px 0;
 
     .col {
         @include span-columns(4);
+        padding: 30px;
+
+        h3 {
+            color: color('black');
+            margin-bottom: 5px;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-align: center;
+        }
 
         p {
+            color: color('gray');
+            font-size: em(14px);
             text-align: center;
         }
     }
