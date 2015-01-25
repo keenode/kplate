@@ -9,17 +9,14 @@
     .main-footer
 */
 .main-footer {
-    border-top: 1px solid $light-gray;
+    padding: 20px;
+    background-color: color('light-gray');
 }
 
-.main-footer__inner {
-    @include outer-container;
-    @include pad(1em);
-}
-
-.main-footer__copyright {
+.copyright-line {
     display: block;
-    color: $gray;
+    color: color('gray');
     font-size: em(12px);
     text-align: center;
+    letter-spacing: 1px;
 }

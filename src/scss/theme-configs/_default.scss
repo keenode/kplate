@@ -16,8 +16,8 @@ $theme-config: (
         'blue':        #068D9D,
         'light-blue':  #85BDBF,
         'gray-blue':   #57737A,
-        'gray':        #999,
-        'light-gray':  #ccc,
+        'gray':        #666,
+        'light-gray':  #ddd,
         'dark-gray':   #333,
         'white':       white,
         'transparent': transparent
@@ -136,7 +136,7 @@ $font-family-subheadings:   $font-family-base;
 /**
     Font Colors
 */
-$font-color-base: #1a1a1a;
+$font-color-base: #333;
 
 
 /**

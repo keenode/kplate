@@ -18,7 +18,7 @@ section.hero {
     text-align: center;
     cursor: default;
     text-shadow: 1px 1px 0 shade(theme-color('primary'), 10%),
-                 0 0 60px tint(theme-color('primary'), 60%);
+                 0 0 60px tint(theme-color('primary'), 70%);
     transition: transform 300ms ease-out;
     animation: heroLogoAppear 750ms cubic-bezier(0.5, 0.1, 0.5, 1.3) 500ms backwards;
 
@@ -65,17 +65,17 @@ section.hero {
     color: shade(theme-color('primary'), 30%);
     text-align: center;
     cursor: default;
-    animation: heroTextAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 1500ms backwards;
+    animation: heroItemAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 1500ms backwards;
 }
 
 .btn.btn-hero {
     display: block;
-    width: 160px;
+    width: 158px;
     margin: 30px auto 20px auto;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: em(14px);
     background-color: color('black');
-    animation: heroTextAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 1750ms backwards;
+    animation: heroItemAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 1750ms backwards;
 
     &:hover {
         background-color: tint(color('black'), 20%);
@@ -86,7 +86,7 @@ section.hero {
     }
 }
 
-@keyframes heroTextAppear {
+@keyframes heroItemAppear {
     from {
         opacity: 0;
         transform: translate3d(0, 100px, 0);
