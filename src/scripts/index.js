@@ -12,6 +12,10 @@
 
     'use strict';
 
+    /**
+        Cloud generator code, credit to http://codepen.io/rlemon/pen/myyjem
+    **/
+
     if (typeof Object.extend !== 'function') {
         Object.extend = function (d, s) {
             for (var k in s) {
