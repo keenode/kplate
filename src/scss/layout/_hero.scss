@@ -18,7 +18,7 @@ section.hero {
 }
 
 .kplate-logo {
-    color: theme-color('primary');
+    color: shade(theme-color('primary'), 40%);
     font-family: 'Source Sans Pro', sans-serif;
     font-size: em(128px);
     text-align: center;

@@ -109,7 +109,7 @@
         height = canvas.height = document.body.offsetHeight,
         width = canvas.width = document.body.offsetWidth,
         clouds = [],
-        speed = 1.5,
+        speed = 1.75,
         cloudCount = width * .2666666
         setTimeout(init, 10);
 
