@@ -91,7 +91,7 @@
 
     // Special logic required for color properties
     // Both 'colors' and 'theme-colors' need to be checked
-    @if $property == 'background-color' or $property == 'nav-item-color' or $property == 'nav-item-hover-color' {
+    @if $property == 'background-color' or $property == 'nav-item-color' or $property == 'nav-item-hover-color' or $property == 'nav-item-color--active' {
 
         // Determine wanted color from theme component
         $wanted-color: map-get($theme-component, $property);

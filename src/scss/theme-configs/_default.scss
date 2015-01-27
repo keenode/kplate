@@ -49,23 +49,27 @@ $theme-config: (
 
 
     'nav': (
-        'padding':              10px,
+        'padding':          10px,
         'background-color': 'transparent',
 
         // Nav Items
-        'nav-item-margin':      0 15px,
-        'nav-item-padding':     0,
-        'nav-item-color':       'white',
-        'nav-item-hover-color': 'light-gray',
-        'nav-item-transition':  color 300ms ease-in
+        'nav-item-margin':        0 15px,
+        'nav-item-padding':       0,
+        'nav-item-color':         'white',
+        'nav-item-hover-color':   'light-gray',
+        'nav-item-color--active': 'teal',
+        'nav-item-transition':    color 300ms ease-in
     ),
+
+
+    // TO ADD: Buttons maps, with nested maps where each item
+    // is a new button type like btn-outline, etc
 
 
     'hero': (
         'background-color': 'accent',
         'padding': 60px 0
     ),
-
 
 
     'z-layers': (

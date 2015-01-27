@@ -31,6 +31,12 @@
         margin-right: 0;
     }
 
+    &.active {
+        a {
+            color: get-theme-property('nav', 'nav-item-color--active');
+        }
+    }
+
     a {
         color: get-theme-property('nav', 'nav-item-color');
         transition: get-theme-property('nav', 'nav-item-transition');
