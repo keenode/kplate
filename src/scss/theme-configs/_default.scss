@@ -10,6 +10,13 @@ $theme-config: (
     'name': $default-theme-name,
 
 
+    /* --------------------------
+       C O L O R S
+       -------------------------- */
+
+    /**
+        Colors used throughout the site.
+    **/
     'colors': (
         'black':       #202A25,
         'teal':        #84DCC6,
@@ -36,15 +43,99 @@ $theme-config: (
     ),
 
 
+
+    /* --------------------------
+       B A S E  S T Y L E S
+       -------------------------- */
+
     /** Page background, accepts only valid css color or image path. **/
     'page-background': #f6f6f6,
 
 
+
+    /* --------------------------
+       T Y P O G R A P H Y
+       -------------------------- */
+
+    'fonts': (
+        'base':     "'Noto Sans', Helvetica, Arial, sans-serif",
+        'headings': "Helvetica, Arial, sans-serif"
+    ),
+
+
+    'typography': (
+
+        'base-font-family':             'base',
+        'base-font-size':               16px,
+        'base-font-weight':             normal,
+        'base-font-style':              normal,
+        'base-line-height':             em(24px),
+        'base-font-antialias':          false,
+        'base-font-optimizelegibility': false,
+
+        'headings': (
+            (
+                'tag':                     'h1',
+                'font-family':             'headings',
+                'font-size':               em(40px),
+                'font-antialias':          true,
+                'font-optimizelegibility': true
+            ),
+            (
+                'tag':                     'h2',
+                'font-family':             'headings',
+                'font-size':               em(30px),
+                'font-antialias':          true,
+                'font-optimizelegibility': true
+            ),
+            (
+                'tag':                     'h3',
+                'font-size':               em(24px)
+            ),
+            (
+                'tag':                     'h4',
+                'font-size':               em(20px)
+            ),
+            (
+                'tag':                     'h5',
+                'font-size':               em(18px),
+                'font-weight':             bold
+            ),
+            (
+                'tag':                     'h6',
+                'font-weight':             bold
+            )
+        ),
+
+        'paragraphs': (
+            'margin': 0 0 10px 0,
+
+            'variations': (
+                (
+                    'name':       'lg-quote',
+                    'color':      'gray',
+                    'font-style': 'italic',
+                    'font-size':  em(20px)
+                ),
+                (
+                    'name':       'quote',
+                    'color':      'gray',
+                    'font-style': 'italic'
+                )
+            )
+        )
+    ),
+
+
+    /* --------------------------
+       C O M P O N E N T S
+       -------------------------- */
+
     /** Must only use colors declared from 'colors' or 'theme-colors'. **/
 
     'header': (
-        'background-color': 'black',
-        'padding': 20px
+        'padding':          20px,
+        'background-color': 'black'
     ),
 
 
@@ -56,19 +147,24 @@ $theme-config: (
         'nav-item-margin':        0 15px,
         'nav-item-padding':       0,
         'nav-item-color':         'white',
-        'nav-item-hover-color':   'light-gray',
         'nav-item-color--active': 'teal',
+        'nav-item-hover-color':   'light-gray',
         'nav-item-transition':    color 300ms ease-in
     ),
 
 
     // TO ADD: Buttons maps, with nested maps where each item
     // is a new button type like btn-outline, etc
+    'buttons': (
+        'padding':     10px 20px,
+        'color':       'white',
+        'font-family': 'base'
+    ),
 
 
     'hero': (
-        'background-color': 'accent',
-        'padding': 60px 0
+        'padding':          60px 0,
+        'background-color': 'accent'
     ),
 
 
