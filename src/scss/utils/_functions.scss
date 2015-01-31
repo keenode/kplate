@@ -160,7 +160,7 @@
         $fonts: map-get($theme-config, 'fonts');
 
         @if map-get($fonts, $key) {
-            @return map-get($fonts, $key);
+            @return unquote(map-get($fonts, $key));
         }
 
         @warn "Font `#{$key}` not found in $theme-config->fonts.";

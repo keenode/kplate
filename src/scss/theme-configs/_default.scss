@@ -69,7 +69,7 @@ $theme-config: (
         'base-font-size':               16px,
         'base-font-weight':             normal,
         'base-font-style':              normal,
-        'base-line-height':             em(24px),
+        'base-line-height':             24px,
         'base-font-antialias':          false,
         'base-font-optimizelegibility': false,
 
@@ -86,6 +86,7 @@ $theme-config: (
                 'selector':                'h1',
                 'font-family':             'headings',
                 'font-size':               em(40px),
+                'line-height':             55px,
                 'font-antialias':          true,
                 'font-optimizelegibility': true
             ),
@@ -93,21 +94,25 @@ $theme-config: (
                 'selector':                'h2',
                 'font-family':             'headings',
                 'font-size':               em(30px),
+                'line-height':             35px,
                 'font-antialias':          true,
                 'font-optimizelegibility': true
             ),
             (
                 'selector':                'h3',
-                'font-size':               em(24px)
+                'font-size':               em(24px),
+                'line-height':             28px,
             ),
             (
                 'selector':                'h4',
-                'font-size':               em(20px)
+                'font-size':               em(20px),
+                'line-height':             24px,
             ),
             (
                 'selector':                'h5',
                 'font-size':               em(18px),
-                'font-weight':             bold
+                'font-weight':             bold,
+                'line-height':             24px
             ),
             (
                 'selector':                'h6',

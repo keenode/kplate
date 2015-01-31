@@ -5,6 +5,34 @@
     Typography styles.
     -------------------------------------------------------- */
 
+/**
+    B A S E
+    Base typography settings applied to body
+*/
+
+body {
+    font-family: get-font-family(get-theme-property('typography', 'base-font-family'));
+    font-size:   get-theme-property('typography', 'base-font-size');
+    font-weight: get-theme-property('typography', 'base-font-weight');
+    font-style:  get-theme-property('typography', 'base-font-style');
+    line-height: get-theme-property('typography', 'base-line-height');
+
+    @if get-theme-property('typography', 'base-font-antialias') == true {
+        -webkit-font-smoothing: antialiased;
+    }
+    @if get-theme-property('typography', 'base-font-optimizelegibility') == true {
+        text-rendering: optimizeLegibility;
+    }
+}
+
+
+
+/**
+    H E A D I N G S
+    h1, h2, h3, h4, h5, h6
+    {h1-h6}.{specialty_class}
+*/
+
 // Get 'headings' map 'typography'
 $headings: get-theme-property('typography', 'headings');
 
@@ -34,6 +62,10 @@ $num-headings: length($headings);
         @if map-has-key($heading, 'font-weight') {
             font-weight: map-get($heading, 'font-weight');
         }
+        // line-height
+        @if map-has-key($heading, 'line-height') {
+            line-height: map-get($heading, 'line-height');
+        }
         // text-rendering
         @if map-has-key($heading, 'font-antialias') {
             @if map-get($heading, 'font-antialias') == true {
@@ -47,54 +79,6 @@ $num-headings: length($headings);
             }
         }
     }
-}
-
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    text-rendering: optimizeLegibility; // Fix the character spacing for headings
-}
-
-h1, h2 {
-    font-family: $font-family-headings;
-    font-weight: 100;
-}
-
-h3, h4 {
-    color: $gray;
-    font-family: $font-family-subheadings;
-    font-weight: 400;
-
-    &.subheading {
-        margin-bottom: 1em;
-    }
-}
-
-h5, h6 {
-    font-family: $font-family-base;
-}
-
-h1 {
-    font-size: em(36px);
-}
-
-h2 {
-    font-size: em(32px);
-}
-
-h3 {
-    font-size: em(26px);
-}
-
-h4 {
-    font-size: em(22px);
-}
-
-h5 {
-    font-size: em(20px);
-}
-
-h6 {
-    font-size: em(16px);
 }
 
 p {
