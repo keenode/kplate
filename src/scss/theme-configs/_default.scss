@@ -75,34 +75,42 @@ $theme-config: (
 
         'headings': (
             (
-                'tag':                     'h1',
+                'selector':                'h1.main-heading',
+                'color':                   'primary',
+                'font-family':             'headings',
+                'font-size':               em(50px),
+                'font-antialias':          true,
+                'font-optimizelegibility': true
+            ),
+            (
+                'selector':                'h1',
                 'font-family':             'headings',
                 'font-size':               em(40px),
                 'font-antialias':          true,
                 'font-optimizelegibility': true
             ),
             (
-                'tag':                     'h2',
+                'selector':                'h2',
                 'font-family':             'headings',
                 'font-size':               em(30px),
                 'font-antialias':          true,
                 'font-optimizelegibility': true
             ),
             (
-                'tag':                     'h3',
+                'selector':                'h3',
                 'font-size':               em(24px)
             ),
             (
-                'tag':                     'h4',
+                'selector':                'h4',
                 'font-size':               em(20px)
             ),
             (
-                'tag':                     'h5',
+                'selector':                'h5',
                 'font-size':               em(18px),
                 'font-weight':             bold
             ),
             (
-                'tag':                     'h6',
+                'selector':                'h6',
                 'font-weight':             bold
             )
         ),

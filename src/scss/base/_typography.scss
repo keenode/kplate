@@ -5,6 +5,50 @@
     Typography styles.
     -------------------------------------------------------- */
 
+// Get 'headings' map 'typography'
+$headings: get-theme-property('typography', 'headings');
+
+// Get total number of headings
+$num-headings: length($headings);
+
+// Generate heading selectors
+@for $i from 1 through $num-headings {
+
+    $heading:  nth($headings, $i);
+    $selector: map-get($heading, 'selector');
+
+    #{$selector} {
+        // color
+        @if map-has-key($heading, 'color') {
+            color: get-color-compare(map-get($heading, 'color'));
+        }
+        // font-family
+        @if map-has-key($heading, 'font-family') {
+            font-family: get-font-family(map-get($heading, 'font-family'));
+        }
+        // font-size
+        @if map-has-key($heading, 'font-size') {
+            font-size: map-get($heading, 'font-size');
+        }
+        // font-weight
+        @if map-has-key($heading, 'font-weight') {
+            font-weight: map-get($heading, 'font-weight');
+        }
+        // text-rendering
+        @if map-has-key($heading, 'font-antialias') {
+            @if map-get($heading, 'font-antialias') == true {
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        // text-rendering
+        @if map-has-key($heading, 'font-optimizelegibility') {
+            @if map-get($heading, 'font-optimizelegibility') == true {
+                text-rendering: optimizeLegibility;
+            }
+        }
+    }
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     text-rendering: optimizeLegibility; // Fix the character spacing for headings
