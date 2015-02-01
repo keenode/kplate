@@ -14,7 +14,7 @@ body {
     font-family: get-font-family(get-theme-property('typography', 'base-font-family'));
     font-size:   get-theme-property('typography', 'base-font-size');
     font-weight: get-theme-property('typography', 'base-font-weight');
-    font-style:  get-theme-property('typography', 'base-font-style');
+    font-style:  unquote(get-theme-property('typography', 'base-font-style'));
     line-height: get-theme-property('typography', 'base-line-height');
 
     @if get-theme-property('typography', 'base-font-antialias') == true {
@@ -30,7 +30,7 @@ body {
 /**
     H E A D I N G S
     h1, h2, h3, h4, h5, h6
-    {h1-h6}.{specialty_class}
+    {h1-h6}.{variations_class}
 */
 
 // Get 'headings' map 'typography'
@@ -62,6 +62,10 @@ $num-headings: length($headings);
         @if map-has-key($heading, 'font-weight') {
             font-weight: map-get($heading, 'font-weight');
         }
+        // font-style
+        @if map-has-key($heading, 'font-style') {
+            font-style: unquote(map-get($heading, 'font-style'));
+        }
         // line-height
         @if map-has-key($heading, 'line-height') {
             line-height: map-get($heading, 'line-height');
@@ -78,14 +82,88 @@ $num-headings: length($headings);
                 text-rendering: optimizeLegibility;
             }
         }
+        // margin
+        @if map-has-key($heading, 'margin') {
+            margin: map-get($heading, 'margin');
+        }
     }
 }
 
+
+
+/**
+    P A R A G R A P H S
+    p.{variations_class}
+*/
+
+$paragraphs: get-theme-property('typography', 'paragraphs');
+
 p {
-    margin: 0 0 1em 0;
-    font-size: em(16px);
-    line-height: em(26px);
+    // margin
+    @if map-has-key($paragraphs, 'margin') {
+        margin: map-get($paragraphs, 'margin');
+    }
+
+    // Get paragraph variations
+    $paragraph-variations:     map-get($paragraphs, 'variations');
+    $num-paragraph-variations: length($paragraph-variations);
+
+    // Generate paragraph variations
+    @for $i from 1 through $num-paragraph-variations {
+
+        $paragraph:  nth($paragraph-variations, $i);
+        $class-name: map-get($paragraph, 'class-name');
+
+        &.#{$class-name} {
+            // color
+            @if map-has-key($paragraph, 'color') {
+                color: get-color-compare(map-get($paragraph, 'color'));
+            }
+            // font-family
+            @if map-has-key($paragraph, 'font-family') {
+                font-family: get-font-family(map-get($paragraph, 'font-family'));
+            }
+            // font-size
+            @if map-has-key($paragraph, 'font-size') {
+                font-size: map-get($paragraph, 'font-size');
+            }
+            // font-weight
+            @if map-has-key($paragraph, 'font-weight') {
+                font-weight: map-get($paragraph, 'font-weight');
+            }
+            // font-style
+            @if map-has-key($paragraph, 'font-style') {
+                font-style: unquote(map-get($paragraph, 'font-style'));
+            }
+            // line-height
+            @if map-has-key($paragraph, 'line-height') {
+                line-height: map-get($paragraph, 'line-height');
+            }
+            // text-rendering
+            @if map-has-key($paragraph, 'font-antialias') {
+                @if map-get($paragraph, 'font-antialias') == true {
+                    -webkit-font-smoothing: antialiased;
+                }
+            }
+            // text-rendering
+            @if map-has-key($paragraph, 'font-optimizelegibility') {
+                @if map-get($paragraph, 'font-optimizelegibility') == true {
+                    text-rendering: optimizeLegibility;
+                }
+            }
+            // margin
+            @if map-has-key($paragraph, 'margin') {
+                margin: map-get($paragraph, 'margin');
+            }
+        }
+    }
 }
+
+
+
+
+
+
 
 a {
     color: $link-color;
