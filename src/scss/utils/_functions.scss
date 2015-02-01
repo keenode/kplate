@@ -107,6 +107,7 @@
 }
 
 
+// TODO: Rename to 'category-property'
 @function get-theme-property($component, $property) {
 
     // Get theme component
@@ -139,6 +140,16 @@
     @else {
         @return map-get($theme-component, $property);
     }
+}
+
+@function get-theme-category($category) {
+
+    @if map-has-key($theme-config, $category) {
+        @return map-get($theme-config, $category);
+    }
+
+    @warn "Category `#{$category}` not found in $theme-config.";
+    @return null;
 }
 
 

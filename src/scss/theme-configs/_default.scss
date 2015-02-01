@@ -65,13 +65,14 @@ $theme-config: (
 
     'typography': (
 
-        'base-font-family':             'base',
-        'base-font-size':               16px,
-        'base-font-weight':             normal,
-        'base-font-style':              normal,
-        'base-line-height':             24px,
-        'base-font-antialias':          false,
-        'base-font-optimizelegibility': false,
+        // Base typographic styles
+        'font-family':             'base',
+        'font-size':               16px,
+        'font-weight':             normal,
+        'font-style':              normal,
+        'line-height':             24px,
+        'font-antialias':          false,
+        'font-optimizelegibility': false,
 
         'headings': (
             (
@@ -141,6 +142,56 @@ $theme-config: (
                     'class-name': 'quote',
                     'color':      'gray',
                     'font-style': 'italic'
+                )
+            )
+        ),
+
+        'anchors': (
+            'color':           'secondary',
+            'text-decoration': none,
+            'transition':      'color 300ms ease-in',
+
+            // :hover
+            'hover-styles': (
+                'color':       'accent',
+                'font-weight': bold
+            ),
+
+            // :active
+            'active-styles': (
+                'color': 'light-blue'
+            ),
+
+            // :visited
+            'visited-styles': (
+                'color': 'gray'
+            ),
+
+            'variations': (
+                (
+                    'class-name':  'active',
+                    'color':       'primary',
+                    'font-weight': bold
+                ),
+                (
+                    'class-name':  'disabled',
+                    'color':       'gray',
+
+                    // :hover
+                    'hover-styles': (
+                        'color':       'gray',
+                        'font-weight': bold
+                    ),
+
+                    // :active
+                    'active-styles': (
+                        'color': 'gray'
+                    ),
+
+                    // :visited
+                    'visited-styles': (
+                        'color': 'gray'
+                    ),
                 )
             )
         )

@@ -10,19 +10,10 @@
     Base typography settings applied to body
 */
 
-body {
-    font-family: get-font-family(get-theme-property('typography', 'base-font-family'));
-    font-size:   get-theme-property('typography', 'base-font-size');
-    font-weight: get-theme-property('typography', 'base-font-weight');
-    font-style:  unquote(get-theme-property('typography', 'base-font-style'));
-    line-height: get-theme-property('typography', 'base-line-height');
+$base-typography: get-theme-category('typography');
 
-    @if get-theme-property('typography', 'base-font-antialias') == true {
-        -webkit-font-smoothing: antialiased;
-    }
-    @if get-theme-property('typography', 'base-font-optimizelegibility') == true {
-        text-rendering: optimizeLegibility;
-    }
+body {
+    @include populate-properties($base-typography);
 }
 
 
@@ -46,46 +37,8 @@ $num-headings: length($headings);
     $selector: map-get($heading, 'selector');
 
     #{$selector} {
-        // color
-        @if map-has-key($heading, 'color') {
-            color: get-color-compare(map-get($heading, 'color'));
-        }
-        // font-family
-        @if map-has-key($heading, 'font-family') {
-            font-family: get-font-family(map-get($heading, 'font-family'));
-        }
-        // font-size
-        @if map-has-key($heading, 'font-size') {
-            font-size: map-get($heading, 'font-size');
-        }
-        // font-weight
-        @if map-has-key($heading, 'font-weight') {
-            font-weight: map-get($heading, 'font-weight');
-        }
-        // font-style
-        @if map-has-key($heading, 'font-style') {
-            font-style: unquote(map-get($heading, 'font-style'));
-        }
-        // line-height
-        @if map-has-key($heading, 'line-height') {
-            line-height: map-get($heading, 'line-height');
-        }
-        // text-rendering
-        @if map-has-key($heading, 'font-antialias') {
-            @if map-get($heading, 'font-antialias') == true {
-                -webkit-font-smoothing: antialiased;
-            }
-        }
-        // text-rendering
-        @if map-has-key($heading, 'font-optimizelegibility') {
-            @if map-get($heading, 'font-optimizelegibility') == true {
-                text-rendering: optimizeLegibility;
-            }
-        }
-        // margin
-        @if map-has-key($heading, 'margin') {
-            margin: map-get($heading, 'margin');
-        }
+        // Include heading properties
+        @include populate-properties($heading);
     }
 }
 
@@ -99,13 +52,13 @@ $num-headings: length($headings);
 $paragraphs: get-theme-property('typography', 'paragraphs');
 
 p {
-    // margin
-    @if map-has-key($paragraphs, 'margin') {
-        margin: map-get($paragraphs, 'margin');
-    }
+    // Include base paragraph properties
+    @include populate-properties($paragraphs);
 
     // Get paragraph variations
-    $paragraph-variations:     map-get($paragraphs, 'variations');
+    $paragraph-variations: map-get($paragraphs, 'variations');
+
+    // Get total number of paragraph variations
     $num-paragraph-variations: length($paragraph-variations);
 
     // Generate paragraph variations
@@ -115,46 +68,71 @@ p {
         $class-name: map-get($paragraph, 'class-name');
 
         &.#{$class-name} {
-            // color
-            @if map-has-key($paragraph, 'color') {
-                color: get-color-compare(map-get($paragraph, 'color'));
-            }
-            // font-family
-            @if map-has-key($paragraph, 'font-family') {
-                font-family: get-font-family(map-get($paragraph, 'font-family'));
-            }
-            // font-size
-            @if map-has-key($paragraph, 'font-size') {
-                font-size: map-get($paragraph, 'font-size');
-            }
-            // font-weight
-            @if map-has-key($paragraph, 'font-weight') {
-                font-weight: map-get($paragraph, 'font-weight');
-            }
-            // font-style
-            @if map-has-key($paragraph, 'font-style') {
-                font-style: unquote(map-get($paragraph, 'font-style'));
-            }
-            // line-height
-            @if map-has-key($paragraph, 'line-height') {
-                line-height: map-get($paragraph, 'line-height');
-            }
-            // text-rendering
-            @if map-has-key($paragraph, 'font-antialias') {
-                @if map-get($paragraph, 'font-antialias') == true {
-                    -webkit-font-smoothing: antialiased;
-                }
-            }
-            // text-rendering
-            @if map-has-key($paragraph, 'font-optimizelegibility') {
-                @if map-get($paragraph, 'font-optimizelegibility') == true {
-                    text-rendering: optimizeLegibility;
-                }
-            }
-            // margin
-            @if map-has-key($paragraph, 'margin') {
-                margin: map-get($paragraph, 'margin');
-            }
+            // Include paragraph variation properties
+            @include populate-properties($paragraph);
+        }
+    }
+}
+
+
+
+/**
+    A N C H O R S
+    a.{variations_class}
+*/
+
+@mixin populate-anchor-states($anchor) {
+
+    // :hover
+    @if map-has-key($anchor, 'hover-styles') {
+        &:hover {
+            $hover-properties: map-get($anchor, 'hover-styles');
+            @include populate-properties($hover-properties);
+        }
+    }
+    // :active
+    @if map-has-key($anchor, 'active-styles') {
+        &:active {
+            $active-properties: map-get($anchor, 'active-styles');
+            @include populate-properties($active-properties);
+        }
+    }
+    // :visited
+    @if map-has-key($anchor, 'visited-styles') {
+        &:visited {
+            $visited-properties: map-get($anchor, 'visited-styles');
+            @include populate-properties($visited-properties);
+        }
+    }
+}
+
+$anchors: get-theme-property('typography', 'anchors');
+
+a {
+    // Include base anchor properties
+    @include populate-properties($anchors);
+
+    // Add properties for anchor states (:hover, :active, :visited)
+    @include populate-anchor-states($anchors);
+
+    // Get anchor variation
+    $anchor-variations: map-get($anchors, 'variations');
+
+    // Get total number of anchor variations
+    $num-anchor-variations: length($anchor-variations);
+
+    // Generate anchor variations
+    @for $i from 1 through $num-anchor-variations {
+
+        $anchor:     nth($anchor-variations, $i);
+        $class-name: map-get($anchor, 'class-name');
+
+        &.#{$class-name} {
+            // Include anchor variation properties
+            @include populate-properties($anchor);
+
+            // Add properties for anchor states (:hover, :active, :visited)
+            @include populate-anchor-states($anchor);
         }
     }
 }
@@ -162,22 +140,6 @@ p {
 
 
 
-
-
-
-a {
-    color: $link-color;
-    text-decoration: none;
-    transition: color 200ms ease-out;
-
-    &:hover {
-        color: $link-hover-color;
-    }
-
-    &:active {
-        color: $link-active-color;
-    }
-}
 
 hr {
     border: 0;

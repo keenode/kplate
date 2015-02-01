@@ -1,0 +1,58 @@
+/** --------------------------------------------------------
+    utils/_mixins.scss
+    --------------------------------------------------------
+    @author Keenan Staffieri
+    Utility mixins.
+    -------------------------------------------------------- */
+
+@mixin populate-properties($element) {
+
+    // margin
+    @if map-has-key($element, 'margin') {
+        margin: map-get($element, 'margin');
+    }
+    // color
+    @if map-has-key($element, 'color') {
+        color: get-color-compare(map-get($element, 'color'));
+    }
+    // font-family
+    @if map-has-key($element, 'font-family') {
+        font-family: get-font-family(map-get($element, 'font-family'));
+    }
+    // font-size
+    @if map-has-key($element, 'font-size') {
+        font-size: map-get($element, 'font-size');
+    }
+    // font-weight
+    @if map-has-key($element, 'font-weight') {
+        font-weight: map-get($element, 'font-weight');
+    }
+    // font-style
+    @if map-has-key($element, 'font-style') {
+        font-style: unquote(map-get($element, 'font-style'));
+    }
+    // line-height
+    @if map-has-key($element, 'line-height') {
+        line-height: map-get($element, 'line-height');
+    }
+    // text-decoration
+    @if map-has-key($element, 'text-decoration') {
+        text-decoration: map-get($element, 'text-decoration');
+    }
+    // text-rendering
+    @if map-has-key($element, 'font-antialias') {
+        @if map-get($element, 'font-antialias') == true {
+            -webkit-font-smoothing: antialiased;
+        }
+    }
+    // text-rendering
+    @if map-has-key($element, 'font-optimizelegibility') {
+        @if map-get($element, 'font-optimizelegibility') == true {
+            text-rendering: optimizeLegibility;
+        }
+    }
+    // transition
+    @if map-has-key($element, 'transition') {
+        transition: unquote(map-get($element, 'transition'));
+    }
+}
