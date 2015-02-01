@@ -33,10 +33,10 @@ $theme-config: (
 
     /**
         Must only use colors declared from 'colors'.
-        'theme-colors' are simply aliases to 'colors'.
+        'color-aliases' are simply names that map to 'colors'.
     **/
 
-    'theme-colors': (
+    'color-aliases': (
         'primary':   'blue',
         'secondary': 'teal',
         'accent':    'light-blue'
@@ -132,6 +132,10 @@ $theme-config: (
             'margin': 0 0 10px 0,
 
             'variations': (
+                (
+                    'class-name': 'lead',
+                    'font-size':  em(24px)
+                ),
                 (
                     'class-name': 'lg-quote',
                     'color':      'gray',

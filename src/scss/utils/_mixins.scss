@@ -13,11 +13,11 @@
     }
     // color
     @if map-has-key($element, 'color') {
-        color: get-color-compare(map-get($element, 'color'));
+        color: theme-color(map-get($element, 'color'));
     }
     // font-family
     @if map-has-key($element, 'font-family') {
-        font-family: get-font-family(map-get($element, 'font-family'));
+        font-family: theme-font-family(map-get($element, 'font-family'));
     }
     // font-size
     @if map-has-key($element, 'font-size') {

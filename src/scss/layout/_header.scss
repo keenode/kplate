@@ -11,8 +11,8 @@
     .main-header
 */
 .main-header {
-    padding: get-theme-property('header', 'padding');
-    background-color: get-theme-property('header', 'background-color');
+    padding: theme-property('header', 'padding');
+    background-color: theme-property('header', 'background-color');
 
     .title {
         @include span-columns(3);

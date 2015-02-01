@@ -5,18 +5,10 @@
     Utility SASS functions.
     -------------------------------------------------------- */
 
-@function color($key) {
+@function get-colors-map() {
 
     @if map-has-key($theme-config, 'colors') {
-
-        $colors: map-get($theme-config, 'colors');
-
-        @if map-get($colors, $key) {
-            @return map-get($colors, $key);
-        }
-
-        @warn "Color `#{$key}` not found in $theme-config->colors.";
-        @return null;
+        @return map-get($theme-config, 'colors');
     }
 
     @warn "'colors' not found in $theme-config";
@@ -24,21 +16,60 @@
 }
 
 
-@function theme-color($key) {
+@function get-color-aliases-map() {
 
-    @if map-has-key($theme-config, 'theme-colors') {
-
-        $theme-colors: map-get($theme-config, 'theme-colors');
-
-        @if map-get($theme-colors, $key) {
-            @return call('color', map-get($theme-colors, $key));
-        }
-
-        @warn "Color `#{$key}` not found in $theme-config->theme-colors.";
-        @return null;
+    @if map-has-key($theme-config, 'color-aliases') {
+        @return map-get($theme-config, 'color-aliases');
     }
 
-    @warn "'theme-colors' not found in $theme-config";
+    @warn "'color-aliases' not found in $theme-config";
+    @return null;
+}
+
+
+@function color($color) {
+
+    $colors: get-colors-map();
+
+    @if map-get($colors, $color) {
+        @return map-get($colors, $color);
+    }
+
+    @warn "Color `#{$color}` not found in $theme-config->colors.";
+    @return null;
+}
+
+
+@function color-alias($color) {
+
+    $color-aliases: get-colors-aliases-map();
+
+    @if map-get($color-aliases, $color) {
+        @return call('color', map-get($color-aliases, $color));
+    }
+
+    @warn "Color `#{$color}` not found in $theme-config->color-aliases.";
+    @return null;
+}
+
+
+// Return color from 'color-aliases' or 'colors'
+@function theme-color($wanted-color) {
+
+    // Get 'color-aliases' and 'colors'
+    $color-aliases: get-color-aliases-map();
+    $colors:        get-colors-map();
+
+    // First, check if colors can be found in 'color-aliases'
+    @if map-has-key($color-aliases, $wanted-color) {
+        @return call('color', map-get($color-aliases, $wanted-color));
+    }
+    // Color not found in 'color-aliases', check if the color is in 'colors'
+    @else if map-has-key($colors, $wanted-color) {
+        @return map-get($colors, $wanted-color);
+    }
+
+    @warn "Color '#{$wanted-color}' not found in 'color-aliases' or 'colors'";
     @return null;
 }
 
@@ -54,95 +85,29 @@
 }
 
 
-// POTENTIALLY UNUSED
-@function get-all-colors() {
-
-    $colors: map-get($theme-config, 'colors');
-    $theme-colors: map-get($theme-config, 'theme-colors');
-    $all-colors: map-merge($colors, $theme-colors);
-
-    @return $all-colors;
-}
-// POTENTIALLY UNUSED
-
-
-// Return color from colors or theme-colors
-@function get-color-compare($wanted-color) {
-
-    // Get 'theme-colors' and 'colors'
-    $theme-colors: get-theme-colors();
-    $colors: get-colors();
-
-    // First, check if colors can be found in 'theme-colors'
-    @if map-has-key($theme-colors, $wanted-color) {
-        @return call('color', map-get($theme-colors, $wanted-color));
-    }
-    // If color not found in 'theme-colors', then check 'colors'
-    @else if map-has-key($colors, $wanted-color) {
-        @return map-get($colors, $wanted-color);
-    }
-
-    @warn "Color not found in 'theme-colors' or 'colors'";
-    @return null;
-}
-
-@function get-colors() {
-
-    @if map-has-key($theme-config, 'colors') {
-        @return map-get($theme-config, 'colors');
-    }
-
-    @warn "'colors' not found in $theme-config";
-    @return null;
-}
-
-@function get-theme-colors() {
-
-    @if map-has-key($theme-config, 'theme-colors') {
-        @return map-get($theme-config, 'theme-colors');
-    }
-
-    @warn "'theme-colors' not found in $theme-config";
-    @return null;
-}
-
-
-// TODO: Rename to 'category-property'
-@function get-theme-property($component, $property) {
+@function theme-property($category, $property) {
 
     // Get theme component
-    $theme-component: map-get($theme-config, $component);
+    $theme-property: map-get($theme-config, $category);
 
     // Special logic required for color properties
     // Both 'colors' and 'theme-colors' need to be checked
     @if $property == 'background-color' or $property == 'nav-item-color' or $property == 'nav-item-hover-color' or $property == 'nav-item-color--active' {
 
         // Determine wanted color from theme component
-        $wanted-color: map-get($theme-component, $property);
+        $wanted-color: map-get($theme-property, $property);
 
-        // Get 'theme-colors' and 'colors'
-        $theme-colors: get-theme-colors();
-        $colors: get-colors();
-
-        // First, check if colors can be found in 'theme-colors'
-        @if map-has-key($theme-colors, $wanted-color) {
-            @return call('color', map-get($theme-colors, $wanted-color));
-        }
-        // If color not found in 'theme-colors', then check 'colors'
-        @else if map-has-key($colors, $wanted-color) {
-            @return map-get($colors, $wanted-color);
-        }
-
-        @warn "Color not found in 'theme-colors' or 'colors'";
-        @return null;
+        // Get color from 'color-aliases' or 'colors'
+        @return theme-color($wanted-color);
     }
     // Return wanted theme property
     @else {
-        @return map-get($theme-component, $property);
+        @return map-get($theme-property, $property);
     }
 }
 
-@function get-theme-category($category) {
+
+@function theme-category($category) {
 
     @if map-has-key($theme-config, $category) {
         @return map-get($theme-config, $category);
@@ -153,31 +118,31 @@
 }
 
 
-@function z($key) {
-
-    @if map-has-key($z-layers, $key) {
-       @return map-get($z-layers, $key);
-    }
-
-    @warn "Unknown `#{$key}` in $z-layers.";
-    @return null;
-}
-
-
-@function get-font-family($key) {
+@function theme-font-family($font) {
 
     @if map-has-key($theme-config, 'fonts') {
 
         $fonts: map-get($theme-config, 'fonts');
 
-        @if map-get($fonts, $key) {
-            @return unquote(map-get($fonts, $key));
+        @if map-get($fonts, $font) {
+            @return unquote(map-get($fonts, $font));
         }
 
-        @warn "Font `#{$key}` not found in $theme-config->fonts.";
+        @warn "Font `#{$font}` not found in $theme-config->fonts.";
         @return null;
     }
 
-    @warn "'fonts' not found in $theme-config";
+    @warn "Category 'fonts' not found in $theme-config";
+    @return null;
+}
+
+
+@function z($z) {
+
+    @if map-has-key($z-layers, $z) {
+       @return map-get($z-layers, $z);
+    }
+
+    @warn "Unknown `#{$z}` in $z-layers.";
     @return null;
 }

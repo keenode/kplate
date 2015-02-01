@@ -10,7 +10,7 @@
     Base typography settings applied to body
 */
 
-$base-typography: get-theme-category('typography');
+$base-typography: theme-category('typography');
 
 body {
     @include populate-properties($base-typography);
@@ -25,7 +25,7 @@ body {
 */
 
 // Get 'headings' map 'typography'
-$headings: get-theme-property('typography', 'headings');
+$headings: theme-property('typography', 'headings');
 
 // Get total number of headings
 $num-headings: length($headings);
@@ -49,7 +49,7 @@ $num-headings: length($headings);
     p.{variations_class}
 */
 
-$paragraphs: get-theme-property('typography', 'paragraphs');
+$paragraphs: theme-property('typography', 'paragraphs');
 
 p {
     // Include base paragraph properties
@@ -106,7 +106,7 @@ p {
     }
 }
 
-$anchors: get-theme-property('typography', 'anchors');
+$anchors: theme-property('typography', 'anchors');
 
 a {
     // Include base anchor properties

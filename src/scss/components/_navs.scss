@@ -13,8 +13,8 @@
 */
 .main-nav {
     @include span-columns(9);
-    padding: get-theme-property('nav', 'padding');
-    background-color: get-theme-property('nav', 'background-color');
+    padding: theme-property('nav', 'padding');
+    background-color: theme-property('nav', 'background-color');
 }
 
 .main-nav-list {
@@ -24,8 +24,8 @@
 
 .main-nav-item {
     float: left;
-    margin: get-theme-property('nav', 'nav-item-margin');
-    padding: get-theme-property('nav', 'nav-item-padding');
+    margin: theme-property('nav', 'nav-item-margin');
+    padding: theme-property('nav', 'nav-item-padding');
 
     &:last-child {
         margin-right: 0;
@@ -33,16 +33,16 @@
 
     &.active {
         a {
-            color: get-theme-property('nav', 'nav-item-color--active');
+            color: theme-property('nav', 'nav-item-color--active');
         }
     }
 
     a {
-        color: get-theme-property('nav', 'nav-item-color');
-        transition: get-theme-property('nav', 'nav-item-transition');
+        color: theme-property('nav', 'nav-item-color');
+        transition: theme-property('nav', 'nav-item-transition');
 
         &:hover {
-            color: get-theme-property('nav', 'nav-item-hover-color');
+            color: theme-property('nav', 'nav-item-hover-color');
         }
     }
 }

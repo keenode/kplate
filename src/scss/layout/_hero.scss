@@ -7,8 +7,8 @@
 
 section.hero {
     position: relative;
-    background-color: get-theme-property('hero', 'background-color');
-    padding: get-theme-property('hero', 'padding');
+    background-color: theme-property('hero', 'background-color');
+    padding: theme-property('hero', 'padding');
     overflow: hidden;
 
     .inner-container {
