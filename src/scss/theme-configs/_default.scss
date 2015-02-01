@@ -30,8 +30,9 @@ $theme-config: (
 
 
     /**
-        Must only use colors declared from 'colors'.
-        'color-aliases' are simply names that map to 'colors'.
+        Can use colors declared from 'colors', color names, or hex values.
+        'color-aliases' are simply names used throughout a theme which
+        apply more meaning to the colors.
     **/
 
     'color-aliases': (
@@ -204,7 +205,10 @@ $theme-config: (
        C O M P O N E N T S
        -------------------------- */
 
-    /** Must only use colors declared from 'colors' or 'theme-colors'. **/
+    /**
+        Can use colors declared from 'colors', 'theme-colors',
+        color names, or hex values.
+    **/
 
     'header': (
         'padding':          20px,
