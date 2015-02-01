@@ -31,7 +31,7 @@
 
     $colors: get-colors-map();
 
-    @if map-get($colors, $color) {
+    @if map-has-key($colors, $color) {
         @return map-get($colors, $color);
     }
 
@@ -44,8 +44,16 @@
 
     $color-aliases: get-colors-aliases-map();
 
-    @if map-get($color-aliases, $color) {
-        @return call('color', map-get($color-aliases, $color));
+    @if map-has-key($color-aliases, $color) {
+
+        $found-color: map-get($color-aliases, $color);
+
+        @if type-of($found-color) == string {
+            @return call('color', $found-color);
+        }
+        @else if type-of($found-color) == color {
+            @return $found-color;
+        }
     }
 
     @warn "Color `#{$color}` not found in $theme-config->color-aliases.";
@@ -62,7 +70,15 @@
 
     // First, check if colors can be found in 'color-aliases'
     @if map-has-key($color-aliases, $wanted-color) {
-        @return call('color', map-get($color-aliases, $wanted-color));
+
+        $found-color: map-get($color-aliases, $wanted-color);
+
+        @if type-of($found-color) == string {
+            @return call('color', $found-color);
+        }
+        @else if type-of($found-color) == color {
+            @return $found-color;
+        }
     }
     // Color not found in 'color-aliases', check if the color is in 'colors'
     @else if map-has-key($colors, $wanted-color) {
@@ -97,8 +113,14 @@
         // Determine wanted color from theme component
         $wanted-color: map-get($theme-property, $property);
 
-        // Get color from 'color-aliases' or 'colors'
-        @return theme-color($wanted-color);
+        @if type-of($wanted-color) == string {
+            // Get color from 'color-aliases' or 'colors'
+            @return theme-color($wanted-color);
+        }
+        @else if type-of($wanted-color) == color {
+            // Raw color or hex value was specified
+            @return $wanted-color;
+        }
     }
     // Return wanted theme property
     @else {

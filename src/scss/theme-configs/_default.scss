@@ -25,9 +25,7 @@ $theme-config: (
         'gray-blue':   #57737A,
         'gray':        #666,
         'light-gray':  #ddd,
-        'dark-gray':   #333,
-        'white':       white,
-        'transparent': transparent
+        'dark-gray':   #333
     ),
 
 
@@ -216,12 +214,12 @@ $theme-config: (
 
     'nav': (
         'padding':          10px,
-        'background-color': 'transparent',
+        'background-color': transparent,
 
         // Nav Items
         'nav-item-margin':        0 15px,
         'nav-item-padding':       0,
-        'nav-item-color':         'white',
+        'nav-item-color':         white,
         'nav-item-color--active': 'teal',
         'nav-item-hover-color':   'light-gray',
         'nav-item-transition':    color 300ms ease-in
@@ -232,7 +230,7 @@ $theme-config: (
     // is a new button type like btn-outline, etc
     'buttons': (
         'padding':     10px 20px,
-        'color':       'white',
+        'color':       white,
         'font-family': 'base'
     ),
 
