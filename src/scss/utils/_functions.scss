@@ -84,6 +84,10 @@
     @else if map-has-key($colors, $wanted-color) {
         @return map-get($colors, $wanted-color);
     }
+    // Raw color provided
+    @else if type-of($wanted-color) == color {
+        @return $wanted-color;
+    }
 
     @warn "Color '#{$wanted-color}' not found in 'color-aliases' or 'colors'";
     @return null;

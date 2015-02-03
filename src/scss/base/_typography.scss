@@ -59,12 +59,21 @@ p {
     $paragraph-variations: map-get($paragraphs, 'variations');
 
     // Get total number of paragraph variations
-    $num-paragraph-variations: length($paragraph-variations);
+    $num-paragraph-variations: 1;
+
+    @if type-of($paragraph-variations) == list {
+        $num-paragraph-variations: length($paragraph-variations);
+    }
 
     // Generate paragraph variations
     @for $i from 1 through $num-paragraph-variations {
 
-        $paragraph:  nth($paragraph-variations, $i);
+        $paragraph: $paragraph-variations;
+
+        @if type-of($paragraph-variations) == list {
+            $paragraph: nth($paragraph-variations, $i);
+        }
+
         $class-name: map-get($paragraph, 'class-name');
 
         &.#{$class-name} {
@@ -119,12 +128,21 @@ a {
     $anchor-variations: map-get($anchors, 'variations');
 
     // Get total number of anchor variations
-    $num-anchor-variations: length($anchor-variations);
+    $num-anchor-variations: 1;
+
+    @if type-of($anchor-variations) == list {
+        $num-anchor-variations: length($anchor-variations);
+    }
 
     // Generate anchor variations
     @for $i from 1 through $num-anchor-variations {
 
-        $anchor:     nth($anchor-variations, $i);
+        $anchor: $anchor-variations;
+
+        @if type-of($anchor-variations) == list {
+            $anchor: nth($anchor-variations, $i);
+        }
+
         $class-name: map-get($anchor, 'class-name');
 
         &.#{$class-name} {

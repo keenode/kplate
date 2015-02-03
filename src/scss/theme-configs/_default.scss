@@ -233,9 +233,35 @@ $theme-config: (
     // TO ADD: Buttons maps, with nested maps where each item
     // is a new button type like btn-outline, etc
     'buttons': (
-        'padding':     10px 20px,
-        'color':       white,
-        'font-family': 'base'
+        'padding':          10px 20px,
+        'color':            white,
+        'font-family':      'base',
+        'background-color': 'secondary',
+        'transition':       'background-color 300ms ease-out',
+
+        // :hover
+        'hover-styles': (
+            'background-color': 'primary'
+        ),
+
+        'variations': (
+            (
+                'class-name':       'primary',
+                'background-color': 'primary',
+
+                'hover-styles': (
+                    'background-color': teal
+                )
+            ),
+            (
+                'class-name':       'small',
+                'background-color': 'primary',
+
+                'hover-styles': (
+                    'background-color': teal
+                )
+            )
+        )
     ),
 
 

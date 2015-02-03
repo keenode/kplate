@@ -11,6 +11,14 @@
     @if map-has-key($element, 'margin') {
         margin: map-get($element, 'margin');
     }
+    // padding
+    @if map-has-key($element, 'padding') {
+        padding: map-get($element, 'padding');
+    }
+    // background-color
+    @if map-has-key($element, 'background-color') {
+        background-color: theme-color(map-get($element, 'background-color'));
+    }
     // color
     @if map-has-key($element, 'color') {
         color: theme-color(map-get($element, 'color'));
