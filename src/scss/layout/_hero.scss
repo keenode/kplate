@@ -5,10 +5,16 @@
     Hero styles.
     -------------------------------------------------------- */
 
+/**
+    H E R O
+    Hero styles.
+*/
+
+$hero: theme-category('hero');
+
 section.hero {
+    @include populate-properties($hero);
     position: relative;
-    background-color: theme-property('hero', 'background-color');
-    padding: theme-property('hero', 'padding');
     overflow: hidden;
 
     .inner-container {

@@ -6,13 +6,14 @@
     -------------------------------------------------------- */
 
 /**
-    Main Header
-    -----------------------------------
-    .main-header
+    H E A D E R
+    Header styles.
 */
+
+$header: theme-category('header');
+
 .main-header {
-    padding: theme-property('header', 'padding');
-    background-color: theme-property('header', 'background-color');
+    @include populate-properties($header);
 
     .title {
         @include span-columns(3);

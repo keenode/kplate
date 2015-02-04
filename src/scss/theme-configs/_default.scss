@@ -221,12 +221,23 @@ $theme-config: (
         'background-color': transparent,
 
         // Nav Items
-        'nav-item-margin':        0 15px,
-        'nav-item-padding':       0,
-        'nav-item-color':         white,
-        'nav-item-color--active': 'teal',
-        'nav-item-hover-color':   'light-gray',
-        'nav-item-transition':    color 300ms ease-in
+        'nav-items': (
+            'margin':        0 15px,
+            'padding':       0,
+
+            'nav-link-color':      white,
+            'nav-link-transition': 'color 300ms ease-in',
+
+            // :hover
+            'hover-styles': (
+                'color':   'light-gray'
+            ),
+
+            // .active
+            'active-styles': (
+                'color': 'teal'
+            )
+        )
     ),
 
 

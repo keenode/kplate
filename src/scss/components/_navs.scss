@@ -6,15 +6,19 @@
     -------------------------------------------------------- */
 
 /**
-    Main Nav
-    -----------------------------------
-    .main-nav, .main-nav-list,
+    N A V
+    Navigation styles.
+
+    .main-nav,
+    .main-nav-list,
     .main-nav-item
 */
+
+$nav: theme-category('nav');
+
 .main-nav {
     @include span-columns(9);
-    padding: theme-property('nav', 'padding');
-    background-color: theme-property('nav', 'background-color');
+    @include populate-properties($nav);
 }
 
 .main-nav-list {
@@ -22,27 +26,36 @@
     float: right;
 }
 
+$nav-items: theme-property('nav', 'nav-items');
+
 .main-nav-item {
     float: left;
-    margin: theme-property('nav', 'nav-item-margin');
-    padding: theme-property('nav', 'nav-item-padding');
+    @include populate-properties($nav-items);
 
     &:last-child {
         margin-right: 0;
     }
 
-    &.active {
-        a {
-            color: theme-property('nav', 'nav-item-color--active');
+    // .active
+    @if map-has-key($nav-items, 'active-styles') {
+        &.active {
+            a {
+                $active-properties: map-get($nav-items, 'active-styles');
+                @include populate-properties($active-properties);
+            }
         }
     }
 
     a {
-        color: theme-property('nav', 'nav-item-color');
-        transition: theme-property('nav', 'nav-item-transition');
+        color: map-get($nav-items, 'nav-link-color');
+        transition: map-get($nav-items, 'nav-link-transition');
 
-        &:hover {
-            color: theme-property('nav', 'nav-item-hover-color');
+        // :hover
+        @if map-has-key($nav-items, 'hover-styles') {
+            &:hover {
+                $hover-properties: map-get($nav-items, 'hover-styles');
+                @include populate-properties($hover-properties);
+            }
         }
     }
 }
