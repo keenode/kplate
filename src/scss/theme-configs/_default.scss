@@ -230,8 +230,6 @@ $theme-config: (
     ),
 
 
-    // TO ADD: Buttons maps, with nested maps where each item
-    // is a new button type like btn-outline, etc
     'buttons': (
         'padding':          10px 20px,
         'color':            white,
@@ -303,81 +301,3 @@ $themes: append($themes, $theme-config);
 }
 
 // @include debug-map($themes);
-
-
-
-/**
-    Theme Colors
-*/
-$color-primary:     #00accc;
-$color-secondary:   #ff338c;
-$color-accent:      #ff8219;
-
-$bg-color: #f6f6f6;
-
-$link-color:        $color-secondary;
-$link-hover-color:  darken($color-secondary, 20%);
-$link-active-color: $color-accent;
-
-
-/**
-    Default Colors
-*/
-$light-gray:    #ccc;
-$gray:          #999;
-$dark-gray:     #333;
-
-
-/**
-    Font Families
-*/
-$font-family-base:          'Noto Sans', Helvetica, Arial, sans-serif;
-$font-family-headings:      $font-family-base;
-$font-family-subheadings:   $font-family-base;
-
-
-/**
-    Font Colors
-*/
-$font-color-base: #333;
-
-
-/**
-    Buttons
-*/
-
-// Default
-$btn-default-color:             $color-secondary;
-$btn-default-color-hover:       lighten($color-secondary, 10%);
-$btn-default-font-color:        white;
-$btn-default-font-color-hover:  white;
-$btn-default-font-size:         em(18);
-$btn-default-padding:           10px 20px;
-$btn-default-transition:        background-color 200ms ease-out;
-$btn-default-antialiased:       true;
-
-// Primary
-$btn-primary-color:             $color-primary;
-$btn-primary-color-hover:       lighten($color-primary, 10%);
-$btn-primary-font-color:        white;
-$btn-primary-font-color-hover:  white;
-$btn-primary-font-size:         em(18);
-$btn-primary-padding:           10px 20px;
-$btn-primary-transition:        background-color 200ms ease-out;
-$btn-primary-antialiased:       true;
-
-// Large
-$btn-large-color:             $color-primary;
-$btn-large-color-hover:       lighten($color-primary, 10%);
-$btn-large-font-color:        white;
-$btn-large-font-color-hover:  white;
-$btn-large-font-size:         em(30);
-$btn-large-padding:           15px 40px;
-$btn-large-transition:        background-color 200ms ease-out;
-$btn-large-antialiased:       true;
-
-
-/**
-    FX and Action Colors
-*/
-$highlight-color: yellow;
