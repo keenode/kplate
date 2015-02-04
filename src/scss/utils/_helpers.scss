@@ -2,7 +2,7 @@
     utils/_helpers.scss
     --------------------------------------------------------
     @author Keenan Staffieri
-    Helper mixins.
+    Helper mixins and classes.
     -------------------------------------------------------- */
 
 @mixin reset-list() {
@@ -10,3 +10,18 @@
     margin: 0;
     padding: 0;
 }
+
+%visuallyhidden {
+    margin: -1px;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
+    position: absolute;
+}
+// Example Use case:
+// .visually-hidden {
+//     @extend %visuallyhidden;
+// }
