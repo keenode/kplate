@@ -15,7 +15,7 @@ var gulp  = require('gulp'),
     TASK: dev:watch
     Watch files in development mode and run only the necessary tasks when certain file types change.
 */
-gulp.task('dev:watch', function(cb) {
+gulp.task('dev:watch', function (cb) {
 
     gutil.log(gutil.colors.bgMagenta.white.bold('Watching files...'));
 

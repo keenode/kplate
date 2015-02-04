@@ -15,7 +15,7 @@ var gulp  = require('gulp'),
     TASK: prod:watch
     Watch files in production mode and run only the necessary tasks when certain file types change.
 */
-gulp.task('prod:watch', function(cb) {
+gulp.task('prod:watch', function (cb) {
 
     gutil.log(gutil.colors.bgMagenta.white.bold('Watching files...'));
 

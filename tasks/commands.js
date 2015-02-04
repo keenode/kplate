@@ -26,7 +26,7 @@ var gulp        = require('gulp'),
     COMMAND: default (gulp)
 */
 gulp.task('default',
-    function(cb) {
+    function (cb) {
 
         gutil.log(gutil.colors.yellow.bold('Running DEVELOPMENT tasks...'));
 
@@ -43,7 +43,7 @@ gulp.task('default',
     COMMAND: prod (gulp prod)
 */
 gulp.task('prod',
-    function(cb) {
+    function (cb) {
 
         gutil.log(gutil.colors.yellow.bold('Running PRODUCTION tasks...'));
 
@@ -60,7 +60,7 @@ gulp.task('prod',
     COMMAND: build:dev (gulp build:dev)
 */
 gulp.task('build:dev',
-    function(cb) {
+    function (cb) {
 
         gutil.log(gutil.colors.blue.bold('Building DEVELOPMENT source...'));
 
@@ -75,7 +75,7 @@ gulp.task('build:dev',
     COMMAND: build:prod (gulp build:prod)
 */
 gulp.task('build:prod',
-    function(cb) {
+    function (cb) {
 
         gutil.log(gutil.colors.blue.bold('Building PRODUCTION source...'));
 
@@ -90,7 +90,7 @@ gulp.task('build:prod',
     COMMAND: serve:dev (gulp serve:dev)
 */
 gulp.task('serve:dev',
-    function(cb) {
+    function (cb) {
 
         gutil.log(gutil.colors.blue.bold('Serving development directory...'));
 
@@ -101,7 +101,7 @@ gulp.task('serve:dev',
     COMMAND: serve:prod (gulp serve:prod)
 */
 gulp.task('serve:prod',
-    function(cb) {
+    function (cb) {
 
         gutil.log(gutil.colors.blue.bold('Serving production directory...'));
 

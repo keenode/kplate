@@ -34,7 +34,7 @@ var gulp            = require('gulp'),
     TASK: prod:connect
     Start a new connect server with livereload support on production settings.
 */
-gulp.task('prod:connect', function() {
+gulp.task('prod:connect', function () {
 
     Helpers.logTaskStartup('Startup connect server (production)...');
 
@@ -49,7 +49,7 @@ gulp.task('prod:connect', function() {
     TASK: prod:css
     Compile scss to css with ruby-sass with production settings.
 */
-gulp.task('prod:css', function() {
+gulp.task('prod:css', function () {
 
     Helpers.logTaskStartup('RUN TASK: CSS (production)...');
 
@@ -74,7 +74,7 @@ gulp.task('prod:css', function() {
     TASK: prod:js
     Concat, minify, and move final JavaScript files to corresponding production path.
 */
-gulp.task('prod:js', function() {
+gulp.task('prod:js', function () {
 
     Helpers.logTaskStartup('RUN TASK: JavaScript (production)...');
 
@@ -141,7 +141,7 @@ gulp.task('prod:js', function() {
     TASK: prod:imagemin
     Apply image and SVG minification on production settings.
 */
-gulp.task('prod:imagemin', function() {
+gulp.task('prod:imagemin', function () {
 
     Helpers.logTaskStartup('RUN TASK: imagemin (production)...');
 
@@ -168,7 +168,7 @@ gulp.task('prod:imagemin', function() {
     TASK: prod:inject
     Inject minified CSS and JavaScript into HTML documents.
 */
-gulp.task('prod:inject', function() {
+gulp.task('prod:inject', function () {
 
     Helpers.logTaskStartup('RUN TASK: inject (production)...');
 
@@ -208,7 +208,7 @@ gulp.task('prod:inject', function() {
     TASK: prod:clear
     Delete the production folder.
 */
-gulp.task('prod:clear', function(cb) {
+gulp.task('prod:clear', function (cb) {
 
     Helpers.logTaskStartup('RUN TASK: clear files (production)...');
 
@@ -219,7 +219,7 @@ gulp.task('prod:clear', function(cb) {
     TASK: prod:videos
     Copy videos to production folder.
 */
-gulp.task('prod:videos', function() {
+gulp.task('prod:videos', function () {
 
     Helpers.logTaskStartup('RUN TASK: copy videos (production)...');
 
@@ -231,7 +231,7 @@ gulp.task('prod:videos', function() {
     TASK: prod:fonts
     Copy fonts to production folder.
 */
-gulp.task('prod:fonts', function() {
+gulp.task('prod:fonts', function () {
 
     Helpers.logTaskStartup('RUN TASK: copy fonts (production)...');
 
@@ -243,7 +243,7 @@ gulp.task('prod:fonts', function() {
     TASK: prod:favicons
     Copy favicons to production folder.
 */
-gulp.task('prod:favicons', function() {
+gulp.task('prod:favicons', function () {
 
     Helpers.logTaskStartup('RUN TASK: copy favicons (production)...');
 
@@ -255,7 +255,7 @@ gulp.task('prod:favicons', function() {
     TASK: prod:rootfiles
     Copy rootfiles to production folder.
 */
-gulp.task('prod:rootfiles', function() {
+gulp.task('prod:rootfiles', function () {
 
     Helpers.logTaskStartup('RUN TASK: copy rootfiles (production)...');
 

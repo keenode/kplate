@@ -31,7 +31,7 @@ var gulp            = require('gulp'),
     TASK: dev:connect
     Start a new connect server with livereload support on development settings.
 */
-gulp.task('dev:connect', function() {
+gulp.task('dev:connect', function () {
 
     Helpers.logTaskStartup('Startup connect server (development)...');
 
@@ -46,7 +46,7 @@ gulp.task('dev:connect', function() {
     TASK: dev:css
     Compile scss to css with ruby-sass with development settings.
 */
-gulp.task('dev:css', function() {
+gulp.task('dev:css', function () {
 
     Helpers.logTaskStartup('RUN TASK: CSS (development)...');
 
@@ -71,7 +71,7 @@ gulp.task('dev:css', function() {
     TASK: dev:js
     Copy full JavaScript files to corresponding development path.
 */
-gulp.task('dev:js', function() {
+gulp.task('dev:js', function () {
 
     Helpers.logTaskStartup('RUN TASK: JavaScript (development)...');
 
@@ -95,7 +95,7 @@ gulp.task('dev:js', function() {
     TASK: jshint
     jshint JavaScript files.
 */
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
 
     Helpers.logTaskStartup('RUN TASK: jshint...');
 
@@ -108,7 +108,7 @@ gulp.task('jshint', function() {
     TASK: dev:imagemin
     Apply image and SVG minification on development settings.
 */
-gulp.task('dev:imagemin', function() {
+gulp.task('dev:imagemin', function () {
 
     Helpers.logTaskStartup('RUN TASK: imagemin (development)...');
 
@@ -135,7 +135,7 @@ gulp.task('dev:imagemin', function() {
     TASK: dev:inject
     Inject all CSS and JavaScript into HTML documents.
 */
-gulp.task('dev:inject', function() {
+gulp.task('dev:inject', function () {
 
     Helpers.logTaskStartup('RUN TASK: inject (development)...');
 
@@ -177,7 +177,7 @@ gulp.task('dev:inject', function() {
     TASK: dev:clear
     Delete the development folder.
 */
-gulp.task('dev:clear', function(cb) {
+gulp.task('dev:clear', function (cb) {
 
     Helpers.logTaskStartup('RUN TASK: clear files (development)...');
 
@@ -188,7 +188,7 @@ gulp.task('dev:clear', function(cb) {
     TASK: dev:videos
     Copy videos to development folder.
 */
-gulp.task('dev:videos', function() {
+gulp.task('dev:videos', function () {
 
     Helpers.logTaskStartup('RUN TASK: copy videos (development)...');
 
@@ -200,7 +200,7 @@ gulp.task('dev:videos', function() {
     TASK: dev:fonts
     Copy fonts to development folder.
 */
-gulp.task('dev:fonts', function() {
+gulp.task('dev:fonts', function () {
 
     Helpers.logTaskStartup('RUN TASK: copy fonts (development)...');
 
@@ -212,7 +212,7 @@ gulp.task('dev:fonts', function() {
     TASK: dev:favicons
     Copy favicons to development folder.
 */
-gulp.task('dev:favicons', function() {
+gulp.task('dev:favicons', function () {
 
     Helpers.logTaskStartup('RUN TASK: copy favicons (development)...');
 
@@ -224,7 +224,7 @@ gulp.task('dev:favicons', function() {
     TASK: dev:rootfiles
     Copy rootfiles to development folder.
 */
-gulp.task('dev:rootfiles', function() {
+gulp.task('dev:rootfiles', function () {
 
     Helpers.logTaskStartup('RUN TASK: copy rootfiles (development)...');
 
