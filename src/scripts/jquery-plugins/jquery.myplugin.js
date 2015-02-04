@@ -21,7 +21,7 @@
     $.fn.myplugin = function(options) {
 
         // Merge options with default options
-        var settings = $.extend({
+        var _settings = $.extend({
             action: 'nothing'
         }, options);
 
@@ -29,7 +29,7 @@
         var _borderColor = '#556b2f';
 
         // Perform specified action
-        if(settings.action === 'addBorder') {
+        if(_settings.action === 'addBorder') {
             this.css('border', '2px solid ' + _borderColor);
         }
 

@@ -42,7 +42,7 @@
         Simply say hello!
     */
     // Replaces the "sayHello" method from MyClass
-    MyChildClass.prototype.sayHello = function() {
+    MyChildClass.prototype.sayHello = function () {
         console.log("Hello, I'm " + this.name + " from the child class.");
     };
 
@@ -50,7 +50,7 @@
         sayAdj
         Say an adjective describing this object.
     */
-    MyChildClass.prototype.sayAdj = function() {
+    MyChildClass.prototype.sayAdj = function () {
         console.log("I am " + this.adj + "!");
     };
 

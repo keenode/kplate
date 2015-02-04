@@ -31,7 +31,7 @@
         sayHello
         Simply say hello!
     */
-    MyClass.prototype.sayHello = function() {
+    MyClass.prototype.sayHello = function () {
         console.log("Hello, I'm " + this.name + ".");
     };
 
