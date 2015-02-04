@@ -38,3 +38,16 @@ section.index-content {
         text-align: center;
     }
 }
+
+
+/**
+    .style-preview
+    Style preview section of the index page.
+*/
+section.style-preview {
+    padding-bottom: 100px;
+
+    .full-col {
+        @include span-columns(12);
+    }
+}
