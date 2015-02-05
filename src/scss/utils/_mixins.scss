@@ -67,6 +67,10 @@
             text-rendering: optimizeLegibility;
         }
     }
+    // cursor
+    @if map-has-key($element, 'cursor') {
+        cursor: unquote(map-get($element, 'cursor'));
+    }
     // transition
     @if map-has-key($element, 'transition') {
         transition: unquote(map-get($element, 'transition'));

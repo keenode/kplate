@@ -172,9 +172,9 @@ $theme-config: (
                     ),
 
                     // :visited
-                    'visited-styles': (
-                        'color': 'gray'
-                    )
+                    // 'visited-styles': (
+                    //     'color': 'gray'
+                    // )
                 )
             )
         )
@@ -222,15 +222,16 @@ $theme-config: (
 
 
     'buttons': (
-        'padding':          10px 20px,
+        'padding':          10px 30px,
         'color':            white,
         'font-family':      'base',
-        'background-color': 'secondary',
+        'background-color': 'accent',
         'transition':       'background-color 300ms ease-out',
 
         // :hover
         'hover-styles': (
-            'background-color': 'primary'
+            'color':            white,
+            'background-color': 'secondary'
         ),
 
         'variations': (
@@ -239,15 +240,19 @@ $theme-config: (
                 'background-color': 'primary',
 
                 'hover-styles': (
-                    'background-color': teal
+                    'color':            white,
+                    'background-color': 'accent-shade'
                 )
             ),
             (
-                'class-name':       'small',
-                'background-color': 'primary',
+                'class-name':       'disabled',
+                'color':            'light-gray',
+                'background-color': 'gray',
+                'cursor':           default,
 
                 'hover-styles': (
-                    'background-color': teal
+                    'color':            'light-gray',
+                    'background-color': 'gray'
                 )
             )
         )
@@ -256,7 +261,7 @@ $theme-config: (
 
     'hero': (
         'padding':          60px 0,
-        'height':           80vh,
+        'height':           500px,
         'background-color': #aaf0f2
     ),
 

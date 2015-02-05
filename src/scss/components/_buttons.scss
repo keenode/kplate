@@ -13,6 +13,7 @@
 $buttons: theme-category('buttons');
 
 .btn {
+    display: inline-block;
     @include populate-properties($buttons);
 
     // :hover

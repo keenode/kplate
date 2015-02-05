@@ -14,13 +14,11 @@ $hero: theme-category('hero');
 
 section.hero {
     @include populate-properties($hero);
-    max-height: 650px;
     position: relative;
     overflow: hidden;
 
     .inner-container {
         position: relative;
-        top: 10%;
         z-index: 20;
     }
 }
@@ -83,15 +81,16 @@ section.hero {
 
 .btn.btn-hero {
     display: block;
+    padding: 10px 20px;
     width: 158px;
     margin: 30px auto 20px auto;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: em(14px);
-    background-color: color('black');
+    background-color: theme-color('accent-shade');
     animation: heroItemAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 2250ms backwards;
 
     &:hover {
-        background-color: tint(color('black'), 20%);
+        background-color: color('black');
     }
 
     i {
