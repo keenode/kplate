@@ -26,6 +26,7 @@ section.index-content {
         p {
             color: color('gray');
             font-size: em(14px);
+            line-height: 24px;
             text-align: center;
         }
     }
@@ -49,5 +50,37 @@ section.style-preview {
 
     .full-col {
         @include span-columns(12);
+    }
+}
+
+/**
+    .theme-color-styles
+    Style preview section of the index page.
+*/
+
+.theme-color-styles {
+    @include span-columns(12);
+}
+
+.color-tile {
+    @include size(100px);
+    float: left;
+    margin: 30px 20px 70px 0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+
+    &.primary {
+        background-color: theme-color('primary');
+    }
+
+    &.secondary {
+        background-color: theme-color('secondary');
+    }
+
+    &.accent {
+        background-color: theme-color('accent');
+    }
+
+    &.accent-shade {
+        background-color: theme-color('accent-shade');
     }
 }

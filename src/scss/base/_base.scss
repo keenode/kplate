@@ -8,3 +8,8 @@
 body {
     background: page-background();
 }
+
+hr {
+    border: 0;
+    border-bottom: 1px solid color('light-gray');
+}

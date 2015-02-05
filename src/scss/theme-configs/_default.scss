@@ -36,9 +36,10 @@ $theme-config: (
     **/
 
     'color-aliases': (
-        'primary':   'blue',
-        'secondary': 'teal',
-        'accent':    'light-blue'
+        'primary':      'blue',
+        'secondary':    'teal',
+        'accent':       'light-blue',
+        'accent-shade': 'gray-blue'
     ),
 
 
@@ -65,110 +66,90 @@ $theme-config: (
     'typography': (
 
         // Base typographic styles
+        'color':                   'black',
         'font-family':             'base',
         'font-size':               16px,
-        'font-weight':             normal,
+        'font-weight':             400,
         'font-style':              normal,
-        'line-height':             24px,
-        'font-antialias':          false,
+        'line-height':             28px,
+        'font-antialias':          true,
         'font-optimizelegibility': false,
 
         'headings': (
             (
-                'selector':                'h1.main-heading',
-                'color':                   'primary',
-                'font-family':             'headings',
-                'font-size':               em(50px),
-                'font-antialias':          true,
-                'font-optimizelegibility': true,
-                'margin':                  0 0 30px 0
-            ),
-            (
                 'selector':                'h1',
                 'font-family':             'headings',
-                'font-size':               em(40px),
+                'font-size':               em(80px),
                 'line-height':             55px,
-                'font-antialias':          true,
                 'font-optimizelegibility': true,
-                'margin':                  0 0 20px 0
+                'margin':                  0 0 40px 0
             ),
             (
                 'selector':                'h2',
                 'font-family':             'headings',
-                'font-size':               em(30px),
+                'font-size':               em(50px),
                 'line-height':             35px,
-                'font-antialias':          true,
                 'font-optimizelegibility': true,
-                'margin':                  0 0 20px 0
+                'margin':                  0 0 30px 0
             ),
             (
                 'selector':                'h3',
-                'font-size':               em(24px),
+                'font-size':               em(30px),
                 'line-height':             28px,
                 'margin':                  0 0 20px 0
             ),
             (
                 'selector':                'h4',
-                'font-size':               em(20px),
+                'font-size':               em(24px),
                 'line-height':             24px,
                 'margin':                  0 0 20px 0
             ),
             (
                 'selector':                'h5',
-                'font-size':               em(18px),
-                'font-weight':             bold,
+                'font-size':               em(20px),
+                'font-weight':             700,
                 'line-height':             24px,
                 'margin':                  0 0 10px 0
             ),
             (
                 'selector':                'h6',
-                'font-weight':             bold,
+                'font-size':               em(16px),
+                'font-weight':             700,
                 'margin':                  0 0 10px 0
             )
         ),
 
         'paragraphs': (
-            'margin': 0 0 10px 0,
+            'margin': 0 0 20px 0,
 
             'variations': (
                 (
-                    'class-name': 'lead',
-                    'font-size':  em(24px)
-                ),
-                (
-                    'class-name': 'lg-quote',
-                    'color':      'gray',
-                    'font-size':  em(20px),
-                    'font-style': 'italic'
-                ),
-                (
-                    'class-name': 'quote',
-                    'color':      'gray',
-                    'font-style': 'italic'
+                    'class-name':  'lead',
+                    'font-size':   em(18px),
+                    'font-weight': 700
                 )
             )
         ),
 
         'anchors': (
-            'color':           'secondary',
+            'color':           'primary',
             'text-decoration': none,
             'transition':      'color 300ms ease-in',
 
             // :hover
             'hover-styles': (
-                'color':       'accent',
-                'font-weight': bold
+                'color': 'accent-shade'
             ),
 
             // :active
             'active-styles': (
-                'color': 'light-blue'
+                'color': red
             ),
 
             // :visited
-            'visited-styles': (
-                'color': 'gray'
-            ),
+            // 'visited-styles': (
+            //     'color': 'gray'
+            // ),
 
             'variations': (
                 (
@@ -182,8 +163,7 @@ $theme-config: (
 
                     // :hover
                     'hover-styles': (
-                        'color':       'gray',
-                        'font-weight': bold
+                        'color':       'gray'
                     ),
 
                     // :active
@@ -211,8 +191,8 @@ $theme-config: (
     **/
 
     'header': (
-        'padding':          20px,
-        'background-color': 'black'
+        'padding':          10px 0 6px 0,
+        'background-color': 'primary'
     ),
 
 
@@ -235,7 +215,7 @@ $theme-config: (
 
             // .active
             'active-styles': (
-                'color': 'teal'
+                'color': 'secondary'
             )
         )
     ),
@@ -276,7 +256,8 @@ $theme-config: (
 
     'hero': (
         'padding':          60px 0,
-        'background-color': 'accent'
+        'height':           80vh,
+        'background-color': #aaf0f2
     ),
 
 

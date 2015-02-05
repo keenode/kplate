@@ -7,6 +7,14 @@
 
 @mixin populate-properties($element) {
 
+    // width
+    @if map-has-key($element, 'width') {
+        width: map-get($element, 'width');
+    }
+    // height
+    @if map-has-key($element, 'height') {
+        height: map-get($element, 'height');
+    }
     // margin
     @if map-has-key($element, 'margin') {
         margin: map-get($element, 'margin');
