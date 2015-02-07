@@ -13,7 +13,6 @@
 $buttons: theme-category('buttons');
 
 .btn {
-    display: inline-block;
     @include populate-properties($buttons);
 
     // :hover
@@ -58,4 +57,7 @@ $buttons: theme-category('buttons');
             }
         }
     }
+
+    // Generate media queries
+    @include responsive-styles($buttons);
 }

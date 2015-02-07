@@ -7,6 +7,10 @@
 
 @mixin populate-properties($element) {
 
+    // display
+    @if map-has-key($element, 'display') {
+        display: map-get($element, 'display');
+    }
     // width
     @if map-has-key($element, 'width') {
         width: map-get($element, 'width');
@@ -19,9 +23,41 @@
     @if map-has-key($element, 'margin') {
         margin: map-get($element, 'margin');
     }
+    // margin-top
+    @if map-has-key($element, 'margin-top') {
+        margin-top: map-get($element, 'margin-top');
+    }
+    // margin-right
+    @if map-has-key($element, 'margin-right') {
+        margin-right: map-get($element, 'margin-right');
+    }
+    // margin-bottom
+    @if map-has-key($element, 'margin-bottom') {
+        margin-bottom: map-get($element, 'margin-bottom');
+    }
+    // margin-left
+    @if map-has-key($element, 'margin-left') {
+        margin-left: map-get($element, 'margin-left');
+    }
     // padding
     @if map-has-key($element, 'padding') {
         padding: map-get($element, 'padding');
+    }
+    // padding-top
+    @if map-has-key($element, 'padding-top') {
+        padding-top: map-get($element, 'padding-top');
+    }
+    // padding-right
+    @if map-has-key($element, 'padding-right') {
+        padding-right: map-get($element, 'padding-right');
+    }
+    // padding-bottom
+    @if map-has-key($element, 'padding-bottom') {
+        padding-bottom: map-get($element, 'padding-bottom');
+    }
+    // padding-left
+    @if map-has-key($element, 'padding-left') {
+        padding-left: map-get($element, 'padding-left');
     }
     // background-color
     @if map-has-key($element, 'background-color') {
@@ -74,6 +110,37 @@
     // transition
     @if map-has-key($element, 'transition') {
         transition: unquote(map-get($element, 'transition'));
+    }
+}
+
+
+@mixin responsive-styles($element) {
+
+    @if map-has-key($element, 'responsive') {
+
+        $responsive-queries: map-get($element, 'responsive');
+
+        // Get total number of button variations
+        $num-queries: 1;
+
+        @if type-of($responsive-queries) == list {
+            $num-queries: length($responsive-queries);
+        }
+
+        @for $i from 1 through $num-queries {
+
+            $media-query: $responsive-queries;
+
+            @if type-of($responsive-queries) == list {
+                $media-query: nth($responsive-queries, $i);
+            }
+
+            $query-breakpoint: map-get($media-query, 'breakpoint');
+
+            @include media($query-breakpoint) {
+                @include populate-properties($media-query);
+            }
+        }
     }
 }
 

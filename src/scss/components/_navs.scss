@@ -21,9 +21,12 @@ $nav: theme-category('nav');
     @include populate-properties($nav);
     background-color: color('black');
 
+    @include media($small-up) {
+        margin-top: 10px;
+    }
+
     @include media($x-small-up) {
         @include span-columns(8);
-        margin-top: 10px;
         background-color: transparent;
     }
 }

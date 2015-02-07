@@ -79,18 +79,34 @@ $theme-config: (
             (
                 'selector':                'h1',
                 'font-family':             'headings',
-                'font-size':               em(80px),
-                'line-height':             75px,
+                'font-size':               em(50px),
+                'line-height':             45px,
                 'font-optimizelegibility': true,
-                'margin':                  0 0 40px 0
+                'margin':                  0 0 40px 0,
+
+                'responsive': (
+                    (
+                        'breakpoint':  $small-up,
+                        'font-size':   em(80px),
+                        'line-height': 75px
+                    )
+                )
             ),
             (
                 'selector':                'h2',
                 'font-family':             'headings',
-                'font-size':               em(50px),
-                'line-height':             45px,
+                'font-size':               em(40px),
+                'line-height':             35px,
                 'font-optimizelegibility': true,
-                'margin':                  0 0 30px 0
+                'margin':                  0 0 30px 0,
+
+                'responsive': (
+                    (
+                        'breakpoint':  $small-up,
+                        'font-size':   em(50px),
+                        'line-height': 45px,
+                    )
+                )
             ),
             (
                 'selector':                'h3',
@@ -120,13 +136,30 @@ $theme-config: (
         ),
 
         'paragraphs': (
-            'margin': 0 0 20px 0,
+            'margin':      0 0 20px 0,
+            'font-size':   em(14px),
+            'line-height': 24px,
+
+            'responsive': (
+                (
+                    'breakpoint':  $small-up,
+                    'font-size':   em(16px),
+                    'line-height': 28px
+                )
+            ),
 
             'variations': (
                 (
                     'class-name':  'lead',
-                    'font-size':   em(18px),
-                    'font-weight': 700
+                    'font-size':   em(16px),
+                    'font-weight': 700,
+
+                    'responsive': (
+                        (
+                            'breakpoint':  $small-up,
+                            'font-size':   em(18px)
+                        )
+                    ),
                 )
             )
         ),
@@ -222,6 +255,8 @@ $theme-config: (
 
 
     'buttons': (
+        'display':          block,
+        'margin-bottom':    10px,
         'padding':          10px 30px,
         'color':            white,
         'font-family':      'base',
@@ -232,6 +267,13 @@ $theme-config: (
         'hover-styles': (
             'color':            white,
             'background-color': 'secondary'
+        ),
+
+        'responsive': (
+            (
+                'breakpoint': $x-small-up,
+                'display': inline-block
+            )
         ),
 
         'variations': (

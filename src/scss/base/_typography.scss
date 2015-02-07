@@ -39,6 +39,9 @@ $num-headings: length($headings);
     #{$selector} {
         // Include heading properties
         @include populate-properties($heading);
+
+        // Generate media queries
+        @include responsive-styles($heading);
     }
 }
 
@@ -54,6 +57,9 @@ $paragraphs: theme-property('typography', 'paragraphs');
 p {
     // Include base paragraph properties
     @include populate-properties($paragraphs);
+
+    // Generate media queries
+    @include responsive-styles($paragraphs);
 
     // Get paragraph variations
     $paragraph-variations: map-get($paragraphs, 'variations');
@@ -79,6 +85,9 @@ p {
         &.#{$class-name} {
             // Include paragraph variation properties
             @include populate-properties($paragraph);
+
+            // Generate media queries
+            @include responsive-styles($paragraph);
         }
     }
 }
