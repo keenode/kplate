@@ -80,7 +80,7 @@ $theme-config: (
                 'selector':                'h1',
                 'font-family':             'headings',
                 'font-size':               em(80px),
-                'line-height':             55px,
+                'line-height':             75px,
                 'font-optimizelegibility': true,
                 'margin':                  0 0 40px 0
             ),
@@ -88,14 +88,14 @@ $theme-config: (
                 'selector':                'h2',
                 'font-family':             'headings',
                 'font-size':               em(50px),
-                'line-height':             35px,
+                'line-height':             45px,
                 'font-optimizelegibility': true,
                 'margin':                  0 0 30px 0
             ),
             (
                 'selector':                'h3',
                 'font-size':               em(30px),
-                'line-height':             28px,
+                'line-height':             30px,
                 'margin':                  0 0 20px 0
             ),
             (
@@ -108,7 +108,7 @@ $theme-config: (
                 'selector':                'h5',
                 'font-size':               em(20px),
                 'font-weight':             700,
-                'line-height':             24px,
+                'line-height':             20px,
                 'margin':                  0 0 10px 0
             ),
             (
@@ -260,8 +260,6 @@ $theme-config: (
 
 
     'hero': (
-        'padding':          60px 0,
-        'height':           500px,
         'background-color': #aaf0f2
     ),
 

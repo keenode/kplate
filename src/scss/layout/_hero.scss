@@ -16,18 +16,27 @@ section.hero {
     @include populate-properties($hero);
     position: relative;
     overflow: hidden;
+    height: 400px;
+    padding: 30px 0;
 
     .inner-container {
         position: relative;
         z-index: 20;
     }
+
+    @include media($small) {
+        height: 500px;
+        padding: 60px 0;
+    }
 }
 
 .kplate-logo {
+    margin-top: 20px;
+    margin-bottom: 0;
     color: shade(theme-color('accent-shade'), 40%);
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: em(140px);
-    line-height: 160px;
+    font-size: em(80px);
+    line-height: 90px;
     text-align: center;
     cursor: default;
     transition: transform 300ms ease-out;
@@ -35,6 +44,18 @@ section.hero {
 
     &:hover {
         transform: scale(1.02);
+    }
+
+    @include media($x-small) {
+        font-size: em(100px);
+        line-height: 115px;
+    }
+
+    @include media($small) {
+        font-size: em(140px);
+        line-height: 160px;
+        margin-top: 0;
+        margin-bottom: 40px;
     }
 }
 
@@ -53,12 +74,16 @@ section.hero {
     margin: 20px 0;
     color: theme-color('primary');
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: em(24px);
+    font-size: em(18px);
     font-style: italic;
     text-align: center;
     letter-spacing: 1px;
     cursor: default;
     animation: heroQuoteAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 1500ms backwards;
+
+    @include media($small) {
+        font-size: em(24px);
+    }
 }
 
 @keyframes heroQuoteAppear {
@@ -74,9 +99,14 @@ section.hero {
 
 .from-who {
     color: shade(theme-color('primary'), 30%);
+    font-size: em(13px);
     text-align: center;
     cursor: default;
     animation: heroItemAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 2000ms backwards;
+
+    @include media($small) {
+        font-size: em(16px);
+    }
 }
 
 .btn.btn-hero {

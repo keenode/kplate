@@ -17,13 +17,24 @@
 $nav: theme-category('nav');
 
 .main-nav {
-    @include span-columns(9);
+    @include span-columns(12);
     @include populate-properties($nav);
+    background-color: color('black');
+
+    @include media($x-small) {
+        @include span-columns(8);
+        margin-top: 10px;
+        background-color: transparent;
+    }
 }
 
 .main-nav-list {
+    @include clearfix;
     @include reset-list();
-    float: right;
+
+    @include media($x-small) {
+        float: right;
+    }
 }
 
 $nav-items: theme-property('nav', 'nav-items');
