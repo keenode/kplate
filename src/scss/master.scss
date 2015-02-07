@@ -13,6 +13,9 @@
 /** Bourbon Mixins **/
 @import '../bower_components/bourbon/app/assets/stylesheets/bourbon';
 
+// Override Neat defaults
+@import 'grid/neat-overrides';
+
 /** Neat Grid **/
 @import '../bower_components/neat/app/assets/stylesheets/neat';
 
@@ -49,8 +52,7 @@ $default-theme-name: 'Default'; // Name used for default theme
     G R I D
 */
 @import
-    'grid/breakpoints',
-    'grid/neat-overrides';
+    'grid/breakpoints';
 
 
 /**
