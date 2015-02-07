@@ -30,7 +30,7 @@ section.index-content {
             text-align: center;
         }
 
-        @include media($small) {
+        @include media($small-up) {
             @include span-columns(4);
         }
     }
@@ -90,7 +90,7 @@ section.style-preview {
         background-color: theme-color('accent-shade');
     }
 
-    @include media($small) {
+    @include media($small-up) {
         @include size(100px);
         margin: 30px 20px 70px 0;
     }

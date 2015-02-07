@@ -16,7 +16,7 @@ $header: theme-category('header');
 .main-header {
     @include populate-properties($header);
 
-    @include media(max-width 480px) {
+    @include media($x-small-down) {
         padding-bottom: 0;
     }
 }
@@ -29,7 +29,7 @@ $header: theme-category('header');
     font-size: em(30px);
     cursor: default;
 
-    @include media($x-small) {
+    @include media($x-small-up) {
         @include span-columns(4);
     }
 }

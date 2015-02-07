@@ -24,7 +24,7 @@ section.hero {
         z-index: 20;
     }
 
-    @include media($small) {
+    @include media($small-up) {
         height: 500px;
         padding: 60px 0;
     }
@@ -46,12 +46,12 @@ section.hero {
         transform: scale(1.02);
     }
 
-    @include media($x-small) {
+    @include media($x-small-up) {
         font-size: em(100px);
         line-height: 115px;
     }
 
-    @include media($small) {
+    @include media($small-up) {
         font-size: em(140px);
         line-height: 160px;
         margin-top: 0;
@@ -81,7 +81,7 @@ section.hero {
     cursor: default;
     animation: heroQuoteAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 1500ms backwards;
 
-    @include media($small) {
+    @include media($small-up) {
         font-size: em(24px);
     }
 }
@@ -104,7 +104,7 @@ section.hero {
     cursor: default;
     animation: heroItemAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 2000ms backwards;
 
-    @include media($small) {
+    @include media($small-up) {
         font-size: em(16px);
     }
 }

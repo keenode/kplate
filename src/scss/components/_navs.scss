@@ -21,7 +21,7 @@ $nav: theme-category('nav');
     @include populate-properties($nav);
     background-color: color('black');
 
-    @include media($x-small) {
+    @include media($x-small-up) {
         @include span-columns(8);
         margin-top: 10px;
         background-color: transparent;
@@ -32,7 +32,7 @@ $nav: theme-category('nav');
     @include clearfix;
     @include reset-list();
 
-    @include media($x-small) {
+    @include media($x-small-up) {
         float: right;
     }
 }
