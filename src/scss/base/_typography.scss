@@ -24,7 +24,7 @@ body {
     {h1-h6}.{variations_class}
 */
 
-// Get 'headings' map 'typography'
+// Get 'headings' map from 'typography'
 $headings: theme-property('typography', 'headings');
 
 // Get total number of headings

@@ -40,8 +40,7 @@
 $themes: (); // Init map to hold theme configs
 $default-theme-name: 'Default'; // Name used for default theme
 @import
-    'theme-configs/default',
-    'theme-configs/dark';
+    'theme-configs/default';
 
 
 /**
@@ -50,8 +49,6 @@ $default-theme-name: 'Default'; // Name used for default theme
 @import
     'utils/functions',
     'utils/mixins',
-    'utils/mixins-buttons',
-    'utils/mixins-navs',
     'utils/helpers';
 
 
@@ -73,7 +70,6 @@ $default-theme-name: 'Default'; // Name used for default theme
 @import
     'layout/header',
     'layout/footer',
-    'layout/sidebar',
     'layout/hero';
 
 
