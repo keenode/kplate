@@ -5,6 +5,12 @@
     Utility mixins.
     -------------------------------------------------------- */
 
+/**
+    Populate CSS propeties from a single map item with
+    property values.
+
+    @params $element - Element map to scan properties on.
+*/
 @mixin populate-properties($element) {
 
     // display
@@ -114,6 +120,12 @@
 }
 
 
+/**
+    Generate valid media queries with associate properties
+    from a map containing properties.
+
+    @params $element - Element map to scan properties on.
+*/
 @mixin responsive-styles($element) {
 
     @if map-has-key($element, 'responsive') {

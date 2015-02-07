@@ -5,6 +5,12 @@
     Default theme configuration settings.
     -------------------------------------------------------- */
 
+/**
+    This is the theme's configuration file.
+    Colors and elements can be tweaked from this SASS map.
+    Future versions of kplate will support multiple child themes.
+*/
+
 $theme-config: (
 
     'name': $default-theme-name,
