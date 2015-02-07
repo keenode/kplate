@@ -6,19 +6,19 @@
     -------------------------------------------------------- */
 
 // Screens
-$screen-lg: 1200;
-$screen-md: 1024;
-$screen-sm: 768;
-$screen-xs: 480;
+$screen-lg: 1200px;
+$screen-md: 1024px;
+$screen-sm: 768px;
+$screen-xs: 480px;
 
 
 /** Breakpoints **/
 
 // UP (min-width queries)
-$large-up:   new-breakpoint(min-width em($screen-lg+1) 12);
-$medium-up:  new-breakpoint(min-width em($screen-md+1) 12);
-$small-up:   new-breakpoint(min-width em($screen-sm+1) 12);
-$x-small-up: new-breakpoint(min-width em($screen-xs+1) 12);
+$large-up:   new-breakpoint(min-width em($screen-lg + 1px) 12);
+$medium-up:  new-breakpoint(min-width em($screen-md + 1px) 12);
+$small-up:   new-breakpoint(min-width em($screen-sm + 1px) 12);
+$x-small-up: new-breakpoint(min-width em($screen-xs + 1px) 12);
 
 // DOWN (max-width queries)
 $large-down:   new-breakpoint(max-width em($screen-lg) 12);
