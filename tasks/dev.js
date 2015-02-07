@@ -53,9 +53,10 @@ gulp.task('dev:css', function () {
     return gulp.src('./src/scss/**/*.{scss,sass}')
         .pipe(plumber())
         .pipe(rubySass({
-            style:          'expanded', // nested, compact, compressed, expanded
-            lineNumbers:    true, // Emit comments in the generated CSS indicating the corresponding source line.
-            cacheLocation: './src/scss/.sass-cache'
+            style:            'expanded', // nested, compact, compressed, expanded
+            lineNumbers:      true, // Emit comments in the generated CSS indicating the corresponding source line.
+            cacheLocation:    './src/scss/.sass-cache',
+            "sourcemap=none": true // temp hack -- http://stackoverflow.com/questions/27068915/gulp-ruby-sass-and-autoprefixer-do-not-get-along
         }))
         .pipe(autoprefixer({
             browsers: ['last 2 versions', 'ie >= 9'],
