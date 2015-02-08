@@ -263,3 +263,15 @@ gulp.task('prod:rootfiles', function () {
     return gulp.src('./src/rootfiles/**/*')
         .pipe(gulp.dest(buildConfig.prod.rootDir));
 });
+
+/**
+    TASK: prod:styleguide
+    Copy styleguide files to production folder.
+*/
+gulp.task('prod:styleguide', function () {
+
+    Helpers.logTaskStartup('RUN TASK: styleguide (production)...');
+
+    return gulp.src('./src/styleguide/dist/**/*')
+        .pipe(gulp.dest(buildConfig.prod.paths.styleguide));
+});

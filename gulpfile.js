@@ -24,5 +24,6 @@ gutil.log(
     ./tasks/dev.js
     ./tasks/prod-watch.js
     ./tasks/prod.js
+    ./tasks/kss.js
 */
 var dir = requireDir('./tasks');

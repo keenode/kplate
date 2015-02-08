@@ -13,12 +13,13 @@ var buildConfig = {
     dev: {
         rootDir: './dev',   // Directory where the site will be hosted
         paths: {
-            css:    './dev/css',    // Path to CSS files
-            js:     './dev/js',     // Path to JavaScript files
-            images: './dev/images', // Path to images
-            svgs:   './dev/svgs',   // Path to SVGs
-            videos: './dev/videos', // Path to videos
-            fonts:  './dev/fonts'   // Path to fonts
+            css:        './dev/css',       // Path to CSS files
+            js:         './dev/js',        // Path to JavaScript files
+            images:     './dev/images',    // Path to images
+            svgs:       './dev/svgs',      // Path to SVGs
+            videos:     './dev/videos',    // Path to videos
+            fonts:      './dev/fonts',     // Path to fonts
+            styleguide: './dev/styleguide' // Path to styleguide
         },
         connectServer: {
             livereload: true,   // Will browser reload automatically when changes are made?
@@ -28,12 +29,13 @@ var buildConfig = {
     prod: {
         rootDir: './prod',  // Directory where the site will be hosted
         paths: {
-            css:    './prod/css',       // Path to CSS files
-            js:     './prod/js',        // Path to JavaScript files
-            images: './prod/images',    // Path to images
-            svgs:   './prod/svgs',      // Path to SVGs
-            videos: './prod/videos',    // Path to videos
-            fonts:  './prod/fonts'      // Path to fonts
+            css:        './prod/css',       // Path to CSS files
+            js:         './prod/js',        // Path to JavaScript files
+            images:     './prod/images',    // Path to images
+            svgs:       './prod/svgs',      // Path to SVGs
+            videos:     './prod/videos',    // Path to videos
+            fonts:      './prod/fonts',     // Path to fonts
+            styleguide: './prod/styleguide' // Path to styleguide
         },
         connectServer: {
             livereload: true,   // Will browser reload automatically when changes are made?

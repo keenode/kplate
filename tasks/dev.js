@@ -232,3 +232,15 @@ gulp.task('dev:rootfiles', function () {
     return gulp.src('./src/rootfiles/**/*')
         .pipe(gulp.dest(buildConfig.dev.rootDir));
 });
+
+/**
+    TASK: dev:styleguide
+    Copy styleguide files to development folder.
+*/
+gulp.task('dev:styleguide', function () {
+
+    Helpers.logTaskStartup('RUN TASK: styleguide (development)...');
+
+    return gulp.src('./src/styleguide/dist/**/*')
+        .pipe(gulp.dest(buildConfig.dev.paths.styleguide));
+});

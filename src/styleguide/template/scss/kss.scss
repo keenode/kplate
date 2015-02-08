@@ -1,0 +1,427 @@
+/** Bourbon Mixins **/
+@import '../../../bower_components/bourbon/app/assets/stylesheets/bourbon';
+
+/** Normalize **/ 
+@import 'normalize';
+
+// Theme Vars
+$orange: #ec503b;
+
+
+body {
+    color: #3c4345;
+    background: black;
+    font-family: 'Noto Sans', Helvetica, Arial, sans-serif;
+}
+
+h1#overview {
+  margin-top: 40px;
+}
+
+a {
+    color: $orange;
+    text-decoration: none;
+    transition: color 250ms ease-in;
+}
+
+a:hover,
+a:active {
+    outline: 0;
+}
+
+a::-moz-selection,
+a::selection {
+    background: rgba(255, 255, 0, 0.3);
+    color: #0645ad;
+}
+
+::-moz-selection,
+::selection {
+    background: rgba(255, 255, 0, 0.3);
+    color: #444444;
+}
+
+p {
+    line-height: 26px;
+    margin: 0 0 20px;
+}
+
+hr {
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+}
+
+#kss-nav {
+    width: 20%;
+    background-color: #068D9D;
+}
+
+#kss-nav nav > ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+        position: relative;
+        background-color: tint(shade(#068D9D, 50%), 3%);
+        transition: background-color 300ms ease-in;
+
+        &:nth-child(odd) {
+            background-color: tint(shade(#068D9D, 50%), 10%);
+
+            span {
+                background-color: tint($orange, 5%);
+            }
+        }
+
+        &:hover {
+            background-color: tint(shade(#068D9D, 50%), 6%);
+
+            &:nth-child(odd) {
+                background-color: tint(shade(#068D9D, 50%), 13%);
+            }
+        }
+
+        span {
+            position: absolute;
+            color: #eee;
+            left: 0;
+            top: 0;
+            background-color: shade($orange, 5%);
+            padding: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        a {
+            display: block;
+            color: white;
+            text-align: right;
+            font-size: em(14px);
+            letter-spacing: 1px;
+            padding: 10px 30px;
+        }
+    }
+}
+
+h1.kss-title {
+  margin: 10px 0;
+}
+
+#kss-header h1 {
+    color: white;
+    font-size: em(32px);
+    text-align: center;
+    letter-spacing: 1px;
+    cursor: default;
+
+    span {
+        color: #eee;
+        display: block;
+        font-size: em(18px, 32px);
+        font-weight: 300;
+        margin-top: -40px;
+    }
+}
+
+#kss-main,
+#kss-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#kss-main {
+    width: 80%;
+    padding-right: 2.5%;
+    padding-left: 2.5%;
+    left: 20%;
+    background-color: white;
+}
+
+.vz-slider, .vz-center-slider {
+    width: 960px;
+
+    // .slick-slide {
+    //     &:nth-child(even) {
+    //         background-color: #eee;
+    //     }
+
+    //     &:nth-child(odd) {
+    //         background-color: #ccc;
+    //     }
+    // }
+}
+
+.kss-heading-wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding-left: 2.5%;
+    background-color: #202A25;
+
+    h1 {
+        color: white;
+        font-size: em(40px);
+        text-indent: 10px;
+        cursor: default;
+    }
+}
+
+.kss-put-up {
+    margin-top: -100px;
+}
+
+.vz-slider-controls {
+    height: 55px;
+}
+
+#kss-content {
+    padding-top: 100px;
+
+    .kss-mod-list {
+        width: 100%;
+    }
+
+    .kss-mod-name {
+        font-size: em(20px);
+        background-color: #f6f6f6;
+        padding: 5px 10px;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .kss-mod-heading h4 {
+        font-size: em(24px);
+        margin: 0 0 20px;
+    }
+
+    .kss-mod-example {
+        display: block;
+        padding-bottom: 20px;
+    }
+
+    .kss-mod-example-2 {
+        td {
+            padding: 5px 10px 20px 10px;
+        }
+    }
+
+    .kss-mod-example > td {
+        display: block;
+    }
+
+    .kss-markup {
+        border: 1px solid #eee;
+        margin-bottom: 40px;
+    }
+
+    .prettyprint {
+        font-family: 'Source Code Pro', monospace;
+        padding: 20px;
+        margin: 0;
+    }
+
+    .kss-ref {
+        color: $orange;
+    }
+
+    .kss-mod-desc {
+        font-weight: 700;
+    }
+
+    .kss-mod-desc-2 {
+        padding: 5px 10px;
+
+        p {
+            margin-top: 5px;
+        }
+    }
+
+    .kss-depth-2 {
+        margin-bottom: 100px;
+    }
+
+    .kss-depth-1 > h1 {
+        font-size: em(32px);
+    }
+
+    .kss-depth-2 > h1 {
+        font-size: em(32px);
+        background-color: #f1f1f1;
+        padding: 10px 20px;
+        margin-top: 40px;
+    }
+
+    .kss-depth-3 > h1 {
+        font-size: em(32px);
+    }
+
+    .kss-depth-4 > h1 {
+        font-size: em(32px);
+    }
+
+    .kss-depth-5 > h1 {
+        font-size: em(32px);
+    }
+
+    .kss-depth-6 > h1 {
+        font-size: em(32px);
+    }
+}
+
+/* Pretty printing styles. Used with prettify.js. */
+/* SPAN elements with the classes below are added by prettyprint. */
+.pln {
+  color: #000000;
+}
+/* plain text */
+@media screen {
+  .str {
+    color: #008800;
+  }
+  /* string content */
+  .kwd {
+    color: #000088;
+  }
+  /* a keyword */
+  .com {
+    color: #880000;
+  }
+  /* a comment */
+  .typ {
+    color: #660066;
+  }
+  /* a type name */
+  .lit {
+    color: #006666;
+  }
+  /* a literal value */
+  /* punctuation, lisp open bracket, lisp close bracket */
+  .pun,
+  .opn,
+  .clo {
+    color: #666600;
+  }
+  .tag {
+    color: #000088;
+  }
+  /* a markup tag name */
+  .atn {
+    color: #660066;
+  }
+  /* a markup attribute name */
+  .atv {
+    color: #008800;
+  }
+  /* a markup attribute value */
+  .dec,
+  .var {
+    color: #660066;
+  }
+  /* a declaration; a variable name */
+  .fun {
+    color: #ff0000;
+  }
+  /* a function name */
+}
+/* Use higher contrast and text-weight for printable form. */
+@media print, projection {
+  .str {
+    color: #006600;
+  }
+  .kwd {
+    color: #006;
+    font-weight: bold;
+  }
+  .com {
+    color: #600;
+    font-style: italic;
+  }
+  .typ {
+    color: #404;
+    font-weight: bold;
+  }
+  .lit {
+    color: #004444;
+  }
+  .pun,
+  .opn,
+  .clo {
+    color: #444400;
+  }
+  .tag {
+    color: #006;
+    font-weight: bold;
+  }
+  .atn {
+    color: #440044;
+  }
+  .atv {
+    color: #006600;
+  }
+}
+/* Put a border around prettyprinted code snippets. */
+/*pre.prettyprint { padding: 2px; border: 1px solid #888 }*/
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* IE indents via margin-left */
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L5,
+li.L6,
+li.L7,
+li.L8 {
+  list-style-type: none;
+}
+/* Alternate shading for lines */
+li.L1,
+li.L3,
+li.L5,
+li.L7,
+li.L9 {
+  background: #eeeeee;
+}
+@media screen and (max-width: 768px) {
+  #kss-main {
+    position: static;
+    width: 90%;
+    margin: 0 auto;
+    padding-left: 0;
+  }
+  #kss-nav {
+    position: static;
+    display: block;
+    width: auto;
+    margin: 0;
+    background: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #ddd;
+  }
+  #kss-nav nav > ul {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  #kss-nav nav > ul > li {
+    display: inline-block;
+    padding-right: 1.5em;
+  }
+  #kss-header > hgroup > h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 640px) {
+  #kss-github {
+    display: none;
+  }
+}

@@ -32,7 +32,7 @@ gulp.task('default',
 
         runSequence(
             'dev:clear',
-            ['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles'],
+            ['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles', 'dev:styleguide'],
             'dev:inject',
             'dev:connect',
             'dev:watch',
@@ -49,7 +49,7 @@ gulp.task('prod',
 
         runSequence(
             'prod:clear',
-            ['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles'],
+            ['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles', 'prod:styleguide'],
             'prod:inject',
             'prod:connect',
             'prod:watch',
