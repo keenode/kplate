@@ -4,7 +4,7 @@
 
 #### Front-End boilerplate with GulpJS build system.
 
-"A place to get started."
+"It all begins here."
 
 Automate your web development process with ease! When changes are made to your code, **kplate** automatically compiles SASS, concat & uglifies JavaScript, minifies images & SVGs, and reloads the browser -- all in seconds!
 
@@ -75,6 +75,9 @@ To install **kplate**, simply clone this repo, update the configuration files, a
 
 * `gulp serve:prod`
     Starts up a server that hosts the production directory on localhost:8000.
+
+* `gulp kss`
+    Scans project SASS/SCSS files and generates KSS styleguide documentation.
 
 ## Recommendations
 * It is recommended that you update properties on both `package.json` and `bower.json` files to reflect your current project.
