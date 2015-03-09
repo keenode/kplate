@@ -2,7 +2,7 @@
     gulpfile.js
     --------------------------------------------------------
     @author Keenan Staffieri
-    @version 0.4.0
+    @version 0.4.1
     GulpJS build tasks for kplate.
     -------------------------------------------------------- */
 

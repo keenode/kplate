@@ -1,6 +1,6 @@
 # kplate
 
-**v0.4.0**
+**v0.4.1**
 
 #### Front-End boilerplate with GulpJS build system.
 
