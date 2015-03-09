@@ -3555,7 +3555,7 @@ hr {
     B A S E
     Base typography settings applied to body.
 */
-/* line 31, ../base/_typography.scss */
+/* line 17, ../base/_typography.scss */
 body {
   color: #202A25;
   font-family: 'Noto Sans', Helvetica, Arial, sans-serif;
@@ -3571,53 +3571,55 @@ body {
     h1, h2, h3, h4, h5, h6
     {h1-h6}.{variations_class}
 */
-/* line 55, ../base/_typography.scss */
-h1 {
-  margin: 0 0 40px 0;
+/* line 48, ../base/_typography.scss */
+h1, h2 {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 3.125em;
-  line-height: 45px;
   text-rendering: optimizeLegibility;
 }
+
+/* line 53, ../base/_typography.scss */
+h1 {
+  margin: 0 0 40px 0;
+  font-size: 3.125em;
+  line-height: 45px;
+}
 @media screen and (min-width: 48.0625em) {
-  /* line 55, ../base/_typography.scss */
+  /* line 53, ../base/_typography.scss */
   h1 {
     font-size: 5em;
     line-height: 75px;
   }
 }
 
-/* line 55, ../base/_typography.scss */
+/* line 64, ../base/_typography.scss */
 h2 {
   margin: 0 0 30px 0;
-  font-family: Helvetica, Arial, sans-serif;
   font-size: 2.5em;
   line-height: 35px;
-  text-rendering: optimizeLegibility;
 }
 @media screen and (min-width: 48.0625em) {
-  /* line 55, ../base/_typography.scss */
+  /* line 64, ../base/_typography.scss */
   h2 {
     font-size: 3.125em;
     line-height: 45px;
   }
 }
 
-/* line 55, ../base/_typography.scss */
+/* line 75, ../base/_typography.scss */
 h3 {
   margin: 0 0 20px 0;
   font-size: 1.875em;
   line-height: 30px;
 }
 
-/* line 55, ../base/_typography.scss */
+/* line 81, ../base/_typography.scss */
 h4 {
   margin: 0 0 20px 0;
   font-size: 1.5em;
   line-height: 24px;
 }
 
-/* line 55, ../base/_typography.scss */
+/* line 87, ../base/_typography.scss */
 h5 {
   margin: 0 0 10px 0;
   font-size: 1.25em;
@@ -3625,37 +3627,31 @@ h5 {
   line-height: 20px;
 }
 
-/* line 55, ../base/_typography.scss */
-h6 {
-  margin: 0 0 10px 0;
-  font-size: 1em;
-  font-weight: 700;
-}
-
 /**
     P A R A G R A P H S
     p.{variations_class}
 */
-/* line 73, ../base/_typography.scss */
+/* line 111, ../base/_typography.scss */
 p {
   margin: 0 0 20px 0;
   font-size: 0.875em;
   line-height: 24px;
 }
 @media screen and (min-width: 48.0625em) {
-  /* line 73, ../base/_typography.scss */
+  /* line 111, ../base/_typography.scss */
   p {
     font-size: 1em;
     line-height: 28px;
   }
 }
-/* line 101, ../base/_typography.scss */
+
+/* line 122, ../base/_typography.scss */
 p.lead {
   font-size: 1em;
   font-weight: 700;
 }
 @media screen and (min-width: 48.0625em) {
-  /* line 101, ../base/_typography.scss */
+  /* line 122, ../base/_typography.scss */
   p.lead {
     font-size: 1.125em;
   }
@@ -3665,35 +3661,32 @@ p.lead {
     A N C H O R S
     a.{variations_class}
 */
-/* line 145, ../base/_typography.scss */
+/* line 149, ../base/_typography.scss */
 a {
   color: #068D9D;
   text-decoration: none;
-  transition: color 300ms ease-in;
 }
-/* line 122, ../base/_typography.scss */
+/* line 153, ../base/_typography.scss */
 a:hover {
   color: #57737A;
 }
-/* line 129, ../base/_typography.scss */
+/* line 157, ../base/_typography.scss */
 a:active {
   color: red;
 }
-/* line 173, ../base/_typography.scss */
+
+/* line 162, ../base/_typography.scss */
 a.active {
   color: #068D9D;
-  font-weight: bold;
+  font-weight: 700;
 }
-/* line 173, ../base/_typography.scss */
+
+/* line 167, ../base/_typography.scss */
 a.disabled {
   color: #666;
 }
-/* line 122, ../base/_typography.scss */
-a.disabled:hover {
-  color: #666;
-}
-/* line 129, ../base/_typography.scss */
-a.disabled:active {
+/* line 170, ../base/_typography.scss */
+a.disabled:hover, a.disabled:active {
   color: #666;
 }
 

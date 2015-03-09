@@ -9,29 +9,20 @@
 // 
 // Styleguide 1.
 
-
-// Headings
-//
-// Page headers.
-//
-// .main-heading - Main heading.
-//
-// Markup:
-// <h1 class="{$modifiers}">Hello, World</h1>
-//
-// Styleguide 1.1
-
 /**
     B A S E
     Base typography settings applied to body.
 */
 
-$base-typography: theme-category('typography');
-
 body {
-    @include populate-properties($base-typography);
+    color: theme-color('black');
+    font-family: theme-font-family('base');
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 28px;
+    -webkit-font-smoothing: antialiased;
 }
-
 
 
 /**
@@ -40,27 +31,65 @@ body {
     {h1-h6}.{variations_class}
 */
 
-// Get 'headings' map from 'typography'
-$headings: theme-property('typography', 'headings');
+// Headings
+//
+// Page headers.
+//
+// Markup:
+// <h1>Hello, World</h1>
+// <h2>Hello, World</h2>
+// <h3>Hello, World</h3>
+// <h4>Hello, World</h4>
+// <h5>Hello, World</h5>
+// <h6>Hello, World</h6>
+//
+// Styleguide 1.1
 
-// Get total number of headings
-$num-headings: length($headings);
+h1, h2 {
+    font-family: theme-font-family('headings');
+    text-rendering: optimizeLegibility;
+}
 
-// Generate heading selectors
-@for $i from 1 through $num-headings {
+h1 {
+    margin: 0 0 40px 0;
+    font-size: em(50px);
+    line-height: 45px;
 
-    $heading:  nth($headings, $i);
-    $selector: map-get($heading, 'selector');
-
-    #{$selector} {
-        // Include heading properties
-        @include populate-properties($heading);
-
-        // Generate media queries
-        @include responsive-styles($heading);
+    @include media($small-up) {
+        font-size: em(80px);
+        line-height: 75px;
     }
 }
 
+h2 {
+    margin: 0 0 30px 0;
+    font-size: em(40px);
+    line-height: 35px;
+
+    @include media($small-up) {
+        font-size: em(50px);
+        line-height: 45px;
+    }
+}
+
+h3 {
+    margin: 0 0 20px 0;
+    font-size: em(30px);
+    line-height: 30px;
+}
+
+h4 {
+    margin: 0 0 20px 0;
+    font-size: em(24px);
+    line-height: 24px;
+}
+
+h5 {
+    margin: 0 0 10px 0;
+    font-size: em(20px);
+    font-weight: 700;
+    line-height: 20px;
+}
 
 
 /**
@@ -68,46 +97,36 @@ $num-headings: length($headings);
     p.{variations_class}
 */
 
-$paragraphs: theme-property('typography', 'paragraphs');
+// Paragraphs
+//
+// Paragraph styles.
+//
+// .lead - Lead paragraph.
+//
+// Markup:
+// <p class="{$modifiers}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, maxime.</p>
+//
+// Styleguide 1.2
 
 p {
-    // Include base paragraph properties
-    @include populate-properties($paragraphs);
+    margin: 0 0 20px 0;
+    font-size: em(14px);
+    line-height: 24px;
 
-    // Generate media queries
-    @include responsive-styles($paragraphs);
-
-    // Get paragraph variations
-    $paragraph-variations: map-get($paragraphs, 'variations');
-
-    // Get total number of paragraph variations
-    $num-paragraph-variations: 1;
-
-    @if type-of($paragraph-variations) == list {
-        $num-paragraph-variations: length($paragraph-variations);
-    }
-
-    // Generate paragraph variations
-    @for $i from 1 through $num-paragraph-variations {
-
-        $paragraph: $paragraph-variations;
-
-        @if type-of($paragraph-variations) == list {
-            $paragraph: nth($paragraph-variations, $i);
-        }
-
-        $class-name: map-get($paragraph, 'class-name');
-
-        &.#{$class-name} {
-            // Include paragraph variation properties
-            @include populate-properties($paragraph);
-
-            // Generate media queries
-            @include responsive-styles($paragraph);
-        }
+    @include media($small-up) {
+        font-size: em(16px);
+        line-height: 28px;
     }
 }
 
+p.lead {
+    font-size: em(16px);
+    font-weight: 700;
+
+    @include media($small-up) {
+        font-size: em(18px);
+    }
+}
 
 
 /**
@@ -115,67 +134,41 @@ p {
     a.{variations_class}
 */
 
-@mixin populate-anchor-states($anchor) {
+// Anchors
+//
+// Anchor styles.
+//
+// .active - Active style.
+// .disabled - Disabled style.
+//
+// Markup:
+// <a href="#" class="{$modifiers}">This is a link</a>
+//
+// Styleguide 1.3
 
-    // :hover
-    @if map-has-key($anchor, 'hover-styles') {
-        &:hover {
-            $hover-properties: map-get($anchor, 'hover-styles');
-            @include populate-properties($hover-properties);
-        }
+a {
+    color: theme-color('primary');
+    text-decoration: none;
+    transition: color 250ms ease-out;
+
+    &:hover {
+        color: theme-color('accent-shade');
     }
-    // :active
-    @if map-has-key($anchor, 'active-styles') {
-        &:active {
-            $active-properties: map-get($anchor, 'active-styles');
-            @include populate-properties($active-properties);
-        }
-    }
-    // :visited
-    @if map-has-key($anchor, 'visited-styles') {
-        &:visited {
-            $visited-properties: map-get($anchor, 'visited-styles');
-            @include populate-properties($visited-properties);
-        }
+
+    &:active {
+        color: red;
     }
 }
 
-$anchors: theme-property('typography', 'anchors');
+a.active {
+    color: theme-color('primary');
+    font-weight: 700;
+}
 
-a {
-    // Include base anchor properties
-    @include populate-properties($anchors);
+a.disabled {
+    color: theme-color('gray');
 
-    // Add properties for anchor states (:hover, :active, :visited)
-    @include populate-anchor-states($anchors);
-
-    // Get anchor variation
-    $anchor-variations: map-get($anchors, 'variations');
-
-    // Get total number of anchor variations
-    $num-anchor-variations: 1;
-
-    @if type-of($anchor-variations) == list {
-        $num-anchor-variations: length($anchor-variations);
-    }
-
-    // Generate anchor variations
-    @for $i from 1 through $num-anchor-variations {
-
-        $anchor: $anchor-variations;
-
-        @if type-of($anchor-variations) == list {
-            $anchor: nth($anchor-variations, $i);
-        }
-
-        $class-name: map-get($anchor, 'class-name');
-
-        &.#{$class-name} {
-            // Include anchor variation properties
-            @include populate-properties($anchor);
-
-            // Add properties for anchor states (:hover, :active, :visited)
-            @include populate-anchor-states($anchor);
-        }
+    &:hover, &:active {
+        color: theme-color('gray');
     }
 }
