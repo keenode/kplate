@@ -14,11 +14,9 @@
     .main-nav-item
 */
 
-$nav: theme-category('nav');
-
 .main-nav {
     @include span-columns(12);
-    @include populate-properties($nav);
+    padding: 10px;
     background-color: color('black');
 
     @include media($small-up) {
@@ -40,36 +38,27 @@ $nav: theme-category('nav');
     }
 }
 
-$nav-items: theme-property('nav', 'nav-items');
-
 .main-nav-item {
     float: left;
-    @include populate-properties($nav-items);
+    margin: 0 15px;
+    padding: 0;
 
     &:last-child {
         margin-right: 0;
     }
 
-    // .active
-    @if map-has-key($nav-items, 'active-styles') {
-        &.active {
-            a {
-                $active-properties: map-get($nav-items, 'active-styles');
-                @include populate-properties($active-properties);
-            }
+    &.active {
+        a {
+            color: theme-color('secondary');
         }
     }
 
     a {
-        color: map-get($nav-items, 'nav-link-color');
-        transition: map-get($nav-items, 'nav-link-transition');
+        color: white;
+        transition: color 300ms ease-in;
 
-        // :hover
-        @if map-has-key($nav-items, 'hover-styles') {
-            &:hover {
-                $hover-properties: map-get($nav-items, 'hover-styles');
-                @include populate-properties($hover-properties);
-            }
+        &:hover {
+            color: color('light-gray');
         }
     }
 }

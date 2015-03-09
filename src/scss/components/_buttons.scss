@@ -10,54 +10,41 @@
     .btn.{variations_class}
 */
 
-$buttons: theme-category('buttons');
-
 .btn {
-    @include populate-properties($buttons);
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px 30px;
+    color: white;
+    font-family: theme-font-family('base');
+    background-color: theme-color('accent');
+    transition: background-color 300ms ease-out;
 
-    // :hover
-    @if map-has-key($buttons, 'hover-styles') {
-        &:hover {
-            $hover-properties: map-get($buttons, 'hover-styles');
-            @include populate-properties($hover-properties);
-        }
+    &:hover {
+        color: white;
+        background-color: theme-color('secondary');
     }
 
-    // Get button variation
-    $button-variations: map-get($buttons, 'variations');
-
-    // Get total number of button variations
-    $num-button-variations: 1;
-
-    @if type-of($button-variations) == list {
-        $num-button-variations: length($button-variations);
+    @include media($x-small-up) {
+        display: inline-block;
     }
+}
 
-    // Generate button variations
-    @for $i from 1 through $num-button-variations {
+.btn.primary {
+    background-color: theme-color('primary');
 
-        $button: $button-variations;
-
-        @if type-of($button-variations) == list {
-            $button: nth($button-variations, $i);
-        }
-
-        $class-name: map-get($button, 'class-name');
-
-        &.#{$class-name} {
-            // Include button variation properties
-            @include populate-properties($button);
-
-            // :hover
-            @if map-has-key($button, 'hover-styles') {
-                &:hover {
-                    $hover-properties: map-get($button, 'hover-styles');
-                    @include populate-properties($hover-properties);
-                }
-            }
-        }
+    &:hover {
+        color: white;
+        background-color: theme-color('accent-shade');
     }
+}
 
-    // Generate media queries
-    @include responsive-styles($buttons);
+.btn.disabled {
+    color: color('light-gray');
+    background-color: color('gray');
+    cursor: default;
+
+    &:hover {
+        color: color('light-gray');
+        background-color: color('gray');
+    }
 }

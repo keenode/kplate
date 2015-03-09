@@ -11,10 +11,9 @@
     .main-header, .main-header-title
 */
 
-$header: theme-category('header');
-
 .main-header {
-    @include populate-properties($header);
+    padding: 10px 0 6px 0;
+    background-color: theme-color('primary');
 
     @include media($x-small-down) {
         padding-bottom: 0;

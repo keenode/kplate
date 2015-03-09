@@ -10,14 +10,12 @@
     Hero styles.
 */
 
-$hero: theme-category('hero');
-
 section.hero {
-    @include populate-properties($hero);
     position: relative;
     overflow: hidden;
     height: 400px;
     padding: 30px 0;
+    background-color: #aaf0f2;
 
     .inner-container {
         position: relative;
