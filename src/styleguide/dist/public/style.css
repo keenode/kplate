@@ -3665,27 +3665,28 @@ p.lead {
 a {
   color: #068D9D;
   text-decoration: none;
+  transition: color 250ms ease-out;
 }
-/* line 153, ../base/_typography.scss */
+/* line 154, ../base/_typography.scss */
 a:hover {
   color: #57737A;
 }
-/* line 157, ../base/_typography.scss */
+/* line 158, ../base/_typography.scss */
 a:active {
   color: red;
 }
 
-/* line 162, ../base/_typography.scss */
+/* line 163, ../base/_typography.scss */
 a.active {
   color: #068D9D;
   font-weight: 700;
 }
 
-/* line 167, ../base/_typography.scss */
+/* line 168, ../base/_typography.scss */
 a.disabled {
   color: #666;
 }
-/* line 170, ../base/_typography.scss */
+/* line 171, ../base/_typography.scss */
 a.disabled:hover, a.disabled:active {
   color: #666;
 }
@@ -3710,19 +3711,19 @@ a.disabled:hover, a.disabled:active {
     Header styles.
     .main-header, .main-header-title
 */
-/* line 16, ../layout/_header.scss */
+/* line 14, ../layout/_header.scss */
 .main-header {
   padding: 10px 0 6px 0;
   background-color: #068D9D;
 }
 @media screen and (max-width: 30em) {
-  /* line 16, ../layout/_header.scss */
+  /* line 14, ../layout/_header.scss */
   .main-header {
     padding-bottom: 0;
   }
 }
 
-/* line 24, ../layout/_header.scss */
+/* line 23, ../layout/_header.scss */
 .main-header-title {
   float: left;
   display: block;
@@ -3739,7 +3740,7 @@ a.disabled:hover, a.disabled:active {
   margin-right: 0;
 }
 @media screen and (min-width: 30.0625em) {
-  /* line 24, ../layout/_header.scss */
+  /* line 23, ../layout/_header.scss */
   .main-header-title {
     float: left;
     display: block;
@@ -3787,28 +3788,28 @@ a.disabled:hover, a.disabled:active {
     H E R O
     Hero styles.
 */
-/* line 15, ../layout/_hero.scss */
+/* line 13, ../layout/_hero.scss */
 section.hero {
-  background-color: #aaf0f2;
   position: relative;
   overflow: hidden;
   height: 400px;
   padding: 30px 0;
+  background-color: #aaf0f2;
 }
-/* line 22, ../layout/_hero.scss */
+/* line 20, ../layout/_hero.scss */
 section.hero .inner-container {
   position: relative;
   z-index: 20;
 }
 @media screen and (min-width: 48.0625em) {
-  /* line 15, ../layout/_hero.scss */
+  /* line 13, ../layout/_hero.scss */
   section.hero {
     height: 500px;
     padding: 60px 0;
   }
 }
 
-/* line 33, ../layout/_hero.scss */
+/* line 31, ../layout/_hero.scss */
 .kplate-logo {
   margin-top: 20px;
   margin-bottom: 0;
@@ -3823,21 +3824,21 @@ section.hero .inner-container {
   -webkit-animation: heroLogoAppear 750ms cubic-bezier(0.5, 0.1, 0.5, 1.3) 1000ms backwards;
   animation: heroLogoAppear 750ms cubic-bezier(0.5, 0.1, 0.5, 1.3) 1000ms backwards;
 }
-/* line 45, ../layout/_hero.scss */
+/* line 43, ../layout/_hero.scss */
 .kplate-logo:hover {
   -webkit-transform: scale(1.02);
   -ms-transform: scale(1.02);
   transform: scale(1.02);
 }
 @media screen and (min-width: 30.0625em) {
-  /* line 33, ../layout/_hero.scss */
+  /* line 31, ../layout/_hero.scss */
   .kplate-logo {
     font-size: 6.25em;
     line-height: 115px;
   }
 }
 @media screen and (min-width: 48.0625em) {
-  /* line 33, ../layout/_hero.scss */
+  /* line 31, ../layout/_hero.scss */
   .kplate-logo {
     font-size: 8.75em;
     line-height: 160px;
@@ -3871,7 +3872,7 @@ section.hero .inner-container {
     transform: scale(1) translate3d(0, 0, 0);
   }
 }
-/* line 73, ../layout/_hero.scss */
+/* line 71, ../layout/_hero.scss */
 .hero-quote {
   margin: 20px 0;
   color: #068D9D;
@@ -3885,7 +3886,7 @@ section.hero .inner-container {
   animation: heroQuoteAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 1500ms backwards;
 }
 @media screen and (min-width: 48.0625em) {
-  /* line 73, ../layout/_hero.scss */
+  /* line 71, ../layout/_hero.scss */
   .hero-quote {
     font-size: 1.5em;
   }
@@ -3916,7 +3917,7 @@ section.hero .inner-container {
     transform: translate3d(0, 0, 0);
   }
 }
-/* line 100, ../layout/_hero.scss */
+/* line 98, ../layout/_hero.scss */
 .from-who {
   color: #04626d;
   font-size: 0.8125em;
@@ -3926,13 +3927,13 @@ section.hero .inner-container {
   animation: heroItemAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 2000ms backwards;
 }
 @media screen and (min-width: 48.0625em) {
-  /* line 100, ../layout/_hero.scss */
+  /* line 98, ../layout/_hero.scss */
   .from-who {
     font-size: 1em;
   }
 }
 
-/* line 112, ../layout/_hero.scss */
+/* line 110, ../layout/_hero.scss */
 .btn.btn-hero {
   display: block;
   padding: 10px 20px;
@@ -3944,11 +3945,11 @@ section.hero .inner-container {
   -webkit-animation: heroItemAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 2250ms backwards;
   animation: heroItemAppear 750ms cubic-bezier(0.5, 0.3, 0.3, 1.2) 2250ms backwards;
 }
-/* line 122, ../layout/_hero.scss */
+/* line 120, ../layout/_hero.scss */
 .btn.btn-hero:hover {
   background-color: #202A25;
 }
-/* line 126, ../layout/_hero.scss */
+/* line 124, ../layout/_hero.scss */
 .btn.btn-hero i {
   margin-right: 10px;
 }
@@ -3991,46 +3992,48 @@ section.hero .inner-container {
     B U T T O N S
     .btn.{variations_class}
 */
-/* line 15, ../components/_buttons.scss */
+/* line 29, ../components/_buttons.scss */
 .btn {
   display: block;
   margin-bottom: 10px;
   padding: 10px 30px;
-  background-color: #85BDBF;
   color: white;
   font-family: 'Noto Sans', Helvetica, Arial, sans-serif;
+  background-color: #85BDBF;
   transition: background-color 300ms ease-out;
 }
-/* line 20, ../components/_buttons.scss */
+/* line 38, ../components/_buttons.scss */
 .btn:hover {
+  color: white;
   background-color: #84DCC6;
-  color: white;
-}
-/* line 47, ../components/_buttons.scss */
-.btn.primary {
-  background-color: #068D9D;
-}
-/* line 53, ../components/_buttons.scss */
-.btn.primary:hover {
-  background-color: #57737A;
-  color: white;
-}
-/* line 47, ../components/_buttons.scss */
-.btn.disabled {
-  background-color: #666;
-  color: #ddd;
-  cursor: default;
-}
-/* line 53, ../components/_buttons.scss */
-.btn.disabled:hover {
-  background-color: #666;
-  color: #ddd;
 }
 @media screen and (min-width: 30.0625em) {
-  /* line 15, ../components/_buttons.scss */
+  /* line 29, ../components/_buttons.scss */
   .btn {
     display: inline-block;
   }
+}
+
+/* line 48, ../components/_buttons.scss */
+.btn.primary {
+  background-color: #068D9D;
+}
+/* line 51, ../components/_buttons.scss */
+.btn.primary:hover {
+  color: white;
+  background-color: #57737A;
+}
+
+/* line 57, ../components/_buttons.scss */
+.btn.disabled {
+  color: #ddd;
+  background-color: #666;
+  cursor: default;
+}
+/* line 62, ../components/_buttons.scss */
+.btn.disabled:hover {
+  color: #ddd;
+  background-color: #666;
 }
 
 /** --------------------------------------------------------
@@ -4047,14 +4050,13 @@ section.hero .inner-container {
     .main-nav-list,
     .main-nav-item
 */
-/* line 19, ../components/_navs.scss */
+/* line 17, ../components/_navs.scss */
 .main-nav {
   float: left;
   display: block;
   margin-right: 2.35765%;
   width: 100%;
   padding: 10px;
-  background-color: transparent;
   background-color: #202A25;
 }
 /* line 87, ../../../../../../../Users/keenan/github/kplate/src/bower_components/neat/app/assets/stylesheets/grid/_span-columns.scss */
@@ -4062,13 +4064,13 @@ section.hero .inner-container {
   margin-right: 0;
 }
 @media screen and (min-width: 48.0625em) {
-  /* line 19, ../components/_navs.scss */
+  /* line 17, ../components/_navs.scss */
   .main-nav {
     margin-top: 10px;
   }
 }
 @media screen and (min-width: 30.0625em) {
-  /* line 19, ../components/_navs.scss */
+  /* line 17, ../components/_navs.scss */
   .main-nav {
     float: left;
     display: block;
@@ -4082,7 +4084,7 @@ section.hero .inner-container {
   }
 }
 
-/* line 34, ../components/_navs.scss */
+/* line 32, ../components/_navs.scss */
 .main-nav-list {
   list-style: none;
   margin: 0;
@@ -4095,32 +4097,32 @@ section.hero .inner-container {
   display: table;
 }
 @media screen and (min-width: 30.0625em) {
-  /* line 34, ../components/_navs.scss */
+  /* line 32, ../components/_navs.scss */
   .main-nav-list {
     float: right;
   }
 }
 
-/* line 45, ../components/_navs.scss */
+/* line 41, ../components/_navs.scss */
 .main-nav-item {
   float: left;
   margin: 0 15px;
   padding: 0;
 }
-/* line 49, ../components/_navs.scss */
+/* line 46, ../components/_navs.scss */
 .main-nav-item:last-child {
   margin-right: 0;
 }
-/* line 56, ../components/_navs.scss */
+/* line 51, ../components/_navs.scss */
 .main-nav-item.active a {
   color: #84DCC6;
 }
-/* line 63, ../components/_navs.scss */
+/* line 56, ../components/_navs.scss */
 .main-nav-item a {
   color: white;
-  transition: "color 300ms ease-in";
+  transition: color 300ms ease-in;
 }
-/* line 69, ../components/_navs.scss */
+/* line 60, ../components/_navs.scss */
 .main-nav-item a:hover {
   color: #ddd;
 }

@@ -36,19 +36,54 @@
 
             <div role="main" id="kss-main">
                 <article id="kss-content">
-                        <div class="kss-put-up">
-                            <h1 id="overview">Overview</h1>
-<hr>
-<p>This is a demo of <a href="https://github.com/kss-node/kss-node">kss-node</a>&#39;s built-in style guide generator.</p>
-<p>This software is a Node.js implementation of <a href="https://github.com/kneath/kss">Knyle Style Sheets</a> (KSS), &quot;a documentation syntax for CSS&quot; that&#39;s intended to have syntax readable by humans <em>and</em> machines. Hence, the kss-node software can be used to create a &quot;living style guide&quot;.</p>
-<ol>
-<li>Write human-readable documentation using &quot;KSS syntax&quot; comments.</li>
-<li>Have <code>kss-node</code> auto-generate a style guide from your stylesheets.</li>
-</ol>
-<p>This site is generated with the <code>kss-node</code> command-line tool used on this <a href="https://github.com/kss-node/kss-node/tree/master/demo">demo project</a>.</p>
-<p>Check out the <a href="https://github.com/kss-node/kss-node">project on Github</a> for more information about the code, or read the spec for details on how to document your stylesheets for KSS.</p>
 
+                        <div class="kss-heading-wrap">
+                            <h1 class="kss-title"><span class="kss-ref">2.0</span> Buttons</h1>
                         </div>
+                                             <section class="kss-depth kss-depth-2">
+                        <h1 class="kss-title"><span class="kss-ref">2.1</span> Buttons</h1>
+                        <div class="kss-box"><p>Paragraph styles.</p>
+</div>
+                        <table class="kss-mod-list">
+                            <tr class="kss-mod-desc-group">
+                                <td class="kss-mod-desc"><p>Default styling:</p></td>
+                            </tr>
+                            <tr class="kss-mod-example">
+                                <td colspan="2"><a href="#" class="btn {$modifiers}">Button</a></td>
+                            </tr>
+                            <tr class="kss-mod-heading">
+                                <td><h4>Modifiers</h4></td>
+                            </tr>
+                            <tr class="kss-mod-desc-group">
+                                <td class="kss-mod-name"><p>.primary</p></td>
+                            </tr>
+                            <tr>
+                                <td class="kss-mod-desc-2"><p>Primary button.</p>
+</td>
+                            </tr>
+                            <tr class="kss-mod-example-2">
+                                <td colspan="2"><a href="#" class="btn primary">Button</a></td>
+                            </tr>
+                            <tr class="kss-mod-heading">
+                                <td><h4>Modifiers</h4></td>
+                            </tr>
+                            <tr class="kss-mod-desc-group">
+                                <td class="kss-mod-name"><p>.disabled</p></td>
+                            </tr>
+                            <tr>
+                                <td class="kss-mod-desc-2"><p>Disabled button.</p>
+</td>
+                            </tr>
+                            <tr class="kss-mod-example-2">
+                                <td colspan="2"><a href="#" class="btn disabled">Button</a></td>
+                            </tr>
+                        </table>
+                        <h5>Code Example</h5>
+                        <div class="kss-markup">
+                            <pre class="prettyprint lang-html">&lt;a href=&quot;#&quot; class=&quot;btn {$modifiers}&quot;&gt;Button&lt;/a&gt;</pre>
+                        </div>
+                        
+                    </section>
                 </article>
             </div>
 
