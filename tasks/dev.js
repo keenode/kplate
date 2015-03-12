@@ -8,26 +8,27 @@
 /**
     Required Modules
 */
-var gulp            = require('gulp'),
-    autoprefixer    = require('gulp-autoprefixer'),
-    connect         = require('gulp-connect'),
-    filter          = require('gulp-filter'),
-    imagemin        = require('gulp-imagemin'),
-    inject          = require('gulp-inject'),
-    gutil           = require('gulp-util'),
-    jshint          = require('gulp-jshint'),
-    plumber         = require('gulp-plumber'),
-    del             = require('del'),
-    rubySass        = require('gulp-ruby-sass'),
-    size            = require('gulp-size'),
-    sourcemaps      = require('gulp-sourcemaps'),
-    replace         = require('gulp-replace'),
-    path            = require('path'),
-    webpack         = require('gulp-webpack-build'),
-    buildConfig     = require('../config/buildConfig'),
-    bowerComponents = require('../config/bowerComponents'),
-    jsCompileFiles  = require('../config/jsCompileFiles'),
-    Helpers         = require('../util/helpers');
+var gulp             = require('gulp'),
+    autoprefixer     = require('gulp-autoprefixer'),
+    connect          = require('gulp-connect'),
+    filter           = require('gulp-filter'),
+    imagemin         = require('gulp-imagemin'),
+    inject           = require('gulp-inject'),
+    gutil            = require('gulp-util'),
+    jshint           = require('gulp-jshint'),
+    plumber          = require('gulp-plumber'),
+    del              = require('del'),
+    rubySass         = require('gulp-ruby-sass'),
+    size             = require('gulp-size'),
+    sourcemaps       = require('gulp-sourcemaps'),
+    replace          = require('gulp-replace'),
+    webpack          = require('webpack'),
+    WebpackDevServer = require('webpack-dev-server'),
+    webpackConfig    = require('../webpack.config.js'),
+    buildConfig      = require('../config/buildConfig'),
+    bowerComponents  = require('../config/bowerComponents'),
+    jsCompileFiles   = require('../config/jsCompileFiles'),
+    Helpers          = require('../util/helpers');
 
 /**
     TASK: dev:connect
@@ -250,53 +251,79 @@ gulp.task('dev:styleguide', function () {
 /**
     TASK: webpack
 */
-var src  = './src',
-    dest = './dev',
-    webpackOptions = {
-        debug:      true,
-        devtool:    '#source-map',
-        watchDelay: 200
-    },
-    webpackConfig = {
-        useMemoryFs: true,
-        progress:    true
-    },
-    CONFIG_FILENAME = webpack.config.CONFIG_FILENAME;
 
-gulp.task('webpack', [], function () {
+// The development server (the recommended option for development)
+// gulp.task("webpack:server", ["webpack-dev-server"]);
+// gulp.task("default", ["webpack-dev-server"]);
 
-    return gulp.src(path.join(src, '**', CONFIG_FILENAME), { base: path.resolve(src) })
-        .pipe(webpack.configure(webpackConfig))
-        .pipe(webpack.overrides(webpackOptions))
-        .pipe(webpack.compile())
-        .pipe(webpack.format({
-            version: false,
-            timings: true
-        }))
-        .pipe(webpack.failAfter({
-            errors: true,
-            warnings: true
-        }))
-        .pipe(gulp.dest(dest));
+// Build and watch cycle (another option for development)
+// Advantage: No server required, can run app from filesystem
+// Disadvantage: Requests are not blocked until bundle is available,
+//               can serve an old app on refresh
+// gulp.task("build-dev", ["webpack:build-dev"], function() {
+//     gulp.watch(["app/**/*"], ["webpack:build-dev"]);
+// });
+
+// Production build
+// gulp.task("build", ["webpack:build"]);
+
+gulp.task('prod:webpack', function (callback) {
+
+    // modify some webpack config options
+    var myConfig = Object.create(webpackConfig);
+    myConfig.plugins = myConfig.plugins.concat(
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin()
+    );
+
+    // run webpack
+    webpack(myConfig, function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack:build", err);
+        gutil.log("[webpack:build]", stats.toString({
+            colors: true
+        }));
+        callback();
+    });
 });
 
-gulp.task('watch', function () {
+// modify some webpack config options
+var myDevConfig = Object.create(webpackConfig);
+myDevConfig.devtool = "sourcemap";
+myDevConfig.debug = true;
 
-    gulp.watch(path.join(src, '**/*.*')).on('change', function (event) {
-        if(event.type === 'changed') {
-            gulp.src(event.path, { base: path.resolve(src) })
-                .pipe(webpack.closest(CONFIG_FILENAME))
-                .pipe(webpack.configure(webpackConfig))
-                .pipe(webpack.overrides(webpackOptions))
-                .pipe(webpack.watch(function (err, stats) {
-                    gulp.src(this.path, { base: this.base })
-                        .pipe(webpack.proxy(err, stats))
-                        .pipe(webpack.format({
-                            verbose: true,
-                            version: false
-                        }))
-                        .pipe(gulp.dest(dest));
-                }));
+// create a single instance of the compiler to allow caching
+var devCompiler = webpack(myDevConfig);
+
+gulp.task("dev:webpack", function(callback) {
+    // run webpack
+    devCompiler.run(function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack:build-dev", err);
+        gutil.log("[webpack:build-dev]", stats.toString({
+            colors: true
+        }));
+        callback();
+    });
+});
+
+gulp.task("webpack-dev-server", function(callback) {
+    // modify some webpack config options
+    var myConfig = Object.create(webpackConfig);
+    myConfig.devtool = "eval";
+    myConfig.debug = true;
+
+    // Start a webpack-dev-server
+    new WebpackDevServer(webpack(myConfig), {
+        publicPath: "/" + myConfig.output.publicPath,
+        stats: {
+            colors: true
         }
+    }).listen(8000, "localhost", function(err) {
+        if(err) throw new gutil.PluginError("webpack-dev-server", err);
+        gutil.log("[webpack-dev-server]", "http://localhost:8000/webpack-dev-server/index.html");
     });
 });
