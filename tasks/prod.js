@@ -8,27 +8,30 @@
 /**
     Required Modules
 */
-var gulp            = require('gulp'),
-    autoprefixer    = require('gulp-autoprefixer'),
-    concat          = require('gulp-concat'),
-    connect         = require('gulp-connect'),
-    filter          = require('gulp-filter'),
-    imagemin        = require('gulp-imagemin'),
-    inject          = require('gulp-inject'),
-    gutil           = require('gulp-util'),
-    plumber         = require('gulp-plumber'),
-    del             = require('del'),
-    rubySass        = require('gulp-ruby-sass'),
-    size            = require('gulp-size'),
-    sourcemaps      = require('gulp-sourcemaps'),
-    stripDebug      = require('gulp-strip-debug'),
-    uglify          = require('gulp-uglify'),
-    replace         = require('gulp-replace'),
-    buildConfig     = require('../config/buildConfig'),
-    bowerComponents = require('../config/bowerComponents'),
-    jsCompileFiles  = require('../config/jsCompileFiles'),
-    jsCDNFiles      = require('../config/jsCDNFiles'),
-    Helpers         = require('../util/helpers');
+var gulp             = require('gulp'),
+    autoprefixer     = require('gulp-autoprefixer'),
+    concat           = require('gulp-concat'),
+    connect          = require('gulp-connect'),
+    filter           = require('gulp-filter'),
+    imagemin         = require('gulp-imagemin'),
+    inject           = require('gulp-inject'),
+    gutil            = require('gulp-util'),
+    plumber          = require('gulp-plumber'),
+    del              = require('del'),
+    rubySass         = require('gulp-ruby-sass'),
+    size             = require('gulp-size'),
+    sourcemaps       = require('gulp-sourcemaps'),
+    stripDebug       = require('gulp-strip-debug'),
+    uglify           = require('gulp-uglify'),
+    replace          = require('gulp-replace'),
+    webpack          = require('webpack'),
+    WebpackDevServer = require('webpack-dev-server'),
+    webpackConfig    = require('../webpack.config.js'),
+    buildConfig      = require('../config/buildConfig'),
+    bowerComponents  = require('../config/bowerComponents'),
+    jsCompileFiles   = require('../config/jsCompileFiles'),
+    jsCDNFiles       = require('../config/jsCDNFiles'),
+    Helpers          = require('../util/helpers');
 
 /**
     TASK: prod:connect
@@ -274,4 +277,33 @@ gulp.task('prod:styleguide', function () {
 
     return gulp.src('./src/styleguide/dist/**/*')
         .pipe(gulp.dest(buildConfig.prod.paths.styleguide));
+});
+
+/**
+    TASK: prod:webpack
+    Run webpack with production config and plugins.
+*/
+
+gulp.task('prod:webpack', function (callback) {
+
+    // Modify some webpack config options
+    var myConfig = Object.create(webpackConfig);
+    myConfig.plugins = myConfig.plugins.concat(
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin()
+    );
+
+    // Run webpack
+    webpack(myConfig, function(err, stats) {
+        if(err) throw new gutil.PluginError('prod:webpack', err);
+        gutil.log('[prod:webpack]', stats.toString({
+            colors: true
+        }));
+        callback();
+    });
 });
