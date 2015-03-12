@@ -22,6 +22,8 @@ var gulp            = require('gulp'),
     size            = require('gulp-size'),
     sourcemaps      = require('gulp-sourcemaps'),
     replace         = require('gulp-replace'),
+    path            = require('path'),
+    webpack         = require('gulp-webpack-build'),
     buildConfig     = require('../config/buildConfig'),
     bowerComponents = require('../config/bowerComponents'),
     jsCompileFiles  = require('../config/jsCompileFiles'),
@@ -243,4 +245,58 @@ gulp.task('dev:styleguide', function () {
 
     return gulp.src('./src/styleguide/dist/**/*')
         .pipe(gulp.dest(buildConfig.dev.paths.styleguide));
+});
+
+/**
+    TASK: webpack
+*/
+var src  = './src',
+    dest = './dev',
+    webpackOptions = {
+        debug:      true,
+        devtool:    '#source-map',
+        watchDelay: 200
+    },
+    webpackConfig = {
+        useMemoryFs: true,
+        progress:    true
+    },
+    CONFIG_FILENAME = webpack.config.CONFIG_FILENAME;
+
+gulp.task('webpack', [], function () {
+
+    return gulp.src(path.join(src, '**', CONFIG_FILENAME), { base: path.resolve(src) })
+        .pipe(webpack.configure(webpackConfig))
+        .pipe(webpack.overrides(webpackOptions))
+        .pipe(webpack.compile())
+        .pipe(webpack.format({
+            version: false,
+            timings: true
+        }))
+        .pipe(webpack.failAfter({
+            errors: true,
+            warnings: true
+        }))
+        .pipe(gulp.dest(dest));
+});
+
+gulp.task('watch', function () {
+
+    gulp.watch(path.join(src, '**/*.*')).on('change', function (event) {
+        if(event.type === 'changed') {
+            gulp.src(event.path, { base: path.resolve(src) })
+                .pipe(webpack.closest(CONFIG_FILENAME))
+                .pipe(webpack.configure(webpackConfig))
+                .pipe(webpack.overrides(webpackOptions))
+                .pipe(webpack.watch(function (err, stats) {
+                    gulp.src(this.path, { base: this.base })
+                        .pipe(webpack.proxy(err, stats))
+                        .pipe(webpack.format({
+                            verbose: true,
+                            version: false
+                        }))
+                        .pipe(gulp.dest(dest));
+                }));
+        }
+    });
 });
