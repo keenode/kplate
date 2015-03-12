@@ -23,7 +23,8 @@ gulp.task('dev:watch', function (cb) {
     gulp.watch('src/scss/**/*.{scss,sass}', ['dev:css'])
 
     // WATCH JavaScript
-    gulp.watch('src/scripts/**/*.js', ['jshint', 'dev:js']);
+    // gulp.watch('src/scripts/**/*.js', ['jshint', 'dev:js']);
+    gulp.watch('src/scripts/**/*.js', ['jshint', 'dev:webpack']);
 
     // WATCH Fonts
     gulp.watch('src/assets/fonts/**/*', ['dev:fonts']);

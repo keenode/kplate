@@ -34,16 +34,16 @@ var gulp             = require('gulp'),
     TASK: dev:connect
     Start a new connect server with livereload support on development settings.
 */
-gulp.task('dev:connect', function () {
+// gulp.task('dev:connect', function () {
 
-    Helpers.logTaskStartup('Startup connect server (development)...');
+//     Helpers.logTaskStartup('Startup connect server (development)...');
 
-    return connect.server({
-        root:       buildConfig.dev.rootDir,
-        livereload: buildConfig.dev.connectServer.livereload,
-        port:       buildConfig.dev.connectServer.port
-    });
-});
+//     return connect.server({
+//         root:       buildConfig.dev.rootDir,
+//         livereload: buildConfig.dev.connectServer.livereload,
+//         port:       buildConfig.dev.connectServer.port
+//     });
+// });
 
 /**
     TASK: dev:css
@@ -75,25 +75,25 @@ gulp.task('dev:css', function () {
     TASK: dev:js
     Copy full JavaScript files to corresponding development path.
 */
-gulp.task('dev:js', function () {
+// gulp.task('dev:js', function () {
 
-    Helpers.logTaskStartup('RUN TASK: JavaScript (development)...');
+//     Helpers.logTaskStartup('RUN TASK: JavaScript (development)...');
 
-    /* Gather all JavaScripts and then copy to dev folder */
-    var jsCompileArr = bowerComponents.concat(
-        [
-            './src/scripts/**/*.js',
-            '!./src/scripts/' + buildConfig.prod.mainJsFileName + '.min.js'
-        ]);
+//     /* Gather all JavaScripts and then copy to dev folder */
+//     var jsCompileArr = bowerComponents.concat(
+//         [
+//             './src/scripts/**/*.js',
+//             '!./src/scripts/' + buildConfig.prod.mainJsFileName + '.min.js'
+//         ]);
 
-    return gulp.src(jsCompileArr)
-        .pipe(plumber())
-        .pipe(sourcemaps.init())
-        .pipe(sourcemaps.write('maps'))
-        .pipe(size({ title: 'JavaScript (uncompressed)' }))
-        .pipe(gulp.dest(buildConfig.dev.paths.js))
-        .pipe(connect.reload());
-});
+//     return gulp.src(jsCompileArr)
+//         .pipe(plumber())
+//         .pipe(sourcemaps.init())
+//         .pipe(sourcemaps.write('maps'))
+//         .pipe(size({ title: 'JavaScript (uncompressed)' }))
+//         .pipe(gulp.dest(buildConfig.dev.paths.js))
+//         .pipe(connect.reload());
+// });
 
 /**
     TASK: jshint
@@ -254,17 +254,17 @@ gulp.task('dev:styleguide', function () {
 */
 
 // Modify some webpack config options
-var myDevConfig = Object.create(webpackConfig);
+var myDevConfig         = Object.create(webpackConfig);
     myDevConfig.devtool = 'sourcemap';
-    myDevConfig.debug = true;
+    myDevConfig.debug   = true;
 
 // Create a single instance of the compiler to allow caching
-var devCompiler = webpack(myDevConfig);
+var webpackCompiler = webpack(myDevConfig);
 
 gulp.task('dev:webpack', function (callback) {
 
     // Run webpack
-    devCompiler.run(function (err, stats) {
+    webpackCompiler.run(function (err, stats) {
         if(err) throw new gutil.PluginError('dev:webpack', err);
         gutil.log('[dev:webpack]', stats.toString({
             colors: true
@@ -273,22 +273,31 @@ gulp.task('dev:webpack', function (callback) {
     });
 });
 
+/**
+    TASK: webpack-dev-server
+    Run webpack server while developing.
+*/
+
 gulp.task('webpack-dev-server', function (callback) {
 
     // <odify some webpack config options
-    var myConfig = Object.create(webpackConfig);
+    var myConfig         = Object.create(webpackConfig);
         myConfig.devtool = 'eval';
-        myConfig.debug = true;
+        myConfig.debug   = true;
+
+    var port = buildConfig.dev.webpackServer.port;
 
     // Start a webpack-dev-server
-    new WebpackDevServer(webpack(myConfig), {
+    var server = new WebpackDevServer(webpack(myConfig), {
         publicPath: '/' + myConfig.output.publicPath,
-        contentBase: './dev',
+        contentBase: buildConfig.dev.rootDir,
         stats: {
             colors: true
         }
-    }).listen(8000, 'localhost', function (err) {
+    })
+
+    server.listen(port, 'localhost', function (err) {
         if(err) throw new gutil.PluginError('webpack-dev-server', err);
-        gutil.log('[webpack-dev-server]', 'http://localhost:8000/webpack-dev-server/index.html');
+        gutil.log('[webpack-dev-server]', 'http://localhost:' + port);
     });
 });

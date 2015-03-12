@@ -32,11 +32,16 @@ gulp.task('default',
 
         runSequence(
             'dev:clear',
-            ['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles', 'dev:styleguide'],
+            ['dev:css', 'jshint', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles', 'dev:styleguide'],
+            // ['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles', 'dev:styleguide'],
             'dev:inject',
-            'dev:connect',
+            'dev:webpack',
+            // 'webpack-dev-server',
+            // 'dev:connect',
             'dev:watch',
         cb);
+
+        runSequence('webpack-dev-server', cb);
 });
 
 /**

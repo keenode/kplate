@@ -21,10 +21,13 @@ var buildConfig = {
             fonts:      './dev/fonts',     // Path to fonts
             styleguide: './dev/styleguide' // Path to styleguide
         },
-        connectServer: {
-            livereload: true,   // Will browser reload automatically when changes are made?
-            port: 8000          // Port in which the site will be hosted locally (http://localhost:[PORT])
+        webpackServer: {
+            port: 8000
         }
+        // connectServer: {
+        //     livereload: true,   // Will browser reload automatically when changes are made?
+        //     port: 8000          // Port in which the site will be hosted locally (http://localhost:[PORT])
+        // }
     },
     prod: {
         rootDir: './prod',  // Directory where the site will be hosted
