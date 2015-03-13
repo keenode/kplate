@@ -4,7 +4,7 @@ var Stuff = function () {
 };
 
 Stuff.prototype.alertStuff = function () {
-    alert('Loaded script!');
+    console.log('Loaded test script!');
 };
 
 module.exports = Stuff;

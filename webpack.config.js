@@ -1,9 +1,10 @@
-var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+// var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 
 module.exports = {
     context: __dirname + '/src/scripts/',
     entry: {
-        index: './pages/index'
+        // index: './pages/index'
+        main: './main'
     },
     output: {
         filename:      '[name].bundle.js',
@@ -17,7 +18,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new CommonsChunkPlugin('commons.chunk.js')
+        // new CommonsChunkPlugin('commons.chunk.js')
     ],
     debug: true
 };

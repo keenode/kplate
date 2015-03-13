@@ -9,4 +9,14 @@ $('#about').on('click', function (e) {
     Stuff = require('./test');
     var stuffz = new Stuff();
     stuffz.alertStuff();
+
+    // bundle-loader
+    var scriptName = 'about';
+    var load = require('bundle?lazy!./' + scriptName + '.js');
+    // var load = require('bundle?lazy!./pages/' + scriptName + '.js');
+
+    // The chunk is not requested until you call the load function
+    load(function (file) {
+        console.log('file: ', file);
+    });
 });
