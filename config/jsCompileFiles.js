@@ -15,19 +15,8 @@
 var jsCompileFiles = [  // Placed before closing </body> tag
     '/**/jquery.js',
     '/**/jquery.*.js',
-    '/**/MyClass.js',
-    '/**/MyChildClass.js',
     '/**/*.js'
 ];
 
-// TODO: Add compile scripts for <head>
-// var jsCompileFilesHead = [ // Placed within <head>
-//     '/**/MyClass.js',
-//     '/**/MyChildClass.js'
-// ];
-
 // Make jsCompileFiles available from require
 module.exports = jsCompileFiles;
-
-// TODO: Add compile scripts for <head>
-// module.exports = jsCompileFilesHead;
