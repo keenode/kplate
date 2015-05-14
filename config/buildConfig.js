@@ -15,6 +15,7 @@ var buildConfig = {
         paths: {
             css:        './dev/css',       // Path to CSS files
             js:         './dev/js',        // Path to JavaScript files
+            vendorJs:   './dev/js/vendor', // Path to JavaScript vendor files (bower components)
             images:     './dev/images',    // Path to images
             svgs:       './dev/svgs',      // Path to SVGs
             videos:     './dev/videos',    // Path to videos
@@ -24,13 +25,15 @@ var buildConfig = {
         connectServer: {
             livereload: true,   // Will browser reload automatically when changes are made?
             port: 8000          // Port in which the site will be hosted locally (http://localhost:[PORT])
-        }
+        },
+        useES6: true
     },
     prod: {
         rootDir: './prod',  // Directory where the site will be hosted
         paths: {
             css:        './prod/css',       // Path to CSS files
             js:         './prod/js',        // Path to JavaScript files
+            vendorJs:   './prod/js/vendor', // Path to JavaScript vendor files (bower components)
             images:     './prod/images',    // Path to images
             svgs:       './prod/svgs',      // Path to SVGs
             videos:     './prod/videos',    // Path to videos
@@ -44,7 +47,8 @@ var buildConfig = {
         jsMangle: true,         // "uglify" the JavaScript
         jsComments: false,      // false or 'all'
         useCdn: true,
-        mainJsFileName: 'main'  // JavaScript filename where all resources concat into it
+        mainJsFileName: 'main', // JavaScript filename where all resources concat into it
+        useES6: true
     },
     logSepDecor: ' *** ' // Logger decor separator for RUN TASK
 };

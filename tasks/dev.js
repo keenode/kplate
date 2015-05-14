@@ -22,6 +22,8 @@ var gulp            = require('gulp'),
     size            = require('gulp-size'),
     sourcemaps      = require('gulp-sourcemaps'),
     replace         = require('gulp-replace'),
+    babel           = require('gulp-babel'),
+    gulpif          = require('gulp-if'),
     buildConfig     = require('../config/buildConfig'),
     bowerComponents = require('../config/bowerComponents'),
     jsCompileFiles  = require('../config/jsCompileFiles'),
@@ -78,18 +80,20 @@ gulp.task('dev:js', function () {
 
     Helpers.logTaskStartup('RUN TASK: JavaScript (development)...');
 
-    /* Gather all JavaScripts and then copy to dev folder */
-    var jsCompileArr = bowerComponents.concat(
-        [
-            './src/scripts/**/*.js',
-            '!./src/scripts/' + buildConfig.prod.mainJsFileName + '.min.js'
-        ]);
+    // Copy vendor JavaScript
+    gulp.src(bowerComponents)
+        .pipe(plumber())
+        .pipe(size({ title: 'Vendor JavaScript (uncompressed)' }))
+        .pipe(gulp.dest(buildConfig.dev.paths.vendorJs))
+        .pipe(connect.reload());
 
-    return gulp.src(jsCompileArr)
+    // Copy application JavaScript, run Babel (ES6)
+    return gulp.src('./src/scripts/**/*.js')
         .pipe(plumber())
         .pipe(sourcemaps.init())
+        .pipe(gulpif(buildConfig.dev.useES6, babel()))
         .pipe(sourcemaps.write('maps'))
-        .pipe(size({ title: 'JavaScript (uncompressed)' }))
+        .pipe(size({ title: 'Application JavaScript (uncompressed)' }))
         .pipe(gulp.dest(buildConfig.dev.paths.js))
         .pipe(connect.reload());
 });
