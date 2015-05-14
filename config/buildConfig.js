@@ -19,8 +19,7 @@ var buildConfig = {
             images:     './dev/images',    // Path to images
             svgs:       './dev/svgs',      // Path to SVGs
             videos:     './dev/videos',    // Path to videos
-            fonts:      './dev/fonts',     // Path to fonts
-            styleguide: './dev/styleguide' // Path to styleguide
+            fonts:      './dev/fonts'      // Path to fonts
         },
         connectServer: {
             livereload: true,   // Will browser reload automatically when changes are made?
@@ -38,7 +37,6 @@ var buildConfig = {
             svgs:       './prod/svgs',      // Path to SVGs
             videos:     './prod/videos',    // Path to videos
             fonts:      './prod/fonts',     // Path to fonts
-            styleguide: './prod/styleguide' // Path to styleguide
         },
         connectServer: {
             livereload: true,   // Will browser reload automatically when changes are made?

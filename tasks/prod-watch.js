@@ -44,5 +44,5 @@ gulp.task('prod:watch', function (cb) {
     gulp.watch('src/rootfiles/**/*', ['prod:rootfiles']);
 
     // WATCH Templates
-    gulp.watch('src/templates/**/*.html', ['prod:inject']);
+    gulp.watch('src/templates/**/*.html', ['prod:html']);
 });

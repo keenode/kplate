@@ -24,6 +24,7 @@ var gulp            = require('gulp'),
     replace         = require('gulp-replace'),
     babel           = require('gulp-babel'),
     gulpif          = require('gulp-if'),
+    swig            = require('gulp-swig'),
     buildConfig     = require('../config/buildConfig'),
     bowerComponents = require('../config/bowerComponents'),
     jsCompileFiles  = require('../config/jsCompileFiles'),
@@ -138,12 +139,13 @@ gulp.task('dev:imagemin', function () {
 });
 
 /**
-    TASK: dev:inject
-    Inject all CSS and JavaScript into HTML documents.
+    TASK: dev:html
+    - Inject all CSS and JavaScript into HTML documents.
+    - Parse Swig templating.
 */
-gulp.task('dev:inject', function () {
+gulp.task('dev:html', function () {
 
-    Helpers.logTaskStartup('RUN TASK: inject (development)...');
+    Helpers.logTaskStartup('RUN TASK: html (development)...');
 
     var target = gulp.src('./src/templates/**/*.html');
 
@@ -175,6 +177,13 @@ gulp.task('dev:inject', function () {
 
     return target.pipe(inject(sources))
         .pipe(plumber())
+        .pipe(swig({
+            defaults: {
+                cache: false,
+                // varControls: ['<%=', '%>'],
+                // tagControls: ['<%', '%>']
+            }
+        }))
         .pipe(gulp.dest(buildConfig.dev.rootDir))
         .pipe(connect.reload());
 });

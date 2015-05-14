@@ -25,6 +25,7 @@ var gulp            = require('gulp'),
     replace         = require('gulp-replace'),
     babel           = require('gulp-babel'),
     gulpif          = require('gulp-if'),
+    swig            = require('gulp-swig'),
     buildConfig     = require('../config/buildConfig'),
     bowerComponents = require('../config/bowerComponents'),
     jsCompileFiles  = require('../config/jsCompileFiles'),
@@ -186,12 +187,13 @@ gulp.task('prod:imagemin', function () {
 });
 
 /**
-    TASK: prod:inject
-    Inject minified CSS and JavaScript into HTML documents.
+    TASK: prod:html
+    - Inject minified CSS and JavaScript into HTML documents.
+    - Parse Swig templating.
 */
-gulp.task('prod:inject', function () {
+gulp.task('prod:html', function () {
 
-    Helpers.logTaskStartup('RUN TASK: inject (production)...');
+    Helpers.logTaskStartup('RUN TASK: html (production)...');
 
     var target = gulp.src('./src/templates/**/*.html');
 
@@ -219,6 +221,13 @@ gulp.task('prod:inject', function () {
             cdnScriptTags += '<script src="' + jsCDNFiles[i].cdnPath + '"></script>';
 
     return target.pipe(inject(sources))
+        .pipe(swig({
+            defaults: {
+                cache: false,
+                // varControls: ['<%=', '%>'],
+                // tagControls: ['<%', '%>']
+            }
+        }))
         .pipe(plumber())
         .pipe(replace('<!-- replace:js-cdn -->', cdnScriptTags))
         .pipe(gulp.dest(buildConfig.prod.rootDir))

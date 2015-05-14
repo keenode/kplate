@@ -33,7 +33,7 @@ gulp.task('default',
         runSequence(
             'dev:clear',
             ['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles'],
-            'dev:inject',
+            'dev:html',
             'dev:connect',
             'dev:watch',
         cb);
@@ -50,7 +50,7 @@ gulp.task('prod',
         runSequence(
             'prod:clear',
             ['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles'],
-            'prod:inject',
+            'prod:html',
             'prod:connect',
             'prod:watch',
         cb);
@@ -67,7 +67,7 @@ gulp.task('build:dev',
         runSequence(
             'dev:clear',
             ['dev:css', 'jshint', 'dev:js', 'dev:imagemin', 'dev:videos', 'dev:fonts', 'dev:favicons', 'dev:rootfiles'],
-            'dev:inject',
+            'dev:html',
         cb);
 });
 
@@ -82,7 +82,7 @@ gulp.task('build:prod',
         runSequence(
             'prod:clear',
             ['prod:css', 'prod:js', 'prod:imagemin', 'prod:videos', 'prod:fonts', 'prod:favicons', 'prod:rootfiles'],
-            'prod:inject',
+            'prod:html',
         cb);
 });
 
