@@ -7,7 +7,7 @@
 
 /* global jQuery */
 
-(function($) {
+(function($) { // jshint ignore:line
 
     'use strict';
 
