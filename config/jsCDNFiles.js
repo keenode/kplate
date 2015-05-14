@@ -15,7 +15,7 @@
 var jsCDNFiles = [
     {
         filePath: './src/bower_components/jquery/dist/jquery.js',
-        cdnPath:  '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'
+        cdnPath:  '//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'
     }
 ];
 
