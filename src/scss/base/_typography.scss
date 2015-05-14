@@ -5,10 +5,6 @@
     Typography styles.
     -------------------------------------------------------- */
 
-// Typography
-// 
-// Styleguide 1.
-
 /**
     B A S E
     Base typography settings applied to body.
@@ -30,20 +26,6 @@ body {
     h1, h2, h3, h4, h5, h6
     {h1-h6}.{variations_class}
 */
-
-// Headings
-//
-// Page headers.
-//
-// Markup:
-// <h1>Hello, World</h1>
-// <h2>Hello, World</h2>
-// <h3>Hello, World</h3>
-// <h4>Hello, World</h4>
-// <h5>Hello, World</h5>
-// <h6>Hello, World</h6>
-//
-// Styleguide 1.1
 
 h1, h2 {
     font-family: theme-font-family('headings');
@@ -97,17 +79,6 @@ h5 {
     p.{variations_class}
 */
 
-// Paragraphs
-//
-// Paragraph styles.
-//
-// .lead - Lead paragraph.
-//
-// Markup:
-// <p class="{$modifiers}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, maxime.</p>
-//
-// Styleguide 1.2
-
 p {
     margin: 0 0 20px 0;
     font-size: em(14px);
@@ -133,18 +104,6 @@ p.lead {
     A N C H O R S
     a.{variations_class}
 */
-
-// Anchors
-//
-// Anchor styles.
-//
-// .active - Active style.
-// .disabled - Disabled style.
-//
-// Markup:
-// <a href="#" class="{$modifiers}">This is a link</a>
-//
-// Styleguide 1.3
 
 a {
     color: theme-color('primary');

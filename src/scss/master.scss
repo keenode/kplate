@@ -24,7 +24,7 @@
     V E N D O R S
 */
 @import
-    'vendors/font-awesome/font-awesome'; // Font Awesome
+    'vendor/font-awesome/font-awesome'; // Font Awesome
 
 
 /**
@@ -37,8 +37,6 @@
 /**
     T H E M E  C O N F I G S
 */
-$themes: (); // Init map to hold theme configs
-$default-theme-name: 'Default'; // Name used for default theme
 @import
     'theme-configs/default';
 
@@ -77,8 +75,7 @@ $default-theme-name: 'Default'; // Name used for default theme
     C O M P O N E N T S
 */
 @import
-    'components/buttons',
-    'components/navs';
+    'components/buttons';
 
 
 /**
