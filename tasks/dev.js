@@ -50,19 +50,21 @@ gulp.task('dev:css', function () {
 
     Helpers.logTaskStartup('RUN TASK: CSS (development)...');
 
-    return gulp.src('./src/scss/**/*.{scss,sass}')
-        .pipe(plumber())
-        .pipe(rubySass({
-            style:            'expanded', // nested, compact, compressed, expanded
-            lineNumbers:      true, // Emit comments in the generated CSS indicating the corresponding source line.
-            cacheLocation:    './src/scss/.sass-cache',
-            "sourcemap=none": true // temp hack -- http://stackoverflow.com/questions/27068915/gulp-ruby-sass-and-autoprefixer-do-not-get-along
-        }))
+    return rubySass('./src/scss/master.scss', {
+            style:         'expanded', // nested, compact, compressed, expanded
+            lineNumbers:   true, // Emit comments in the generated CSS indicating the corresponding source line.
+            cacheLocation: './src/scss/.sass-cache',
+            sourcemap:     true
+        })
+        .on('error', function (err) {
+            console.error('SASS Error!', err.message);
+        })
+        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.write())
         .pipe(autoprefixer({
             browsers: ['last 2 versions', 'ie >= 9'],
             cascade:  false
         }))
-        .on('error', function(err) { console.log(err.message); })
         .pipe(size({ title: 'CSS (uncompressed)' }))
         .pipe(gulp.dest(buildConfig.dev.paths.css))
         .pipe(connect.reload());
@@ -231,16 +233,4 @@ gulp.task('dev:rootfiles', function () {
 
     return gulp.src('./src/rootfiles/**/*')
         .pipe(gulp.dest(buildConfig.dev.rootDir));
-});
-
-/**
-    TASK: dev:styleguide
-    Copy styleguide files to development folder.
-*/
-gulp.task('dev:styleguide', function () {
-
-    Helpers.logTaskStartup('RUN TASK: styleguide (development)...');
-
-    return gulp.src('./src/styleguide/dist/**/*')
-        .pipe(gulp.dest(buildConfig.dev.paths.styleguide));
 });

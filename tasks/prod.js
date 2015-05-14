@@ -20,7 +20,6 @@ var gulp            = require('gulp'),
     del             = require('del'),
     rubySass        = require('gulp-ruby-sass'),
     size            = require('gulp-size'),
-    sourcemaps      = require('gulp-sourcemaps'),
     stripDebug      = require('gulp-strip-debug'),
     uglify          = require('gulp-uglify'),
     replace         = require('gulp-replace'),
@@ -53,20 +52,20 @@ gulp.task('prod:css', function () {
 
     Helpers.logTaskStartup('RUN TASK: CSS (production)...');
 
-    return gulp.src('./src/scss/**/*.{scss,sass}')
-        .pipe(plumber())
-        .pipe(rubySass({
-            style:            'compressed', // nested, compact, compressed, expanded
-            lineNumbers:      false, // Emit comments in the generated CSS indicating the corresponding source line.
-            cacheLocation:    './src/scss/.sass-cache',
-            "sourcemap=none": true // temp hack -- http://stackoverflow.com/questions/27068915/gulp-ruby-sass-and-autoprefixer-do-not-get-along
-        }))
+    return rubySass('./src/scss/master.scss', {
+            style:         'compressed', // nested, compact, compressed, expanded
+            lineNumbers:   false, // Emit comments in the generated CSS indicating the corresponding source line.
+            cacheLocation: './src/scss/.sass-cache',
+            sourcemap:     false
+        })
+        .on('error', function (err) {
+            console.error('SASS Error!', err.message);
+        })
         .pipe(autoprefixer({
             browsers: ['last 2 versions', 'ie >= 9'],
             cascade:  false
         }))
-        .on('error', function(err) { console.log(err.message); })
-        .pipe(size({ title: 'CSS (compressed)' }))
+        .pipe(size({ title: 'CSS (uncompressed)' }))
         .pipe(gulp.dest(buildConfig.prod.paths.css))
         .pipe(connect.reload());
 });
@@ -124,7 +123,6 @@ gulp.task('prod:js', function () {
 
     return gulp.src(jsCompileArr)
         .pipe(plumber())
-        .pipe(sourcemaps.init())
         .pipe(concat(buildConfig.prod.mainJsFileName + '.min.js'))
         .pipe(stripDebug())
         .pipe(uglify({
@@ -132,7 +130,6 @@ gulp.task('prod:js', function () {
             compress:         true,
             preserveComments: buildConfig.prod.jsComments
         }))
-        .pipe(sourcemaps.write('maps'))
         .pipe(size({ title: 'JavaScript (compressed)' }))
         .pipe(gulp.dest(buildConfig.prod.paths.js))
         .pipe(connect.reload());
@@ -262,16 +259,4 @@ gulp.task('prod:rootfiles', function () {
 
     return gulp.src('./src/rootfiles/**/*')
         .pipe(gulp.dest(buildConfig.prod.rootDir));
-});
-
-/**
-    TASK: prod:styleguide
-    Copy styleguide files to production folder.
-*/
-gulp.task('prod:styleguide', function () {
-
-    Helpers.logTaskStartup('RUN TASK: styleguide (production)...');
-
-    return gulp.src('./src/styleguide/dist/**/*')
-        .pipe(gulp.dest(buildConfig.prod.paths.styleguide));
 });
