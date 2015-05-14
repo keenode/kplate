@@ -23,6 +23,8 @@ var gulp            = require('gulp'),
     stripDebug      = require('gulp-strip-debug'),
     uglify          = require('gulp-uglify'),
     replace         = require('gulp-replace'),
+    babel           = require('gulp-babel'),
+    gulpif          = require('gulp-if'),
     buildConfig     = require('../config/buildConfig'),
     bowerComponents = require('../config/bowerComponents'),
     jsCompileFiles  = require('../config/jsCompileFiles'),
@@ -80,7 +82,9 @@ gulp.task('prod:js', function () {
 
     /* Loop through JavaScript files to compile and 
         prepend scripts folder path */
-    var jsCompileFilesWithPath = [];
+    var jsCompileFilesWithPath = [],
+        bowerFilesWithCDN      = [];
+
     for(var i = 0; i < jsCompileFiles.length; i++) {
 
         // Determine if there is a CDN instance of this script
@@ -112,17 +116,36 @@ gulp.task('prod:js', function () {
                     canUse = false;
 
             // Ignore including script for compile if CDN had been set up
-            if(!canUse)
+            if(!canUse) {
                 jsCompileFilesWithPath.push('!' + bowerComponents[i]);
+
+                // Flag this bower file to not compile because it's already being included on a CDN
+                bowerFilesWithCDN.push('!' + bowerComponents[i]);
+            }
         }
     }
 
-    /* Gather JavaScripts in correct order and then
-        create a single minified JavaScript file. */
-    var jsCompileArr = bowerComponents.concat(jsCompileFilesWithPath).concat([ './src/scripts/**/*.js' ]);
+    /* Gather JavaScripts paths for vendor and application scripts. */
+    var vendorJS = bowerComponents.concat(bowerFilesWithCDN),
+        appJS    = jsCompileFilesWithPath.concat(['./src/scripts/**/*.js']);
 
-    return gulp.src(jsCompileArr)
+    // Compile vendor JavaScript
+    gulp.src(vendorJS)
         .pipe(plumber())
+        .pipe(concat(buildConfig.prod.vendorJsFileName + '.min.js'))
+        .pipe(stripDebug())
+        .pipe(uglify({
+            mangle:           buildConfig.prod.jsMangle,
+            compress:         true,
+            preserveComments: buildConfig.prod.jsComments
+        }))
+        .pipe(size({ title: 'Vendor JavaScript (compressed)' }))
+        .pipe(gulp.dest(buildConfig.prod.paths.vendorJs));
+
+    // Compile application JavaScript, run Babel (ES6)
+    return gulp.src(appJS)
+        .pipe(plumber())
+        .pipe(gulpif(buildConfig.prod.useES6, babel()))
         .pipe(concat(buildConfig.prod.mainJsFileName + '.min.js'))
         .pipe(stripDebug())
         .pipe(uglify({
@@ -130,7 +153,7 @@ gulp.task('prod:js', function () {
             compress:         true,
             preserveComments: buildConfig.prod.jsComments
         }))
-        .pipe(size({ title: 'JavaScript (compressed)' }))
+        .pipe(size({ title: 'Application JavaScript (compressed)' }))
         .pipe(gulp.dest(buildConfig.prod.paths.js))
         .pipe(connect.reload());
 });

@@ -84,8 +84,7 @@ gulp.task('dev:js', function () {
     gulp.src(bowerComponents)
         .pipe(plumber())
         .pipe(size({ title: 'Vendor JavaScript (uncompressed)' }))
-        .pipe(gulp.dest(buildConfig.dev.paths.vendorJs))
-        .pipe(connect.reload());
+        .pipe(gulp.dest(buildConfig.dev.paths.vendorJs));
 
     // Copy application JavaScript, run Babel (ES6)
     return gulp.src('./src/scripts/**/*.js')
