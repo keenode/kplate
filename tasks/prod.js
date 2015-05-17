@@ -195,7 +195,7 @@ gulp.task('prod:html', function () {
 
     Helpers.logTaskStartup('RUN TASK: html (production)...');
 
-    var target = gulp.src('./src/templates/**/*.html');
+    var target = gulp.src('./src/views/**/*.html');
 
     // get css and js folder names
     var cssPath       = buildConfig.prod.paths.css,
@@ -220,15 +220,17 @@ gulp.task('prod:html', function () {
         for(var i = 0; i < jsCDNFiles.length; i++)
             cdnScriptTags += '<script src="' + jsCDNFiles[i].cdnPath + '"></script>';
 
-    return target.pipe(inject(sources))
+    return target.pipe(plumber())
         .pipe(swig({
-            defaults: {
-                cache: false,
-                // varControls: ['<%=', '%>'],
-                // tagControls: ['<%', '%>']
+            setup: function (swig) {
+                swig.setDefaults({
+                    autoescape: false,
+                    cache: false,
+                    loader: swig.loaders.fs('./src/views/')
+                });
             }
         }))
-        .pipe(plumber())
+        .pipe(inject(sources))
         .pipe(replace('<!-- replace:js-cdn -->', cdnScriptTags))
         .pipe(gulp.dest(buildConfig.prod.rootDir))
         .pipe(connect.reload());

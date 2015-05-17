@@ -147,7 +147,7 @@ gulp.task('dev:html', function () {
 
     Helpers.logTaskStartup('RUN TASK: html (development)...');
 
-    var target = gulp.src('./src/templates/**/*.html');
+    var target = gulp.src('./src/views/**/*.html');
 
     // Get css and js folder names
     var cssPath       = buildConfig.dev.paths.css,
@@ -175,17 +175,19 @@ gulp.task('dev:html', function () {
             cwd:  buildConfig.dev.rootDir
         });
 
-    return target.pipe(inject(sources))
-        .pipe(plumber())
-        .pipe(swig({
-            defaults: {
-                cache: false,
-                // varControls: ['<%=', '%>'],
-                // tagControls: ['<%', '%>']
-            }
-        }))
-        .pipe(gulp.dest(buildConfig.dev.rootDir))
-        .pipe(connect.reload());
+        return target.pipe(plumber())
+            .pipe(swig({
+                setup: function (swig) {
+                    swig.setDefaults({
+                        autoescape: false,
+                        cache: false,
+                        loader: swig.loaders.fs('./src/views/')
+                    });
+                }
+            }))
+            .pipe(inject(sources))
+            .pipe(gulp.dest(buildConfig.dev.rootDir))
+            .pipe(connect.reload());
 });
 
 /**

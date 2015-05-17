@@ -43,6 +43,6 @@ gulp.task('dev:watch', function (cb) {
     // WATCH Rootfiles
     gulp.watch('src/rootfiles/**/*', ['dev:rootfiles']);
 
-    // WATCH Templates
-    gulp.watch('src/templates/**/*.html', ['dev:html']);
+    // WATCH Template Views
+    gulp.watch('src/views/**/*.html', ['dev:html']);
 });

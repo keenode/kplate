@@ -1,0 +1,41 @@
+<!--
+ __           .__          __          
+|  | ________ |  | _____ _/  |_  ____  
+|  |/ /\____ \|  | \__  \\   __\/ __ \ 
+|    < |  |_> >  |__/ __ \|  | \  ___/ 
+|__|_ \|   __/|____(____  /__|  \___  >
+     \/|__|             \/          \/ 
+                kplate
+    https://github.com/keezoid/kplate
+____________________________________________
+
+"It all begins here." - Keenan Staffieri
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        {# Head #}
+        {% include 'partials/head.html' with {
+            title: 'My kPlate',
+            meta_description: 'My kplate website.'
+        } only %}
+
+        {% include 'partials/stylesheets.html' %}
+    </head>
+    <body>
+
+        {# Header #}
+        {% include 'partials/header.html' with {
+            title: 'My Site'
+        } only %}
+
+        {# Content #}
+        {% block content %}{% endblock %}
+
+        {# Footer #}
+        {% include 'partials/footer.html' %}
+
+        {# Scripts #}
+        {% include 'partials/scripts.html' %}
+    </body>
+</html>
