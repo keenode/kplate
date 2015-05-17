@@ -26,6 +26,7 @@ var gulp            = require('gulp'),
     babel           = require('gulp-babel'),
     gulpif          = require('gulp-if'),
     swig            = require('gulp-swig'),
+    rename          = require('gulp-rename'),
     buildConfig     = require('../config/buildConfig'),
     bowerComponents = require('../config/bowerComponents'),
     jsCompileFiles  = require('../config/jsCompileFiles'),
@@ -68,6 +69,7 @@ gulp.task('prod:css', function () {
             browsers: ['last 2 versions', 'ie >= 9'],
             cascade:  false
         }))
+        .pipe(rename({suffix: '.min'}))
         .pipe(size({ title: 'CSS (uncompressed)' }))
         .pipe(gulp.dest(buildConfig.prod.paths.css))
         .pipe(connect.reload());
