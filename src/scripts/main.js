@@ -11,6 +11,7 @@
 
     'use strict';
 
+    // ES6 Class (Babel)
     class Messenger {
 
         constructor() {
