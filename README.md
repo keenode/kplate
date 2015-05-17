@@ -29,6 +29,7 @@ You will need to following tools for **kplate** to operate. It is preferable tha
 1. **NodeJS** (comes with NPM) -- http://nodejs.org/
 2. **Bower** -- http://bower.io/
 3. **Ruby** (already installed on Macs)
+4. **SASS 3.4 or higher.** (type 'sass -v' in terminal)
 
 ## Install
 To install **kplate**, simply clone this repo, update the configuration files, and create your own repo instance. 
