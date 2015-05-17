@@ -124,13 +124,13 @@ gulp.task('dev:imagemin', function () {
 
     return gulp.src(['./src/assets/images/**/*.{png,jpg,jpeg,gif}', './src/assets/svgs/**/*.svg'])
         .pipe(plumber())
+        .pipe(imgFilter)
         .pipe(imagemin({
             progressive:       false,                     // (jpg)
             optimizationLevel: 3,                         // (png) (0-7 low-high)
             interlaced:        false,                     // (gif)
             svgoPlugins:       [{ removeViewBox: false }] // (svg)
         }))
-        .pipe(imgFilter)
         .pipe(gulp.dest(buildConfig.dev.paths.images))
         .pipe(imgFilter.restore())
         .pipe(svgFilter)

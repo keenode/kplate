@@ -13,6 +13,7 @@
     production mode.
 */
 var jsCDNFiles = [
+    // jQuery
     {
         filePath: './src/bower_components/jquery/dist/jquery.js',
         cdnPath:  '//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'
